@@ -1,0 +1,40 @@
+.arrow-with-stick {
+    display: flex;
+    align-items: center;
+  }
+  
+  .arrow-with-stick .arrow {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid black;
+    margin-right: 10px;
+  }
+  
+  .arrow-with-stick .stick {
+    width: 4px;
+    height: 20px;
+    background-color: black;
+  }
+
+  .arrow-with-stick2 .arrow {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid black;
+    margin-right: 10px;
+  }
+  
+  .arrow-with-stick2 .stick {
+    width: 4px;
+    height: 20px;
+    background-color: black;
+  }
+
+  .arrow-with-stick2 {
+    display: flex;
+    align-items: center;
+    transform: rotate(270deg);
+  }

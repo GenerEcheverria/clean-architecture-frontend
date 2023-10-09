@@ -1,0 +1,229 @@
+<!-- <h1 [style.font-size.px]="size" [style.color]="color">{{ text }}</h1>
+    <label>
+      Tamaño:
+      <input type="number" [(ngModel)]="size">
+    </label>
+    <label>
+      Color:
+      <input type="color" [(ngModel)]="color">
+    </label>
+    <label>
+      Texto:
+      <input type="text" [(ngModel)]="text">
+    </label> -->
+    <a class="btn btn-primary" style="margin-top:10px;" (click)="modificar()">
+         modo edicion: {{editMode}}
+    </a>
+    
+    <select *ngIf="editMode" style="margin-top:10px;margin-bottom:10px;" class="form-select" aria-label="Default select example" [(ngModel)]="typeView">
+        <option value="vertical">Vertical</option>
+        <option value="horizontal">Horizontal</option>
+        <option value="escalonado">Escalonado</option>
+    </select>
+
+    <div *ngIf="typeView=='vertical'">
+        <div *ngFor="let itemTime of LineaDelTiempo ; let indice = index" style="text-align: center;">
+            <div class="card"  [style.width]="itemTime.Ancho+'%'" [style.margin-left]="((100-itemTime.Ancho)/2)+'%'" [style.background-color]="itemTime.Fondo">
+                <div class="card-body">
+                    <h5 class="card-title" [style.color]="itemTime.TituloColor">{{ itemTime.Titulo }}</h5>
+                    <p class="card-text">{{ itemTime.Fecha }}</p>
+                    <img [src]="itemTime.imageSrc" *ngIf="itemTime.Multimedia=='Foto'" [style.width]="itemTime.FotoAncho+'%'">
+                    <video [src]="itemTime.videoSrc" *ngIf="itemTime.Multimedia=='Video'" controls [style.width]="itemTime.FotoAncho+'%'"></video>
+                    <p class="card-text" [style.color]="itemTime.DescripcionColor">{{ itemTime.Descripcion }}</p>
+                </div>
+            </div>
+            <div id="Configuration buttons" *ngIf="editMode" style="margin-top: 10px;">
+                <button class="btn btn-primary" style="height: 40px; margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="indexModal=indice">
+                        <i class="bi bi-pencil-square"></i>
+                </button>
+                <button class="btn btn-primary" style="height: 40px; margin-left: 10px;" (click)="deleteItem(indice)">
+                    <i class="bi bi-trash-fill"></i>
+                </button>
+            </div>
+            <div *ngIf="indice<(LineaDelTiempo.length-1)">
+                <img style="transform: rotate(90deg); height: 50px; margin-left: 10px;" src="../../../../../assets/images/flecha.png" alt="Flecha hacia la derecha">
+            </div>
+        </div>
+    </div>
+ 
+    <div *ngIf="typeView=='horizontal'" style="margin-top: 10px; margin-bottom: 10px; display: flex; justify-content: center; align-items: center;">
+        <div style="overflow-x: auto; width:100%;display: flex; justify-content: center; align-items: center;">
+            <div *ngFor="let itemTime of LineaDelTiempo ; let indice = index" style="text-align: center;display: flex; justify-content: center; align-items: center;">
+                <div>
+                    <div class="card"  [style.width]="itemTime.Ancho+'vw'" [style.background-color]="itemTime.Fondo" style="display: flex;">
+                    <div class="card-body">
+                    <h5 class="card-title" [style.color]="itemTime.TituloColor">{{ itemTime.Titulo }}</h5>
+                    <p class="card-text">{{ itemTime.Fecha }}</p>
+                    <img [src]="itemTime.imageSrc" *ngIf="itemTime.Multimedia=='Foto'" [style.width]="itemTime.FotoAncho+'%'">
+                    <video [src]="itemTime.videoSrc" *ngIf="itemTime.Multimedia=='Video'" controls [style.width]="itemTime.FotoAncho+'%'"></video>
+                    <p class="card-text" [style.color]="itemTime.DescripcionColor">{{ itemTime.Descripcion }}</p>
+                    </div>
+                    </div>
+                    <div id="Configuration buttons" *ngIf="editMode" style="margin-top: 10px;">
+                        <button class="btn btn-primary" style="height: 40px; margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="indexModal=indice">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button class="btn btn-primary" style="height: 40px; margin-left: 10px;" (click)="deleteItem(indice)">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="indice<(LineaDelTiempo.length-1)" style="display:flex;">
+                    <img style="height: 50px;" src="../../../../../assets/images/flecha.png" alt="Flecha hacia la derecha">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="typeView=='escalonado'" style="margin-top: 10px; margin-bottom: 10px;">
+        <div style="overflow-x: auto; width:100%;">
+            <div *ngFor="let itemTime2 of LineaDelTiempo ; let indice1 = index" style=" width:100%;">
+                <div *ngIf="indice1 % 2 ==0" style="display: flex; justify-content: center; align-items: center;">
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <div *ngFor="let itemTime of LineaDelTiempo.slice(indice1, indice1+2) ; let indice = index" style="text-align: center;display: flex; justify-content: center; align-items: center; ">
+                            <div>
+                                <div class="card"  [style.width]="itemTime.Ancho+'vw'" [style.background-color]="itemTime.Fondo" style="display: flex; justify-content: center; align-items: center;">
+                                    <div class="card-body">
+                                        <h5 class="card-title" [style.color]="itemTime.TituloColor">{{ itemTime.Titulo }}</h5>
+                                        <p class="card-text">{{ itemTime.Fecha }}</p>
+                                        <img [src]="itemTime.imageSrc" *ngIf="itemTime.Multimedia=='Foto'" [style.width]="itemTime.FotoAncho+'%'">
+                                        <video [src]="itemTime.videoSrc" *ngIf="itemTime.Multimedia=='Video'" controls [style.width]="itemTime.FotoAncho+'%'"></video>
+                                        <p class="card-text" [style.color]="itemTime.DescripcionColor">{{ itemTime.Descripcion }}</p>
+                                    </div>
+                                </div>
+                                <div id="Configuration buttons" *ngIf="editMode" style="margin-top: 10px;">
+                                    <button class="btn btn-primary" style="height: 40px; margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="indexModal=LineaDelTiempo.indexOf(itemTime)">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button class="btn btn-primary" style="height: 40px; margin-left: 10px;" (click)="deleteItem(LineaDelTiempo.indexOf(itemTime))">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div *ngIf="indice1<(LineaDelTiempo.length-1) && indice==0" class="arrow-with-stick2" style="display:flex;">
+                                <img style="transform: rotate(90deg); height: 50px;" src="../../../../../assets/images/flecha.png" alt="Flecha hacia la derecha">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="indice1 % 2 ==0" style="display: flex; height: 50px;">
+                    <img *ngIf="indice1+1<(LineaDelTiempo.length-1)" style="transform: rotate(145deg); height: 100%;" [style.margin-left]="((LineaDelTiempo[indice1+2].Ancho)*3)+'%'" src="../../../../../assets/images/flecha.png" alt="Flecha hacia la diagonal">
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edite el componente</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card" [style.width]="LineaDelTiempo[indexModal].Ancho+'%'" [style.margin-left]="((100-LineaDelTiempo[indexModal].Ancho)/2)+'%'" [style.background-color]="LineaDelTiempo[indexModal].Fondo">
+                    <div class="card-body">
+                      <h5 class="card-title" [style.color]="LineaDelTiempo[indexModal].TituloColor">{{ LineaDelTiempo[indexModal].Titulo }}</h5>
+                      <p class="card-text">{{ LineaDelTiempo[indexModal].Fecha }}</p>
+                      <img [src]="LineaDelTiempo[indexModal].imageSrc" *ngIf="LineaDelTiempo[indexModal].Multimedia=='Foto'" [style.width]="LineaDelTiempo[indexModal].FotoAncho+'%'">
+                      <video [src]="LineaDelTiempo[indexModal].videoSrc" *ngIf="LineaDelTiempo[indexModal].Multimedia=='Video'" controls [style.width]="LineaDelTiempo[indexModal].FotoAncho+'%'"></video>
+                      <p class="card-text" [style.color]="LineaDelTiempo[indexModal].DescripcionColor">{{ LineaDelTiempo[indexModal].Descripcion }}</p>
+                    </div>
+                  </div>
+      
+          <div *ngIf="editMode">
+              <a class="btn btn-primary" style="margin-top:10px;" data-bs-toggle="collapse" [href]="'#'+'EditCard'+indexModal" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Edite el contenedor
+              </a>
+              <a class="btn btn-primary" style="margin-top:10px; margin-left: 10px;" data-bs-toggle="collapse" [href]="'#'+'EditTitle'+indexModal" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Edite el Titulo
+              </a>
+              <a class="btn btn-primary" style="margin-top:10px; margin-left: 10px;" data-bs-toggle="collapse" [href]="'#'+'EditMultimedia'+indexModal" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Edite el archivo Multimedia
+              </a>
+              <a class="btn btn-primary" style="margin-top:10px; margin-left: 10px;" data-bs-toggle="collapse" [href]="'#'+'EditDescription'+indexModal" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Edite la Descripción
+              </a>
+      
+              <div class="collapse" [id]="'EditCard'+indexModal" style="text-align: center; margin-top: 10px;">
+                  <div class="card card-body">
+                      <h4 class="mt-4 fw-bold" style="font-family: 'Inter';">Contenedor</h4>
+                      <div class="mb-3 row">
+                          <label for="correo-login" class="col-sm-2 col-form-label" style="font-family: 'Inter';">Fondo:</label>
+                          <div class="col-sm-1">
+                          <input type="color" class="form-control rounded-pill bg-azure-web" [(ngModel)]="LineaDelTiempo[indexModal].Fondo" aria-describedby="emailHelp">
+                          </div>
+                      </div>
+                      <div class="mb-3 row">
+                          <label for="correo-login" class="col-sm-2 col-form-label" style="font-family: 'Inter';">Ancho:</label>
+                          <div class="col-sm-2">
+                          <input type="number" class="form-control rounded-pill bg-azure-web" [(ngModel)]="LineaDelTiempo[indexModal].Ancho" aria-describedby="emailHelp">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="collapse" [id]="'EditTitle'+indexModal" style="text-align: center; margin-top: 10px;">
+                  <div class="card card-body">
+                      <h4 class="mt-4 fw-bold" style="font-family: 'Inter';">Titulo</h4>
+                      <div class="mb-3 row">
+                          <label for="correo-login" class="col-sm-2 col-form-label" style="font-family: 'Inter';">Texto:</label>
+                          <div class="col-sm-3">
+                          <input type="text" class="form-control rounded-pill bg-azure-web" [(ngModel)]="LineaDelTiempo[indexModal].Titulo" aria-describedby="emailHelp">
+                          </div>
+                      </div>
+                      <div class="mb-3 row">
+                          <label for="correo-login" class="col-sm-2 col-form-label" style="font-family: 'Inter';">Color Texto:</label>
+                          <div class="col-sm-1">
+                          <input type="color" class="form-control rounded-pill bg-azure-web" [(ngModel)]="LineaDelTiempo[indexModal].TituloColor" aria-describedby="emailHelp">
+                          </div>
+                      </div>
+                      <div class="mb-3 row">
+                          <label for="correo-login" class="col-sm-2 col-form-label" style="font-family: 'Inter';">Fecha:</label>
+                          <div class="col-sm-2">
+                          <input type="number" class="form-control rounded-pill bg-azure-web" [(ngModel)]="LineaDelTiempo[indexModal].Fecha" aria-describedby="emailHelp">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="collapse" [id]="'EditMultimedia'+indexModal" style="text-align: center; margin-top: 10px;">
+                  <div class="card card-body">
+                      <h4 class="mt-4 fw-bold" style="font-family: 'Inter';">Multimedia</h4>
+                      <div class="mb-3 row">
+                          <label for="correo-login" class="col-sm-2 col-form-label" style="font-family: 'Inter';">Foto/Video:</label>
+                          <div class="col-sm-6">
+                              <input type="file" class="form-control rounded-pill bg-azure-web" accept="image/*,video/*" (change)="handleFileInput($event, indexModal)">
+                          </div>
+                      </div>
+                      <div class="mb-3 row">
+                          <label for="correo-login" class="col-sm-2 col-form-label" style="font-family: 'Inter';">Ancho:</label>
+                          <div class="col-sm-3">
+                          <input type="number" class="form-control rounded-pill bg-azure-web" [(ngModel)]="LineaDelTiempo[indexModal].FotoAncho" aria-describedby="emailHelp">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="collapse" [id]="'EditDescription'+indexModal" style="text-align: center; margin-top: 10px;">
+                  <div class="card card-body">
+                      <h4 class="mt-4 fw-bold" style="font-family: 'Inter';">Descripcion</h4>
+                      <div class="mb-3 row">
+                          <label for="correo-login" class="col-sm-2 col-form-label" style="font-family: 'Inter';">Texto:</label>
+                          <div class="col-sm-3">
+                          <input type="text" class="form-control rounded-pill bg-azure-web" [(ngModel)]="LineaDelTiempo[indexModal].Descripcion" aria-describedby="emailHelp">
+                          </div>
+                      </div>
+                      <div class="mb-3 row">
+                          <label for="correo-login" class="col-sm-2 col-form-label" style="font-family: 'Inter';">Color Texto:</label>
+                          <div class="col-sm-1">
+                          <input type="color" class="form-control rounded-pill bg-azure-web" [(ngModel)]="LineaDelTiempo[indexModal].DescripcionColor" aria-describedby="emailHelp">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <button *ngIf="editMode" class="btn btn-primary" style="margin-top:10px;margin-left: 49%;" (click)="agregarItem()">+</button>

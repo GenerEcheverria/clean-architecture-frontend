@@ -1,0 +1,45 @@
+<ng-container *ngIf="isDataLoaded">
+
+<div
+  class="border border-primary"
+  [style.background-color]="webContent.newCrearSitio.backgroundColor"
+>
+<!-- Componente para construir el header del sitio -->
+  <app-titulo-lienzo
+    [hero]="webContent.newCrearSitio.header.hero"
+    [title]="webContent.newCrearSitio.header.title"
+    [position]="webContent.newCrearSitio.header.position"
+    [size]="webContent.newCrearSitio.header.size"
+    [color]="webContent.newCrearSitio.header.color"
+    [image]="webContent.newCrearSitio.header.image"
+  >
+  </app-titulo-lienzo>
+  <!-- Componente para construir los elementos que conforman al body del sitio -->
+  <app-body-builder
+    *ngFor="let item of this.webContent.newCrearSitio.body; let i = index"
+    [webContent]="item"
+  >
+  </app-body-builder>
+  <br>
+  <br>
+  <!-- Componente para construir el footer del sitio -->
+  <app-footer-lienzo
+    class="m-0 p-0"
+    [backgroundColor]="webContent.newCrearSitio.footer.backgroundColor"
+    [textColor]="webContent.newCrearSitio.footer.textColor"
+    [setSocialMedia]="webContent.newCrearSitio.footer.socialMedia.setSocialMedia"
+    [facebookUrl]="webContent.newCrearSitio.footer.socialMedia.facebook"
+    [instagramUrl]="webContent.newCrearSitio.footer.socialMedia.instagram"
+    [twitterUrl]="webContent.newCrearSitio.footer.socialMedia.twitter"
+    [linkedinUrl]="webContent.newCrearSitio.footer.socialMedia.linkedin"
+    [tiktokUrl]="webContent.newCrearSitio.footer.socialMedia.tiktok"
+    [otroUrl]="webContent.newCrearSitio.footer.socialMedia.otro"
+    [setExtra]="webContent.newCrearSitio.footer.extra.setExtra"
+    [imgExtraFooter]="webContent.newCrearSitio.footer.extra.image"
+    [textExtraFooter]="webContent.newCrearSitio.footer.extra.text"
+    [setContact]="webContent.newCrearSitio.footer.contact.setContact"
+    [phone]="webContent.newCrearSitio.footer.contact.phone"
+    [address]="webContent.newCrearSitio.footer.contact.address"
+  ></app-footer-lienzo>
+</div>
+</ng-container>

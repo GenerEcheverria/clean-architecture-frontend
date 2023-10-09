@@ -1,0 +1,465 @@
+<div class="d-flex justify-content-between align-items-center">
+  <h3>Crear sitio web</h3>
+  <div class="position-fixed end-0 border rounded p-1 bg-secondary">
+    <div class="form-check form-switch">
+      <label class="form-check-label" for="type">Visualizar</label>
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        (change)="mostrarPreview()"
+      />
+    </div>
+  </div>
+</div>
+<!-- Formulario para las secciones de la página -->
+<form
+  [style.display]="showForm" 
+  id="sitioForm"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="sitioForm"
+>
+  <div class="border rounded p-4">
+    <h5>Información del sitio</h5>
+    <div class="d-flex align-items-center">
+      <label class="me-2" for="name">Nombre: </label>
+      <input class="form-control" type="text" formControlName="name" />
+    </div>
+    <span class="text-danger" *ngIf="name && name.invalid && name.touched"
+      >Solo se permiten caracteres alfanuméricos sin espacios</span
+    >
+    <div class="mt-2">
+      <label for="color" class="align-top">Color de fondo:</label>
+      <input class="mx-2" type="color" formControlName="backgroundColor" />
+    </div>
+  </div>
+  <br />
+  <div class="border rounded p-4">
+    <h5>Cabecera</h5>
+    <form id="header" formGroupName="header">
+      <div class="d-flex align-items-center justify-content-between pt-2">
+        <div class="d-flex align-items-center">
+          <label for="title">Titulo: </label>
+          <input
+            class="mx-2 form-control"
+            type="text"
+            formControlName="title"
+          />
+        </div>
+        <div class="">
+          <label class="pe-2" for="position">Posición:</label>
+          <div class="form-check form-check-inline">
+            <input
+              type="radio"
+              value="left"
+              formControlName="position"
+              class="form-check-input"
+            />
+            <label class="form-check-label"> Izquierda </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              value="center"
+              formControlName="position"
+            />
+            <label class="form-check-label"> Centro </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              value="right"
+              formControlName="position"
+            />
+
+            <label class="form-check-label"> Derecha </label>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span
+          class="text-danger"
+          *ngIf="headerTitle && headerTitle.invalid && headerTitle.touched"
+          >Solo se permiten titulos alfanuméricos</span
+        >
+        <div></div>
+        <span
+          class="text-danger ml-auto"
+          *ngIf="headerPosition && headerPosition.invalid"
+          >Debe elegir una posición</span
+        >
+      </div>
+      <div class="d-flex justify-content-between pt-2">
+        <div class="">
+          <label class="pe-2" for="size">Tamaño de letra:</label>
+          <div class="form-check form-check-inline">
+            <input
+              type="radio"
+              value="small"
+              formControlName="size"
+              class="form-check-input"
+            />
+            <label class="form-check-label"> Pequeño </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              type="radio"
+              value="medium"
+              formControlName="size"
+              class="form-check-input"
+            />
+            <label class="form-check-label"> Mediano </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              type="radio"
+              value="big"
+              formControlName="size"
+              class="form-check-input"
+            />
+            <label class="form-check-label"> Grande </label>
+          </div>
+        </div>
+        <div class="">
+          <label for="color" class="align-top">Color:</label>
+          <input class="mx-2" type="color" formControlName="color" />
+        </div>
+      </div>
+      <span class="text-danger ml-auto" *ngIf="headerSize && headerSize.invalid"
+        >Debe elegir un tamaño</span
+      >
+      <div class="ms-1 py-1 row">
+        <div class="form-check form-switch col-3">
+          <label class="form-check-label" for="type">Agregar Hero</label>
+          <input
+            value="false"
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="hero"
+            formControlName="hero"
+            (change)="isHero = !isHero"
+          />
+        </div>
+        <div *ngIf="isHero" class="col-7">
+          <div class="row">
+            <label for="image" class="col-1 me-5">Imagen: </label>
+            <div class="form-check col-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="image"
+                id="image"
+                (change)="uploadHeroImage = true"
+                checked
+              />
+              <label class="form-check-label" for="image">
+                Agregar archivo
+              </label>
+            </div>
+            <div class="form-check col-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="image"
+                id="image"
+                (change)="uploadHeroImage = false"
+              />
+              <label class="form-check-label" for="image"> Agregar URL </label>
+            </div>
+            <div class="col-8">
+              <input
+                type="file"
+                class="form-control ms-2"
+                formControlName="image"
+                *ngIf="uploadHeroImage"
+              />
+              <input
+                placeholder="URL"
+                type="text"
+                class="form-control ms-2"
+                formControlName="image"
+                *ngIf="!uploadHeroImage"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br />
+  <!-- Array de secciones para el body -->
+  <div class="border rounded p-4">
+    <h5>Cuerpo</h5>
+    <app-body-element
+      *ngFor="
+        let childForm of getCtrl('body', sitioForm).controls;
+        let i = index
+      "
+      [bodyElementForm]="childForm"
+      [arrayIndex]="i"
+      (deleteBodyElementEvent)="deleteBodyElement($event)"
+    >
+    </app-body-element>
+    <div class="text-center border border-primary rounded p-1">
+      <h5 class="fs-6">Agregar nuevo elemento</h5>
+      <div class="row my-2">
+        <h5 class="col-3 fs-6">Columna completa</h5>
+        <select class="col-6" #full>
+          <option selected>Elemento</option>
+          <option value="Text">Texto</option>
+          <option value="Image">Imagen</option>
+          <option value="Video">Video</option>
+          <option value="Timeline">Línea del tiempo</option>
+        </select>
+        <button
+          type="button"
+          (click)="addFullColumn(full.value)"
+          class="col-2 text-primary pe-auto btn btn-outline-secondary mx-1"
+        >
+          Agregar
+        </button>
+      </div>
+      <div class="row">
+        <h5 class="col-3 fs-6">Columna dividida</h5>
+        <select name="" id="" class="col-3" #leftType>
+          <option selected>Elemento izquierdo</option>
+          <option value="Text">Texto</option>
+          <option value="Image">Imagen</option>
+          <option value="Video">Video</option>
+        </select>
+        <select name="" id="" class="col-3" #rightType>
+          <option selected>Elemento derecho</option>
+          <option value="Text">Texto</option>
+          <option value="Image">Imagen</option>
+          <option value="Video">Video</option>
+        </select>
+        <button
+          type="button"
+          (click)="addSplitColumn(leftType.value, rightType.value)"
+          class="col-2 text-primary pe-auto btn btn-outline-secondary mx-1"
+        >
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+  <br />
+  <!-- Formulario para pie de pagina -->
+  <form class="border rounded p-4" formGroupName="footer">
+    <h5>Pie</h5>
+    <div class="d-flex justify-content-between">
+      <div class="py-1">
+        <label for="color" class="align-top">Color de fondo:</label>
+        <input class="mx-2" type="color" formControlName="backgroundColor" />
+      </div>
+      <div class="py-1">
+        <label for="color" class="align-top">Color de texto:</label>
+        <input class="mx-2" type="color" formControlName="textColor" />
+      </div>
+    </div>
+    <div formGroupName="socialMedia">
+      <div class="form-check form-switch pb-2">
+        <label class="form-check-label" for="type"
+          >Agregar redes sociales</label
+        >
+        <input
+          value="true"
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          formControlName="setSocialMedia"
+          (change)="setSocialMedia = !setSocialMedia"
+        />
+      </div>
+      <div *ngIf="setSocialMedia" class="text-center">
+        <h5 class="fs-6">Enlaces a Redes sociales</h5>
+        <div class="d-flex justify-content-between py-1">
+          <div class="d-flex align-items-center">
+            <label for="facebook" class="me-1">Facebook: </label>
+            <input
+              class="mx-2 form-control"
+              type="text"
+              formControlName="facebook"
+            />
+          </div>
+          <div class="d-flex align-items-center">
+            <label for="facebook">Twitter: </label>
+            <input
+              class="mx-2 form-control"
+              type="text"
+              formControlName="twitter"
+            />
+          </div>
+        </div>
+        <div class="d-flex justify-content-between py-1">
+          <div class="d-flex align-items-center">
+            <label for="facebook">Instagram: </label>
+            <input
+              class="mx-2 form-control"
+              type="text"
+              formControlName="instagram"
+            />
+          </div>
+          <div class="d-flex align-items-center">
+            <label for="facebook">Tiktok: </label>
+            <input
+              class="mx-2 form-control"
+              type="text"
+              formControlName="tiktok"
+            />
+          </div>
+        </div>
+        <div class="d-flex justify-content-between py-1">
+          <div class="d-flex align-items-center">
+            <label for="facebook" class="me-2">LinkedIn: </label>
+            <input
+              class="mx-2 form-control"
+              type="text"
+              formControlName="linkedin"
+            />
+          </div>
+          <div class="d-flex align-items-center">
+            <label for="facebook">Otro: </label>
+            <input
+              class="mx-2 form-control"
+              type="text"
+              formControlName="otro"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="py-3" formGroupName="contact">
+      <div class="form-check form-switch pb-2">
+        <label class="form-check-label" for="type"
+          >Agregar datos de contacto</label
+        >
+        <input
+          value="true"
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          formControlName="setContact"
+          (change)="setContact = !setContact"
+        />
+      </div>
+      <div *ngIf="setContact">
+        <h5 class="fs-6 text-center">Datos de contacto</h5>
+        <div class="d-flex justify-content-between py-1">
+          <div class="d-flex align-items-center">
+            <label for="phone" class="me-1">Teléfono: </label>
+            <input
+              class="mx-2 form-control"
+              type="text"
+              formControlName="phone"
+            />
+          </div>
+          <div class="d-flex align-items-center">
+            <label for="facebook">Dirección: </label>
+            <input
+              class="mx-2 form-control"
+              type="text"
+              formControlName="address"
+            />
+          </div>
+        </div>
+        <span
+          class="text-danger ml-auto"
+          *ngIf="footerPhone && footerPhone.invalid"
+          >El teléfono debe ser 10 dígitos</span
+        >
+      </div>
+    </div>
+    <div formGroupName="extra">
+      <div class="form-check form-switch pb-2">
+        <label class="form-check-label" for="type">Agregar extras</label>
+        <input
+          value="true"
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          formControlName="setExtra"
+          (change)="setExtra = !setExtra"
+        />
+      </div>
+      <div *ngIf="setExtra">
+        <h5 class="fs-6 text-center">Otros</h5>
+        <div class="py-1">
+          <div class="row">
+            <label for="image" class="col-1 me-5">Imagen: </label>
+            <div class="form-check col-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="image"
+                id="image"
+                (change)="upload = true"
+                checked
+              />
+              <label class="form-check-label" for="image">
+                Agregar archivo
+              </label>
+            </div>
+            <div class="form-check col-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="image"
+                id="image"
+                (change)="upload = false"
+              />
+              <label class="form-check-label" for="image"> Agregar URL </label>
+            </div>
+            <div class="col-4">
+              <input
+                type="file"
+                class="form-control ms-2"
+                formControlName="image"
+                *ngIf="upload"
+              />
+              <input
+                placeholder="URL"
+                type="text"
+                class="form-control ms-2"
+                formControlName="image"
+                *ngIf="!upload"
+              />
+            </div>
+          </div>
+          <div class="d-flex align-items-center">
+            <label for="facebook">Pie de imagen: </label>
+            <input
+              class="mx-2 form-control"
+              type="text"
+              formControlName="text"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="d-flex justify-content-evenly my-4">
+    <button
+      (click)="cancelar()"
+      class="btn btn-secondary rounded-pill text-gray px-5 py-2"
+    >
+      Cancelar
+    </button>
+    <button
+      [disabled]="sitioForm.invalid"
+      type="submit"
+      form="sitioForm"
+      class="btn btn-primary rounded-pill text-white px-5 py-2"
+    >
+      Guardar
+    </button>
+  </div>
+</form>
+<!-- Preview de la página -->
+<app-lienzo-pagina
+  *ngIf="preview"
+  [webContent]="this.sitioForm.value"
+></app-lienzo-pagina>

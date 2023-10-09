@@ -1,0 +1,48 @@
+<form [formGroup]="bodyElementForm">
+  <div *ngIf="isFull" [ngSwitch]="mediaType">
+    <div class="border p-3 mb-1">
+      <div class="d-flex justify-content-between align-items-baseline">
+        <p class="fs-6 fw-light">Columna completa</p>
+        <button
+          class="btn"
+          type="button"
+          (click)="deleteBodyElement(arrayIndex)"
+        >
+          <i class="bi bi-trash text-danger"></i>
+        </button>
+      </div>
+      <app-text [column]="'full'" *ngSwitchCase="'Text'"></app-text>
+      <app-image [column]="'full'" *ngSwitchCase="'Image'"></app-image>
+      <app-video [column]="'full'" *ngSwitchCase="'Video'"></app-video>
+      <app-timeline *ngSwitchCase="'Timeline'"></app-timeline>
+    </div>
+  </div>
+
+  <div *ngIf="!isFull">
+    <div class="border p-3 mb-1">
+      <div class="d-flex justify-content-between align-items-baseline">
+        <p class="fs-6 fw-light">Columna dividida</p>
+        <button
+          class="btn"
+          type="button"
+          (click)="deleteBodyElement(arrayIndex)"
+        >
+          <i class="bi bi-trash text-danger"></i>
+        </button>
+      </div>
+      <div class="row">
+        <form [ngSwitch]="leftType" class="p-2 border-end col-6">
+          <app-text [column]="'left'" *ngSwitchCase="'Text'"></app-text>
+          <app-image [column]="'left'" *ngSwitchCase="'Image'"></app-image>
+          <app-video [column]="'left'" *ngSwitchCase="'Video'"></app-video>
+        </form>
+
+        <form [ngSwitch]="rightType" class="p-2 border-start col-6">
+          <app-text [column]="'right'" *ngSwitchCase="'Text'"></app-text>
+          <app-image [column]="'right'" *ngSwitchCase="'Image'"></app-image>
+          <app-video [column]="'right'" *ngSwitchCase="'Video'"></app-video>
+        </form>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,71 @@
+<div>
+  <div *ngIf="!columns" [ngSwitch]="fullType" class="row m-0 p-0">
+    <!--alineacionTexto puede ser Justificado || Izquierda || Derecha || Centro. -->
+    <app-texto-lienzo
+      *ngSwitchCase="'text'"
+      [title]="this.full.text.title"
+      [position]="this.full.text.position"
+      [texto]="this.full.text.text"
+      [alineacionTexto]="this.full.text.alignment"
+    >
+    </app-texto-lienzo>
+    <!--tamañoImg puede ser Grande || Mediano|| Pequeño. -->
+    <app-imagen-lienzo
+      *ngSwitchCase="'image'"
+      [fuenteImg]="this.full.image.image"
+      [captionImg]="this.full.image.caption"
+      [tamañoImg]="this.full.image.size"
+    ></app-imagen-lienzo>
+    <app-video-lienzo
+      *ngSwitchCase="'video'"
+      [fuenteVid]="this.full.video.video"
+      [tamañoVid]="this.full.video.size"
+    ></app-video-lienzo>
+  </div>
+  <div *ngIf="columns" class="d-flex justify-content-between">
+    <div [ngSwitch]="leftType">
+      <app-texto-lienzo
+        *ngSwitchCase="'text'"
+        [title]="this.left.text.title"
+        [position]="this.left.text.position"
+        [texto]="this.left.text.text"
+        [alineacionTexto]="this.left.text.alignment"
+      >
+      </app-texto-lienzo>
+      <!--tamañoImg puede ser Grande || Mediano|| Pequeño. -->
+      <app-imagen-lienzo
+        *ngSwitchCase="'image'"
+        [fuenteImg]="this.left.image.image"
+        [captionImg]="this.left.image.caption"
+        [tamañoImg]="this.left.image.size"
+      ></app-imagen-lienzo>
+      <app-video-lienzo
+        *ngSwitchCase="'video'"
+        [fuenteVid]="this.left.video.video"
+        [tamañoVid]="this.left.video.size"
+      ></app-video-lienzo>
+    </div>
+    <div [ngSwitch]="rightType">
+      <app-texto-lienzo
+        *ngSwitchCase="'text'"
+        [title]="this.right.text.title"
+        [position]="this.right.text.position"
+        [texto]="this.right.text.text"
+        [alineacionTexto]="this.right.text.alignment"
+      >
+      </app-texto-lienzo>
+      <!--tamañoImg puede ser Grande || Mediano|| Pequeño. -->
+      <app-imagen-lienzo
+        *ngSwitchCase="'image'"
+        [fuenteImg]="this.right.image.image"
+        [captionImg]="this.right.image.caption"
+        [tamañoImg]="this.right.image.size"
+      ></app-imagen-lienzo>
+      <app-video-lienzo
+        *ngSwitchCase="'video'"
+        [fuenteVid]="this.right.video.video"
+        [tamañoVid]="this.right.video.size"
+      ></app-video-lienzo>
+    </div>
+  </div>
+</div>

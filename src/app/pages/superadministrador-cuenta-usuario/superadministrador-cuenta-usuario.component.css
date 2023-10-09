@@ -1,0 +1,27 @@
+.rounded-pill {
+    border-radius: 20px;
+}
+#nombreUsuario, #correoUsuario {
+    display: flex;
+    align-items: center; /* alinea verticalmente en el centro */
+    justify-content: flex-start; /* alinea horizontalmente a la izquierda */
+    width: 550px;
+    height: 40px;
+    padding-left: 20px;
+}
+.divGuardarEstado{
+    align-items: end; /* alinea verticalmente en el centro */
+    justify-content: flex-end;
+}
+button{
+
+    border-radius: 20px;
+}
+#filasInformacion{
+    height: 40px;
+}
+#image-container {
+    width: 150px;
+    height: 150px;
+  }
+  

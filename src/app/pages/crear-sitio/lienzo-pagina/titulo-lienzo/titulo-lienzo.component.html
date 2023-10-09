@@ -1,0 +1,16 @@
+<div class="">
+  <div *ngIf="!hero" id="titulo" class="{{clase}}">
+    <h2 [style.color]="color" class="{{claseSize}} p-3">{{ title }}</h2>
+  </div>
+  <div *ngIf="hero">
+    <div class="p-5 text-center rounded-3" style="background-image: url('{{image}}'); height: 400px; background-position: center; background-repeat: no-repeat; background-size: cover; display: flex; align-items: center; justify-content: center; position: relative;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6); position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+              <h2 class="{{ claseSize }}">{{ title }}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
