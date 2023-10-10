@@ -23,6 +23,10 @@ Formato: `type(scope?): subject`
 - scope is optional; multiple scopes are supported (current delimiter options: "/", "\" and ",")
 - subject: lowercase and not sentece
 
+## lint
+- ``.eslint.json` contiene las reglas
+- Se ejecuta con `npm run lint`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
