@@ -2,6 +2,27 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.0.
 
+## Setup
+1. Descargar dependencias con `npm install`
+2. Instalar husky con `npx husky install`
+
+## Commit format
+Formato: `type(scope?): subject`
+- type: 
+    - build
+    - chore
+    - ci
+    - docs
+    - feat
+    - fix
+    - perf
+    - refactor
+    - revert
+    - style
+    - test
+- scope is optional; multiple scopes are supported (current delimiter options: "/", "\" and ",")
+- subject: lowercase and not sentece
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
