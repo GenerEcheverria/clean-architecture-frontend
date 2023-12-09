@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: [ './register.component.css' ]
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
 
@@ -65,18 +65,19 @@ export class RegisterComponent {
    */
   ngOnInit(): void {
     this.formLogin = this.formBuilder.group({
-      name: [ '', [ Validators.required, Validators.minLength(this.MINIMUM_INPUT_LENGTH) ] ],
-      email: [ '', [ Validators.required, this.emailValidator() ] ],
-      phone: [ '', [ Validators.required, Validators.minLength(this.MINIMUM_CELLPHONE_NUMBER_LENGTH), Validators.maxLength(this.MAXIMUM_CELLPHONE_NUMBER_LENGTH) ] ],
-      photo: [ '', [ Validators.required, this.imageValidator.bind(this) ] ],
-      password: [ '', [ Validators.required, Validators.minLength(this.MINIMUM_INPUT_LENGTH) ] ],
-      confirmPassword: [ '', [ Validators.required ] ] }, { validator: this.passwordsMatchValidator });
+      name: ['', [Validators.required, Validators.minLength(this.MINIMUM_INPUT_LENGTH)]],
+      email: ['', [Validators.required, this.emailValidator()]],
+      phone: ['', [Validators.required, Validators.minLength(this.MINIMUM_CELLPHONE_NUMBER_LENGTH), Validators.maxLength(this.MAXIMUM_CELLPHONE_NUMBER_LENGTH)]],
+      photo: ['', [Validators.required, this.imageValidator.bind(this)]],
+      password: ['', [Validators.required, Validators.minLength(this.MINIMUM_INPUT_LENGTH)]],
+      confirmPassword: ['', [Validators.required]]
+    }, { validator: this.passwordsMatchValidator });
   }
 
   passwordsMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
-    if(password != '' && confirmPassword != ''){
+    if (password != '' && confirmPassword != '') {
       if (password && confirmPassword && password !== confirmPassword) {
         formGroup.get('confirmPassword')?.setErrors({ passwordsNotMatch: true });
       } else {
@@ -144,18 +145,18 @@ export class RegisterComponent {
    */
   onSubmit() {
     const formUser = this.formLogin.value;
-    const newUser:User = {
+    const newUser: User = {
       'name': formUser.name,
-      'email' : formUser.email,
-      'password' : this.crypto.encrypted(formUser.password),
-      'role' : 'admin',
+      'email': formUser.email,
+      'password': this.crypto.encrypted(formUser.password),
+      'role': 'admin',
       'phone': formUser.phone,
       'photo': '../../../assets/users/generceo.png',
     };
     this.authService.register(newUser.name, newUser.email, newUser.password, newUser.role, newUser.phone, newUser.photo).subscribe(
       (response) => {
         console.log(response);
-        this.router.navigate([ '/login' ]);
+        this.router.navigate(['/login']);
       },
       (error) => {
         console.error(error);

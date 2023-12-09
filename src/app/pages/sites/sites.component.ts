@@ -8,7 +8,7 @@ import { SiteService } from 'src/app/services/site.service';
 @Component({
   selector: 'app-sitios',
   templateUrl: './sites.component.html',
-  styleUrls: [ './sites.component.css' ]
+  styleUrls: ['./sites.component.css']
 })
 export class SitesComponent {
   protected webContent: any;
@@ -52,7 +52,7 @@ export class SitesComponent {
       try {
         const response = await this.siteService.getSiteIdByUrl(this.url.toString()).toPromise();
         if (response.state !== 'publicada') {
-          this.router.navigate([ '/misSitios' ]);
+          this.router.navigate(['/misSitios']);
           return;
         }
         id = response.id;
@@ -62,7 +62,7 @@ export class SitesComponent {
         console.log(error);
       }
     } else {
-      this.router.navigate([ '/login' ]);
+      this.router.navigate(['/login']);
     }
   }
 }

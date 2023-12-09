@@ -28,7 +28,7 @@ export class MySitesService {
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
   public getAllUsers() {
-    return this.httpClient.get<any>(this.URL+'/media/mySites', this.httpOptions);
+    return this.httpClient.get<any>(this.URL + '/media/mySites', this.httpOptions);
   }
 
 }

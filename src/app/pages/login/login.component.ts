@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: [ './login.component.css' ]
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -33,28 +33,28 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.formLogin = this.formBuilder.group({
-      email: [ '', [ Validators.required, this.emailValidator() ] ],
-      password: [ '', [ Validators.required, Validators.minLength(this.MINIMUM_INPUT_VALUE) ] ]
+      email: ['', [Validators.required, this.emailValidator()]],
+      password: ['', [Validators.required, Validators.minLength(this.MINIMUM_INPUT_VALUE)]]
     });
   }
 
   protected login(): void {
     const formUser = this.formLogin.value;
     const user = {
-      'email' : formUser.email,
-      'password' : this.crypto.encrypted(formUser.password)
+      'email': formUser.email,
+      'password': this.crypto.encrypted(formUser.password)
     };
     this.authService.login(user.email, user.password).subscribe(
       (response) => {
         localStorage.setItem('token', response.access_token);
         this.authService.setUserRoles(response.role);
         if (response.role === 'superadmin') {
-          this.router.navigate([ '/sasitios' ]);
+          this.router.navigate(['/sasitios']);
         } else if (response.role === 'admin') {
-          this.router.navigate([ '/misSitios' ]);
+          this.router.navigate(['/misSitios']);
         } else {
           // Redirigir a otra página en caso de otro tipo de usuario
-          this.router.navigate([ '/login' ]);
+          this.router.navigate(['/login']);
         }
       },
       (error) => {

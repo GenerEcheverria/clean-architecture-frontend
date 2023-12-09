@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-superadministrador-cuenta-usuario',
   templateUrl: './superadministrador-cuenta-usuario.component.html',
-  styleUrls: [ './superadministrador-cuenta-usuario.component.css' ]
+  styleUrls: ['./superadministrador-cuenta-usuario.component.css']
 })
 export class SuperadministradorCuentaUsuarioComponent implements OnInit {
   id!: string | null;
@@ -24,9 +24,9 @@ export class SuperadministradorCuentaUsuarioComponent implements OnInit {
   protected sites: any;
   protected isDeleteUser!: boolean;
 
-   /**
-   * Método que se ejecuta después de que los componentes de la vista se inicializan completamente.
-   */
+  /**
+  * Método que se ejecuta después de que los componentes de la vista se inicializan completamente.
+  */
   ngAfterViewInit() {
     $(document).ready(function () {
       $('#example').DataTable({
@@ -50,18 +50,18 @@ export class SuperadministradorCuentaUsuarioComponent implements OnInit {
     private datePipe: DatePipe
   ) { }
 
-   /**
-   * Método que se ejecuta al inicializar el componente.
-   */
+  /**
+  * Método que se ejecuta al inicializar el componente.
+  */
   ngOnInit(): void {
     this.isDeleteUser = false;
     this.loadData();
 
   }
 
-    /**
-   * Carga los datos del usuario y los sitios asociados.
-   */
+  /**
+ * Carga los datos del usuario y los sitios asociados.
+ */
   async loadData(): Promise<void> {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {

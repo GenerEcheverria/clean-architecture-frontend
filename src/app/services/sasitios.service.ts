@@ -29,7 +29,7 @@ export class SasitiosService {
    * Obtiene la lista de usuarios del sistema SASitios.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
-  public getUsers(){
+  public getUsers() {
     return this.httpClient.get<saUsuarios[]>(this.URL + '/account/sausers', this.httpOptions);
   }
 

@@ -7,15 +7,15 @@ import { MySitesService } from 'src/app/services/my-sites.service';
 @Component({
   selector: 'app-ranking',
   templateUrl: './ranking.component.html',
-  styleUrls: [ './ranking.component.css' ]
+  styleUrls: ['./ranking.component.css']
 })
 export class RankingComponent {
 
   protected siteLibrary: any[] = [];
   private mySitesService!: MySitesService;
 
-  constructor(mySitesServieParam: MySitesService) {
-    this.mySitesService=mySitesServieParam;
+  constructor(mySitesServiceParam: MySitesService) {
+    this.mySitesService = mySitesServiceParam;
   }
 
   ngOnInit(): void {

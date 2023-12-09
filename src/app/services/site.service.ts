@@ -49,7 +49,7 @@ export class SiteService {
    * @param state Nuevo estado del sitio.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
-  public updateState(siteId:number, state: string){
+  public updateState(siteId: number, state: string) {
     return this.httpClient.post<any>(this.URL + '/media/updateState', { id: siteId, state });
   }
 
@@ -58,7 +58,7 @@ export class SiteService {
    * @param userId Identificador del usuario.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
-  public getSitesForUser(userId: string){
-    return this.httpClient.get<any>(this.URL + '/media/userSites/'+userId, this.httpOptions);
+  public getSitesForUser(userId: string) {
+    return this.httpClient.get<any>(this.URL + '/media/userSites/' + userId, this.httpOptions);
   }
 }

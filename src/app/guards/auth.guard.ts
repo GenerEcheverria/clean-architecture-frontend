@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
   private authService!: AuthService;
   private router!: Router;
 
-  constructor( authServiceParam: AuthService, routerParam: Router) {
+  constructor(authServiceParam: AuthService, routerParam: Router) {
     this.authService = authServiceParam;
     this.router = routerParam;
   }
@@ -22,12 +22,12 @@ export class AuthGuard implements CanActivate {
       if (response.valid) {
         return true;
       } else {
-        this.router.navigate([ '/login' ]);
+        this.router.navigate(['/login']);
         return false;
       }
     } catch (error) {
       console.error('Error occurred during authentication check:', error);
-      this.router.navigate([ '/login' ]);
+      this.router.navigate(['/login']);
       return false;
     }
   }

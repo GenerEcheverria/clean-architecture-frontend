@@ -35,6 +35,6 @@ export class MyAccountService {
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
   public editAccount(account: any, userId: string) {
-    return this.httpClient.put<any>(this.URL + '/account/users/'+userId, { account, id: userId }, this.httpOptions);
+    return this.httpClient.put<any>(this.URL + '/account/users/' + userId, { account, id: userId }, this.httpOptions);
   }
 }

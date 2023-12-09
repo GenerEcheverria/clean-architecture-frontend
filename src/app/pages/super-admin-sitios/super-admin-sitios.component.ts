@@ -16,21 +16,21 @@ import DataTables from 'datatables.net';
 @Component({
   selector: 'app-super-admin-sitios',
   templateUrl: './super-admin-sitios.component.html',
-  styleUrls: [ './super-admin-sitios.component.css' ]
+  styleUrls: ['./super-admin-sitios.component.css']
 })
 export class SuperAdminSitiosComponent implements OnInit {
   public userSiteCounts: { userId: string, siteCount: number }[] = [];
   public saUsuarios: saUsuarios[] = [];
   public nombre: string[] = [];
   public nsitios: number[] = [];
-  id!:string | null;
-  protected name!:string;
-  protected email!:string;
-  protected phone!:string;
+  id!: string | null;
+  protected name!: string;
+  protected email!: string;
+  protected phone!: string;
   public dataTable: any;
 
 
-  constructor(private sasitiosService: SasitiosService, private route: ActivatedRoute, private userService: UserService,private siteService: SiteService, private router: Router) { }
+  constructor(private sasitiosService: SasitiosService, private route: ActivatedRoute, private userService: UserService, private siteService: SiteService, private router: Router) { }
 
   /**
    * Método que se ejecuta al inicializar el componente.
@@ -67,7 +67,7 @@ export class SuperAdminSitiosComponent implements OnInit {
 
         console.log(userSiteCount); // Aquí puedes ver el objeto con el ID y la cantidad de sitios
 
-        const boton = '<button type="button" class="btn btn-primary rounded-pill text-white"><a class="text-white text-decoration-none" href="http://localhost:4200/sausuarios/'+ userId +'">Ver Usuario</a></button>'
+        const boton = '<button type="button" class="btn btn-primary rounded-pill text-white"><a class="text-white text-decoration-none" href="http://localhost:4200/sausuarios/' + userId + '">Ver Usuario</a></button>'
         this.dataTable.row.add([
           nom,
           siteCount.toString(),
@@ -92,18 +92,18 @@ export class SuperAdminSitiosComponent implements OnInit {
    * Método que se ejecuta después de que los componentes de la vista se inicializan completamente.
    */
   ngAfterViewInit() {
-        this.dataTable = $('#example').DataTable({
+    this.dataTable = $('#example').DataTable({
 
-          "language": {
-            "search": "",
-            "searchPlaceholder": "Buscar",
-          },
-          "dom": '<"d-flex justify-content-end"f>t<"d-flex justify-content-between"ipl>',
+      "language": {
+        "search": "",
+        "searchPlaceholder": "Buscar",
+      },
+      "dom": '<"d-flex justify-content-end"f>t<"d-flex justify-content-between"ipl>',
 
-          "pagingType": "simple_numbers",
-        });
+      "pagingType": "simple_numbers",
+    });
 
-    }
   }
+}
 
 

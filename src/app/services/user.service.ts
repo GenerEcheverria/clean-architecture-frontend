@@ -35,7 +35,7 @@ export class UserService {
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
   public getUser(userId: string) {
-    return this.httpClient.get<any>(this.URL + '/users/'+userId, this.httpOptions);
+    return this.httpClient.get<any>(this.URL + '/users/' + userId, this.httpOptions);
   }
 
   /**
@@ -44,6 +44,6 @@ export class UserService {
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
   public deleteUser(userId: string) {
-    return this.httpClient.delete<any>(this.URL + '/users/'+userId, this.httpOptions);
+    return this.httpClient.delete<any>(this.URL + '/users/' + userId, this.httpOptions);
   }
 }

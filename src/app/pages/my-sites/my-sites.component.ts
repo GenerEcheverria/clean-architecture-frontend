@@ -14,7 +14,7 @@ import { SiteService } from 'src/app/services/site.service';
 @Component({
   selector: 'app-mis-sitios',
   templateUrl: './my-sites.component.html',
-  styleUrls: [ './my-sites.component.css' ]
+  styleUrls: ['./my-sites.component.css']
 })
 export class MySitesComponent {
   protected siteLibrary: any[] = [];
@@ -44,9 +44,9 @@ export class MySitesComponent {
   /**
    * Actualiza el estado de un sitio en la base de datos.
    */
-  protected updateSelected(id:number,state:string): void{
-    this.actualModify=id;
-    this.newState=state;
+  protected updateSelected(id: number, state: string): void {
+    this.actualModify = id;
+    this.newState = state;
   }
 
 
@@ -62,11 +62,11 @@ export class MySitesComponent {
   /**
    * Actualiza el estado de un sitio en la base de datos.
    */
-  protected updateDBState(){
+  protected updateDBState() {
     console.log(this.actualModify, this.newState);
     const site = {
-      'id' : this.actualModify,
-      'state' : this.newState
+      'id': this.actualModify,
+      'state': this.newState
     };
     this.siteService.updateState(site.id, site.state).subscribe(
       (response) => {
@@ -83,30 +83,31 @@ export class MySitesComponent {
    * Genera y descarga un archivo PDF con los datos de la biblioteca de sitios.
    */
   protected generatePDF() {
-    const documentDefinition = {   content: [
-      {
-        table: {
-          headerRows: 1,
-          widths: [ '*', '*', '*' ],
-          body: [
-            [ 'URL', 'Nombre', 'Vistas' ],
-            ...this.siteLibrary.map(item => [ '/site/'+item.url, item.name, item.views ])
-          ]
+    const documentDefinition = {
+      content: [
+        {
+          table: {
+            headerRows: 1,
+            widths: ['*', '*', '*'],
+            body: [
+              ['URL', 'Nombre', 'Vistas'],
+              ...this.siteLibrary.map(item => ['/site/' + item.url, item.name, item.views])
+            ]
+          }
+        }
+      ],
+      defaultStyle: {
+        fontSize: 12,
+        color: '#333333'
+      },
+      styles: {
+        body: {
+          fillColor: '#CCCCCC',
+          color: '#FFFFFF',
+          bold: true,
+          fontSize: 15
         }
       }
-    ],
-    defaultStyle: {
-      fontSize: 12,
-      color: '#333333'
-    },
-    styles: {
-      body: {
-        fillColor: '#CCCCCC',
-        color: '#FFFFFF',
-        bold: true,
-        fontSize: 15
-      }
-    }
     };
     pdfMake.createPdf(documentDefinition).download('ReporteMisSitios.pdf');
   }
@@ -120,7 +121,7 @@ export class MySitesComponent {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Biblioteca Sitios');
     const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    const data = new Blob([ excelBuffer ], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const data = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     saveAs(data, 'ReporteMisSitios.xlsx');
   }
 
@@ -143,7 +144,7 @@ export class MySitesComponent {
   /**
    * Actualiza los datos de la biblioteca de sitios.
    */
-  private updateData(){
+  private updateData() {
     this.mySiteService.getAllUsers().subscribe(data => {
       this.siteLibrary = data.sites;
       this.filteredData = this.siteLibrary;

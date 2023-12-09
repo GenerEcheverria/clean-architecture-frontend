@@ -59,21 +59,21 @@ export class AuthService {
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.httpClient.post<any>(this.URL + '/logout', {},httpOptions);
+    return this.httpClient.post<any>(this.URL + '/logout', {}, httpOptions);
   }
 
   /**
    * Obtiene la información del usuario actualmente autenticado.
    * @returns Observable que representa la información del usuario.
    */
-  public getActualUser(){
+  public getActualUser() {
     const token = this.getToken();
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.httpClient.post<any>(this.URL+'/me', {},httpOptions);
+    return this.httpClient.post<any>(this.URL + '/me', {}, httpOptions);
   }
 
   /**
@@ -117,7 +117,7 @@ export class AuthService {
   public hasRole(requiredRole: string): boolean {
     const userRole: string | null = localStorage.getItem('role');
     if (userRole) {
-      return userRole===requiredRole;
+      return userRole === requiredRole;
     }
     return false;
   }

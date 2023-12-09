@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
-  styleUrls: [ './user-account.component.css' ]
+  styleUrls: ['./user-account.component.css']
 })
 export class UserAccountComponent implements OnInit {
 
@@ -43,7 +43,7 @@ export class UserAccountComponent implements OnInit {
   private router!: Router;
   private accountService!: MyAccountService;
 
-  constructor(formBuilderParam: FormBuilder, authServiceParam: AuthService, routerParam: Router, accountServiceParam: MyAccountService){
+  constructor(formBuilderParam: FormBuilder, authServiceParam: AuthService, routerParam: Router, accountServiceParam: MyAccountService) {
     this.formBuilder = formBuilderParam;
     this.authService = authServiceParam;
     this.router = routerParam;
@@ -56,13 +56,13 @@ export class UserAccountComponent implements OnInit {
    */
   ngOnInit(): void {
     this.userDataForm = this.formBuilder.group({
-      name: [ '', [ Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH) ] ],
-      email: [ '', [ Validators.required, Validators.email ] ],
-      phone: [ '', [ Validators.required, Validators.pattern('^((\\+52-?)|0)?[0-9]{10}$') ] ]
+      name: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('^((\\+52-?)|0)?[0-9]{10}$')]]
     });
     this.passwordForm = this.formBuilder.group({
-      currentPassword: [ '', [ Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH) ] ],
-      newPassword: [ '', [ Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH) ] ]
+      currentPassword: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]],
+      newPassword: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]]
     }, { validator: passwordValidator });
 
     this.authService.getActualUser().subscribe(data => {
@@ -92,7 +92,7 @@ export class UserAccountComponent implements OnInit {
     this.accountService.editAccount(userDataForm, this.idUser).subscribe(
       (response) => {
         console.log(response);
-        this.router.navigate([ '/misSitios' ]);
+        this.router.navigate(['/misSitios']);
       },
       (error) => {
         console.error(JSON.stringify(JSON.parse(error), null, this.JSON_SPACING));
@@ -104,7 +104,7 @@ export class UserAccountComponent implements OnInit {
    * Método que se ejecuta al enviar el formulario de cambio de contraseñas.
    * Guarda la nueva contraseña del usuario.
    */
-  protected submitPasswordChange(){
+  protected submitPasswordChange() {
     const passwordForm = this.passwordForm.value;
     passwordForm.url = passwordForm.name;
     passwordForm.views = 0;
@@ -112,7 +112,7 @@ export class UserAccountComponent implements OnInit {
     this.accountService.editAccount(passwordForm, this.idUser).subscribe(
       (response) => {
         console.log(response);
-        this.router.navigate([ '/misSitios' ]);
+        this.router.navigate(['/misSitios']);
       },
       (error) => {
         console.error(JSON.stringify(JSON.parse(error), null, this.JSON_SPACING));
