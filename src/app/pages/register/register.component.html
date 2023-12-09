@@ -16,30 +16,30 @@
                                 <div class="m-0 p-0 mt-2 p-3">
                                     <label for="Nombre">Nombre:</label>
                                     <input type="text" id="Nombre" pattern="^[A-Z][a-z]*$" formControlName="Nombre" class="form-control rounded-pill bg-azure-web mt-2" >
-                                
-                                    <div *ngIf="formLogin.get('Nombre')?.invalid && (formLogin.get('Nombre')?.dirty || formLogin.get('Nombre')?.touched)">
-                                        <div class="control-error" *ngIf="formLogin.get('Nombre')?.errors?.['required']">El campo Nombre es requerido.</div>
-                                        <div class="control-error" *ngIf="formLogin.get('Nombre')?.errors?.['minlength']">No es un Nombre válido</div>
+
+                                    <div *ngIf="formLogin.get('name')?.invalid && (formLogin.get('name')?.dirty || formLogin.get('name')?.touched)">
+                                        <div class="control-error" *ngIf="formLogin.get('name')?.errors?.['required']">El campo Nombre es requerido.</div>
+                                        <div class="control-error" *ngIf="formLogin.get('name')?.errors?.['minlength']">No es un Nombre válido</div>
                                     </div>
-                                
+
                                 </div>
                                 <div class="m-0 p-0 mt-2 p-3">
                                     <label for="email">Correo electrónico:</label>
                                     <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" formControlName="email" class="form-control rounded-pill bg-azure-web mt-2" >
-                                
+
                                     <div *ngIf="formLogin.get('email')?.invalid && (formLogin.get('email')?.dirty || formLogin.get('email')?.touched)">
                                         <div class="control-error" *ngIf="formLogin.get('email')?.errors?.['required']">El campo Email es requerido.</div>
                                         <div class="control-error" *ngIf="formLogin.get('email')?.errors?.['email']">No es un email válido</div>
                                     </div>
-                                
+
                                 </div>
                                 <div class="m-0 p-0 mt-2 p-3">
                                     <label for="telefono">Teléfono:</label>
-                                    <input type="telefono" id="telefono" pattern="^[0-9]+$" formControlName="telefono" class="form-control rounded-pill bg-azure-web mt-2">
-                                    <div *ngIf="formLogin.get('telefono')?.invalid && (formLogin.get('telefono')?.dirty || formLogin.get('telefono')?.touched)">
-                                        <div class="control-error" *ngIf="formLogin.get('telefono')?.errors?.['required']">Se requiere un número telefónico</div>
-                                        <div class="control-error" *ngIf="formLogin.get('telefono')?.errors?.['minlength']">El teléfono debe tener 10 números</div>
-                                        <div class="control-error" *ngIf="formLogin.get('telefono')?.errors?.['maxlength']">El teléfono debe tener 10 números</div>
+                                    <input type="cel" id="cel" pattern="^[0-9]+$" formControlName="cel" class="form-control rounded-pill bg-azure-web mt-2">
+                                    <div *ngIf="formLogin.get('cel')?.invalid && (formLogin.get('cel')?.dirty || formLogin.get('cel')?.touched)">
+                                        <div class="control-error" *ngIf="formLogin.get('cel')?.errors?.['required']">Se requiere un número telefónico</div>
+                                        <div class="control-error" *ngIf="formLogin.get('cel')?.errors?.['minlength']">El teléfono debe tener 10 números</div>
+                                        <div class="control-error" *ngIf="formLogin.get('cel')?.errors?.['maxlength']">El teléfono debe tener 10 números</div>
                                     </div>
                                 </div>
                             </div>
@@ -54,17 +54,17 @@
                         <div class="m-0 p-0 mt-2 p-3">
                             <label for="Nombre">Nombre:</label>
                             <input type="text" id="Nombre" pattern="^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\s]+$" formControlName="Nombre" class="form-control rounded-pill bg-azure-web mt-2" >
-                        
-                            <div *ngIf="formLogin.get('Nombre')?.invalid && (formLogin.get('Nombre')?.dirty || formLogin.get('Nombre')?.touched)">
-                                <div class="control-error" *ngIf="formLogin.get('Nombre')?.errors?.['required']">El campo Nombre es requerido.</div>
-                                <div class="control-error" *ngIf="formLogin.get('Nombre')?.errors?.['minlength']">El campo Nombre debe ser mayor a 3 caracteres</div>
+
+                            <div *ngIf="formLogin.get('name')?.invalid && (formLogin.get('name')?.dirty || formLogin.get('name')?.touched)">
+                                <div class="control-error" *ngIf="formLogin.get('name')?.errors?.['required']">El campo Nombre es requerido.</div>
+                                <div class="control-error" *ngIf="formLogin.get('name')?.errors?.['minlength']">El campo Nombre debe ser mayor a 3 caracteres</div>
                             </div>
-                        
+
                         </div>
                         <div class="m-0 p-0 mt-2 p-3">
                             <label for="email">Correo electrónico:</label>
                             <input type="email" id="email" formControlName="email" class="form-control rounded-pill bg-azure-web mt-2">
-                            
+
                             <div *ngIf="formLogin.get('email')?.touched" class="control-error">
                               <div *ngIf="formLogin.get('email')?.hasError('required')">El campo Email es requerido.</div>
                               <div *ngIf="formLogin.get('email')?.value !== '' && formLogin.get('email')?.hasError('emailInvalid')">Correo no válido.</div>
@@ -72,21 +72,21 @@
                         </div>
                         <div class="m-0 p-0 mt-2 p-3">
                             <label for="telefono">Teléfono:</label>
-                            <input type="telefono" id="telefono" pattern="^[0-9]+$" formControlName="telefono" class="form-control rounded-pill bg-azure-web mt-2">
-                            <div *ngIf="formLogin.get('telefono')?.invalid && (formLogin.get('telefono')?.dirty || formLogin.get('telefono')?.touched)">
-                                <div class="control-error" *ngIf="formLogin.get('telefono')?.errors?.['required']">Se requiere un número telefónico</div>
-                                <div class="control-error" *ngIf="formLogin.get('telefono')?.errors?.['minlength']">El teléfono debe tener 10 números</div>
-                                <div class="control-error" *ngIf="formLogin.get('telefono')?.errors?.['maxlength']">El teléfono debe tener 10 números</div>
+                            <input type="cel" id="cell" pattern="^[0-9]+$" formControlName="phone" class="form-control rounded-pill bg-azure-web mt-2">
+                            <div *ngIf="formLogin.get('phone')?.invalid && (formLogin.get('phone')?.dirty || formLogin.get('phone')?.touched)">
+                                <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['required']">Se requiere un número telefónico</div>
+                                <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['minlength']">El teléfono debe tener 10 números</div>
+                                <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['maxlength']">El teléfono debe tener 10 números</div>
                             </div>
                         </div>
                     </div>
                     <div class="m-0 p-0 mt-2 p-3">
-                        <label for="fotoPerfil">Foto de perfil:</label>
-                        <input type="file" id="fotoPerfil" name="fotoPerfil" accept="image/*" formControlName="fotoPerfil" (change)="onFileChange($event)" class="form-control rounded-pill bg-azure-web mt-2" />
-                        <div *ngIf="formLogin.get('fotoPerfil')?.invalid && (formLogin.get('fotoPerfil')?.dirty || formLogin.get('fotoPerfil')?.touched)">
-                          <div class="control-error" *ngIf="formLogin.get('fotoPerfil')?.errors?.['required']">Se requiere una foto de perfil</div>
-                          <div class="control-error" *ngIf="formLogin.get('fotoPerfil')?.errors?.['pattern']">El archivo seleccionado no es una imagen válida</div>
-                          <div class="control-error" *ngIf="formLogin.get('fotoPerfil')?.errors?.['dimensions']">La imagen debe tener el mismo ancho y alto</div>
+                        <label for="phone">Foto de perfil:</label>
+                        <input type="file" id="phone" name="phone" accept="image/*" formControlName="phone" (change)="onFileChange($event)" class="form-control rounded-pill bg-azure-web mt-2" />
+                        <div *ngIf="formLogin.get('phone')?.invalid && (formLogin.get('phone')?.dirty || formLogin.get('phone')?.touched)">
+                          <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['required']">Se requiere una foto de perfil</div>
+                          <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['pattern']">El archivo seleccionado no es una imagen válida</div>
+                          <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['dimensions']">La imagen debe tener el mismo ancho y alto</div>
                         </div>
                     </div>
                     <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
@@ -98,7 +98,7 @@
                             <div class="control-error" *ngIf="formLogin.get('password')?.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres</div>
                           </div>
                         </div>
-                      
+
                         <div class="m-0 p-0 mt-2 p-3">
                           <label for="confirmPassword">Confirmar Contraseña:</label>
                           <input type="password" id="confirmPassword" formControlName="confirmPassword" [(ngModel)]="pass2" class="form-control rounded-pill bg-azure-web mt-2">
@@ -107,12 +107,12 @@
                             <div class="control-error" *ngIf="formLogin.get('confirmPassword')?.errors?.['passwordsNotMatch']">Las contraseñas no coinciden</div>
                           </div>
                         </div>
-                      
+
                         <div class="d-flex justify-content-center m-0 p-0 mt-3 p-3">
                           <button type="submit" [disabled]="formLogin.invalid" class="btn btn-primary rounded-pill w-50 text-white">Crear cuenta</button>
                         </div>
                       </form>
-                                                                            
+
                 </form>
                 <div class="m-0 p-0 p-3 d-flex justify-content-center">
                     <p>¿Ya tienes cuenta? <span ><a href="/login">Inicia sesión aquí</a></span></p>

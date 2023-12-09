@@ -1,16 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-/**
- * Servicio para realizar operaciones relacionadas con los sitios.
- */
 @Injectable({
   providedIn: 'root'
 })
 export class SiteService {
-  url: string = 'http://localhost:8000/api';
-  
-  httpOptions = {
+
+  private readonly URL: string = 'http://localhost:8000/api';
+
+  private httpClient!: HttpClient;
+
+  private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -19,17 +19,17 @@ export class SiteService {
 
   /**
    * Constructor del servicio SiteService.
-   * @param http Instancia de HttpClient para realizar las peticiones HTTP.
+   * @param httpClient Instancia de HttpClient para realizar las peticiones HTTP.
    */
-  constructor(private http: HttpClient) { }
-  
+  constructor() { }
+
   /**
    * Obtiene la información de un sitio.
    * @param id Identificador del sitio a obtener.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
   getSite(id: string) {
-    return this.http.get<any>(this.url + '/media/site/'+id, {});
+    return this.httpClient.get<any>(this.URL + '/media/site/' + id, {});
   }
 
   /**
@@ -37,8 +37,8 @@ export class SiteService {
    * @param url URL del sitio.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
-  getSiteIdbyUrl(url: string) {
-    return this.http.get<any>(this.url + '/media/id/'+url, {});
+  getSiteIdByUrl(url: string) {
+    return this.httpClient.get<any>(this.URL + '/media/id/' + url, {});
   }
 
   /**
@@ -48,7 +48,7 @@ export class SiteService {
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
   updateState(id:number, state: string){
-    return this.http.post<any>(this.url + '/media/updateState', {id, state});
+    return this.httpClient.post<any>(this.URL + '/media/updateState', { id, state });
   }
 
   /**
@@ -57,6 +57,6 @@ export class SiteService {
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
   getSitesForUser(id: string){
-    return this.http.get<any>(this.url + '/media/userSites/'+id, this.httpOptions);
+    return this.httpClient.get<any>(this.URL + '/media/userSites/'+id, this.httpOptions);
   }
 }

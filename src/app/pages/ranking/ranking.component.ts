@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MisSitiosService } from 'src/app/services/mis-sitios.service';
+import { MySitesService } from 'src/app/services/my-sites.service';
 
 /**
  * Componente para mostrar el ranking de sitios.
@@ -10,21 +10,17 @@ import { MisSitiosService } from 'src/app/services/mis-sitios.service';
   styleUrls: [ './ranking.component.css' ]
 })
 export class RankingComponent {
-  public bibliotecaSitios: any[] = [];  
-  private misSitiosService!: MisSitiosService;
 
+  protected siteLibrary: any[] = [];
+  private mySitesService!: MySitesService;
 
-  constructor(protected misSitiosServiceParam: MisSitiosService) {
-    this.misSitiosService = misSitiosServiceParam;
-  }
+  constructor() {}
 
-  /**
-   * Se ejecuta al inicializar el componente.
-   */
   ngOnInit(): void {
-    this.misSitiosService.getAll().subscribe(data => {
-      this.bibliotecaSitios = data.sites;
-      this.bibliotecaSitios.sort((a, b) => b.views - a.views);
+    this.mySitesService.getAll().subscribe(data => {
+      this.siteLibrary = data.sites;
+      this.siteLibrary.sort((firstSite, secondSite) => secondSite.views - firstSite.views);
     });
   }
+
 }

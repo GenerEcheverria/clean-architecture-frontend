@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { TimelineComponent } from './pages/crear-sitio/media-types/timeline/timeline.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
-import { MiCuentaComponent } from './pages/mi-cuenta/mi-cuenta.component';
+import { UserAccountComponent } from './pages/user-account/user-account.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
-import { SitiosComponent } from './pages/sitios/sitios.component';
+import { SitesComponent } from './pages/sites/sites.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { MenuOptionComponent } from './shared/buttons/menu-option/menu-option.component';
@@ -24,7 +24,7 @@ import { ImagenLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-bu
 import { VideoLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/video-lienzo/video-lienzo.component';
 import { FooterLienzoComponent } from './pages/crear-sitio/lienzo-pagina/footer-lienzo/footer-lienzo.component';
 import { SuperAdminSitiosComponent } from './pages/super-admin-sitios/super-admin-sitios.component';
-import { MisSitiosComponent } from './pages/mis-sitios/mis-sitios.component';
+import { MySitesComponent } from './pages/my-sites/my-sites.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
 import { BodyBuilderComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/body-builder.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -38,9 +38,9 @@ import { DatePipe } from '@angular/common';
     AppComponent,
     TimelineComponent,
     LoginComponent,
-    MiCuentaComponent,
+    UserAccountComponent,
     MainLayoutComponent,
-    SitiosComponent,
+    SitesComponent,
     HeaderComponent,
     SidebarComponent,
     MenuOptionComponent,
@@ -50,7 +50,7 @@ import { DatePipe } from '@angular/common';
     VideoComponent,
     CrearSitioComponent,
     SuperAdminSitiosComponent,
-    MisSitiosComponent,
+    MySitesComponent,
     RankingComponent,
     LienzoPaginaComponent,
     TituloLienzoComponent,
@@ -72,8 +72,8 @@ import { DatePipe } from '@angular/common';
     CommonModule
   ],
 
-  providers: [DatePipe],
-  bootstrap: [AppComponent]
+  providers: [ DatePipe ],
+  bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }

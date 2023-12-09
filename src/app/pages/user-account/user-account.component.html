@@ -1,0 +1,133 @@
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+</head>
+<div class="container-fluid">
+  <div class="row justify-content-center mb-5">
+    <div class="col-12 col-md-6" style="width: 100%;">
+      <div class="d-flex justify-content-start align-items-center mb-3">
+        <img src="../../../assets/users/generceo.png" alt="Imagen de usuario" class="img-fluid mx-3 my-2 rounded-5"
+          style="width: 50px; height: 50px;">
+        <h4 class="my-2">Mi Cuenta</h4>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center mb-5">
+    <div class="col-12 " style="width: 100%;">
+      <form [formGroup]="userDataForm" (ngSubmit)="submitUserDataChange()">
+        <h4 class="mb-3">Mi Información</h4>
+
+        <div class="row mb-3">
+          <div class="col-2">
+            <label for="name" class="form-label">Nombre:</label>
+          </div>
+          <div class="col-6">
+            <input type="text" formControlName="name" class="form-control rounded-pill bg-azure-web" id="nombre"
+              name="name">
+
+              <div *ngIf="userDataForm.get('name')?.invalid && (userDataForm.get('name')?.dirty || userDataForm.get('nombre')?.touched)">
+                <div class="control-error" *ngIf="userDataForm.get('name')?.errors?.['required']">El campo Nombre es requerido.</div>
+                <div class="control-error" *ngIf="userDataForm.get('name')?.errors?.['minlength']">El campo Nombre debe tener al menos 8 caracteres.</div>
+                <div class="control-error" *ngIf="userDataForm.get('name')?.errors?.['maxlength']">El campo Nombre debe tener menos de 32 caracteres.</div>
+              </div>
+
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-2">
+
+            <label for="email" class="form-label">Correo Electrónico:</label>
+          </div>
+          <div class="col-6">
+
+            <input type="email" formControlName="email" class="form-control rounded-pill bg-azure-web" id="email"
+              name="email">
+
+              <div *ngIf="userDataForm.get('email')?.invalid && (userDataForm.get('email')?.dirty || userDataForm.get('email')?.touched)">
+              <div class="control-error" *ngIf="userDataForm.get('email')?.errors?.['required']">El campo Email es requerido.</div>
+              <div class="control-error" *ngIf="userDataForm.get('email')?.errors?.['email']">No es un email valido</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-2">
+
+            <label for="phone" class="form-label">Teléfono:</label>
+          </div>
+          <div class="col-6">
+
+            <input type="phone" formControlName="phone" class="form-control rounded-pill bg-azure-web" id="phone"
+              name="phone">
+
+
+              <div *ngIf="userDataForm.get('phone')?.invalid && (userDataForm.get('phone')?.dirty || userDataForm.get('phone')?.touched)">
+                <div class="control-error" *ngIf="userDataForm.get('phone')?.errors?.['required']">El campo número es requerido.</div>
+                <div class="control-error" *ngIf="userDataForm.get('phone')?.errors?.['pattern']">No es un número valido</div>
+              </div>
+
+
+          </div>
+        </div>
+        <div class="d-flex col-8 justify-content-end align-items-end">
+
+          <button type="submit" [disabled]="userDataForm.invalid"
+            class="btn btn-primary rounded-pill text-white ">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center mb-5">
+    <div class="col-12 col-md-6" style="width: 100%;">
+      <form [formGroup]="passwordForm" (ngSubmit)="submitPasswordChange()">
+        <h4 class="mb-3">Cambio de Contraseña</h4>
+        <div class="row mb-3">
+          <div class="col-2">
+
+            <label for="newPassword" class="form-label">Nueva Contraseña:</label>
+          </div>
+
+          <div class="col-6">
+
+            <input type="password" formControlName="newPassword" class="form-control rounded-pill bg-azure-web" id="newPassword"
+              name="newPassword">
+
+              <div *ngIf="passwordForm.get('newPassword')?.invalid && (passwordForm.get('newPassword')?.dirty || passwordForm.get('newPassword')?.touched)">
+                <div class="control-error" *ngIf="passwordForm.get('newPassword')?.errors?.['required']">Se requiere una contraseña</div>
+                <div class="control-error" *ngIf="passwordForm.get('newPassword')?.errors?.['minlength']">Se requiere una contraseña de al menos 8 caracteres.</div>
+                <div class="control-error" *ngIf="passwordForm.get('newPassword')?.errors?.['maxlength']">La contraseña no debe exceder de 32 caracteres.</div>
+              </div>
+
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-2">
+
+            <label for="currentPassword" class="form-label">Confirmar Contraseña:</label>
+          </div>
+          <div class="col-6">
+
+            <input type="password" formControlName="currentPassword" class="form-control rounded-pill bg-azure-web" id="currentPassword"
+              name="currentPassword">
+
+              <div *ngIf="passwordForm.get('currentPassword')?.invalid && (passwordForm.get('currentPassword')?.dirty || passwordForm.get('currentPassword')?.touched)">
+                <div class="control-error" *ngIf="passwordForm.get('currentPassword')?.errors?.['required']">Se requiere una contraseña</div>
+                <div class="control-error" *ngIf="passwordForm.get('currentPassword')?.errors?.['minlength']">Se requiere una contraseña de al menos 8 caracteres.</div>
+                <div class="control-error" *ngIf="passwordForm.get('currentPassword')?.errors?.['maxlength']">La contraseña no debe exceder de 32 caracteres.</div>
+              </div>
+
+              <div  class="control-error" *ngIf="passwordForm.hasError('passwordsDoNotMatch') && (passwordForm.get('newPassword')?.dirty || passwordForm.get('currentPassword')?.dirty)">
+                Las contraseñas no coinciden
+              </div>
+
+          </div>
+        </div>
+        <div class="d-flex col-8 justify-content-end align-items-end">
+
+          <button type="submit" [disabled]="passwordForm.invalid"
+            class="btn btn-primary rounded-pill w-10 text-white">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
