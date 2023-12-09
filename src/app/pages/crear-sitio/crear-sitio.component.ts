@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BodyElementComponent } from './body-element/body-element.component';
-import { CrearSitioService } from 'src/app/services/crear-sitio.service';
+import { CreateSiteService } from 'src/app/services/create-sitie.service';
 
 /**
  * Componente para la ventana de creación de sitios.
@@ -112,9 +112,9 @@ export class CrearSitioComponent implements OnInit {
 
   private cdr!: ChangeDetectorRef;
 
-  private crearSitio!: CrearSitioService;
+  private crearSitio!: CreateSiteService;
 
-  constructor(routerParam: Router, cdrParam: ChangeDetectorRef, crearSitioParam: CrearSitioService) {
+  constructor(routerParam: Router, cdrParam: ChangeDetectorRef, crearSitioParam: CreateSiteService) {
     this.isHero = false;
     this.setSocialMedia = false;
     this.setContact = false;
@@ -254,7 +254,7 @@ export class CrearSitioComponent implements OnInit {
     const sitioForm = this.sitioForm.value;
     sitioForm.url = sitioForm.name;
     sitioForm.views = 0;
-    this.crearSitio.crearSite(sitioForm).subscribe(
+    this.crearSitio.createSite(sitioForm).subscribe(
       (response) => {
         console.log(response);
         this.router.navigate([ '/misSitios' ]);

@@ -14,21 +14,21 @@ export class MainLayoutComponent implements OnInit{
   protected photo!: string;
 
   constructor(private authService: AuthService){}
-  
-  
+
+
   /**
    * Método que se ejecuta al inicializar el componente.
    */
   ngOnInit(): void {
       this.getUserInfo();
-      
+
   }
 
     /**
    * Obtiene la información del usuario actual.
    */
   private getUserInfo(){
-    this.authService.me().subscribe(data => {
+    this.authService.getActualUser().subscribe(data => {
       this.name = data.name;
       this.photo = data.photo;
       const img = new Image();

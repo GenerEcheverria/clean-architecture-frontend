@@ -144,7 +144,7 @@ export class MySitesComponent {
    * Actualiza los datos de la biblioteca de sitios.
    */
   private updateData(){
-    this.mySiteService.getAll().subscribe(data => {
+    this.mySiteService.getAllUsers().subscribe(data => {
       this.siteLibrary = data.sites;
       this.filteredData = this.siteLibrary;
     });

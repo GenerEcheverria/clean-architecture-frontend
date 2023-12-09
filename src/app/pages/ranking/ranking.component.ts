@@ -19,7 +19,7 @@ export class RankingComponent {
   }
 
   ngOnInit(): void {
-    this.mySitesService.getAll().subscribe(data => {
+    this.mySitesService.getAllUsers().subscribe(data => {
       this.siteLibrary = data.sites;
       this.siteLibrary.sort((firstSite, secondSite) => secondSite.views - firstSite.views);
     });

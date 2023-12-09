@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { saUsuarios } from '../interfaces/saUsuarios';
 
 /**
@@ -10,27 +9,28 @@ import { saUsuarios } from '../interfaces/saUsuarios';
   providedIn: 'root'
 })
 export class SasitiosService {
-  url: string = 'http://localhost:8000/api';
 
-  /**
-   * Constructor del servicio SasitiosService.
-   * @param http Instancia de HttpClient para realizar las peticiones HTTP.
-   */
-  constructor(private http: HttpClient) { }
+  private readonly URL: string = 'http://localhost:8000/api';
 
-  httpOptions = {
+  private httpClient!: HttpClient;
+
+  private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     })
   };
 
+  constructor(httpClientParam: HttpClient) {
+    this.httpClient = httpClientParam;
+  }
+
   /**
    * Obtiene la lista de usuarios del sistema SASitios.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
-  getUsuarios(){
-    return this.http.get<saUsuarios[]>(this.url + '/account/sausers', this.httpOptions);
+  public getUsers(){
+    return this.httpClient.get<saUsuarios[]>(this.URL + '/account/sausers', this.httpOptions);
   }
-  
+
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of } from 'rxjs';
-import { Crypto } from '../util/crypto';
 
 /**
  * Servicio de autenticación y gestión de usuarios.
@@ -10,16 +9,20 @@ import { Crypto } from '../util/crypto';
   providedIn: 'root'
 })
 export class AuthService {
-  url: string = 'http://localhost:8000/api/auth';
-  private crypto = new Crypto;
 
-  constructor(private http: HttpClient) { }
+  private readonly URL: string = 'http://localhost:8000/api/auth';
 
-  httpOptions = {
+  private httpClient!: HttpClient;
+
+  private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
   };
+
+  constructor(httpClientParam: HttpClient) {
+    this.httpClient = httpClientParam;
+  }
 
   /**
    * Registra un nuevo usuario.
@@ -31,8 +34,8 @@ export class AuthService {
    * @param photo Foto del perfil del usuario.
    * @returns Observable que representa la respuesta del servidor.
    */
-  register(name: string, email: string, password: string, role: string, phone: string, photo: string) {
-    return this.http.post<any>(this.url + '/register', { name, email, password, role, phone, photo }, this.httpOptions);
+  public register(name: string, email: string, password: string, role: string, phone: string, photo: string) {
+    return this.httpClient.post<any>(this.URL + '/register', { name, email, password, role, phone, photo }, this.httpOptions);
   }
 
   /**
@@ -41,43 +44,43 @@ export class AuthService {
    * @param password Contraseña del usuario.
    * @returns Observable que representa la respuesta del servidor.
    */
-  login(email: string, password: string) {
-    return this.http.post<any>(this.url + '/login', { email, password });
-  }
-
-  /**
-   * Obtiene la información del usuario actualmente autenticado.
-   * @returns Observable que representa la información del usuario.
-   */
-  me(){
-    const token = this.getToken();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      })
-    };
-    return this.http.post<any>(this.url+'/me', {},httpOptions);
+  public login(email: string, password: string) {
+    return this.httpClient.post<any>(this.URL + '/login', { email, password });
   }
 
   /**
    * Cierra la sesión del usuario.
    * @returns Observable que representa la respuesta del servidor.
    */
-  logout() {
+  public logout() {
     const token = this.getToken();
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.http.post<any>(this.url + '/logout', {},httpOptions);
+    return this.httpClient.post<any>(this.URL + '/logout', {},httpOptions);
+  }
+
+  /**
+   * Obtiene la información del usuario actualmente autenticado.
+   * @returns Observable que representa la información del usuario.
+   */
+  public getActualUser(){
+    const token = this.getToken();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+    return this.httpClient.post<any>(this.URL+'/me', {},httpOptions);
   }
 
   /**
    * Obtiene el token de autenticación almacenado en el almacenamiento local.
    * @returns El token de autenticación o null si no está presente.
    */
-  getToken(): string | null {
+  public getToken(): string | null {
     return localStorage.getItem('token');
   }
 
@@ -85,7 +88,7 @@ export class AuthService {
    * Comprueba si el usuario ha iniciado sesión.
    * @returns Observable que indica si el usuario ha iniciado sesión o no.
    */
-  isLoggedIn() {
+  public isLoggedIn() {
     const token = this.getToken();
     if (token) {
       const httpOptions = {
@@ -93,12 +96,12 @@ export class AuthService {
           'Authorization': `Bearer ${token}`
         })
       };
-      return this.http.get<any>(this.url + `/check`, httpOptions);
+      return this.httpClient.get<any>(this.URL + '/check', httpOptions);
     }
     return of({ valid: false });
   }
 
-   /**
+  /**
    * Establece los roles del usuario en el almacenamiento local.
    * @param role Rol del usuario.
    */
@@ -118,6 +121,5 @@ export class AuthService {
     }
     return false;
   }
-  
 
 }

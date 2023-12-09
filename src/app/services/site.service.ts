@@ -27,11 +27,11 @@ export class SiteService {
 
   /**
    * Obtiene la información de un sitio.
-   * @param id Identificador del sitio a obtener.
+   * @param siteId Identificador del sitio a obtener.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
-  getSite(id: string) {
-    return this.httpClient.get<any>(this.URL + '/media/site/' + id, {});
+  public getSite(siteId: string) {
+    return this.httpClient.get<any>(this.URL + '/media/site/' + siteId, {});
   }
 
   /**
@@ -39,26 +39,26 @@ export class SiteService {
    * @param url URL del sitio.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
-  getSiteIdByUrl(url: string) {
+  public getSiteIdByUrl(url: string) {
     return this.httpClient.get<any>(this.URL + '/media/id/' + url, {});
   }
 
   /**
    * Actualiza el estado de un sitio.
-   * @param id Identificador del sitio a actualizar.
+   * @param siteId Identificador del sitio a actualizar.
    * @param state Nuevo estado del sitio.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
-  updateState(id:number, state: string){
-    return this.httpClient.post<any>(this.URL + '/media/updateState', { id, state });
+  public updateState(siteId:number, state: string){
+    return this.httpClient.post<any>(this.URL + '/media/updateState', { id: siteId, state });
   }
 
   /**
    * Obtiene los sitios de un usuario.
-   * @param id Identificador del usuario.
+   * @param userId Identificador del usuario.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
-  getSitesForUser(id: string){
-    return this.httpClient.get<any>(this.URL + '/media/userSites/'+id, this.httpOptions);
+  public getSitesForUser(userId: string){
+    return this.httpClient.get<any>(this.URL + '/media/userSites/'+userId, this.httpOptions);
   }
 }

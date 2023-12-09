@@ -13,13 +13,13 @@ export class MainLayoutComponent implements OnInit{
   protected name!: string;
   protected photo!: string;
   protected userRole!: string|null;
-  
+
   /**
    * Constructor del componente MainLayoutComponent.
    * @param authService Servicio de autenticación utilizado para obtener información del usuario.
    */
   constructor(private authService: AuthService){}
-  
+
   /**
    * Método de inicialización del componente.
    */
@@ -32,7 +32,7 @@ export class MainLayoutComponent implements OnInit{
    * Método privado para obtener la información del usuario.
    */
   private getUserInfo(){
-    this.authService.me().subscribe(data => {
+    this.authService.getActualUser().subscribe(data => {
       this.name = data.name;
       this.photo = data.photo;
       const img = new Image();

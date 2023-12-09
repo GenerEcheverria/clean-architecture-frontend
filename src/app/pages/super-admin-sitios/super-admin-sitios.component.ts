@@ -28,7 +28,7 @@ export class SuperAdminSitiosComponent implements OnInit {
   protected email!:string;
   protected phone!:string;
   public dataTable: any;
-  
+
 
   constructor(private sasitiosService: SasitiosService, private route: ActivatedRoute, private userService: UserService,private siteService: SiteService, private router: Router) { }
 
@@ -36,7 +36,7 @@ export class SuperAdminSitiosComponent implements OnInit {
    * Método que se ejecuta al inicializar el componente.
    */
   ngOnInit() {
-    this.sasitiosService.getUsuarios().subscribe((data: saUsuarios[]) => {
+    this.sasitiosService.getUsers().subscribe((data: saUsuarios[]) => {
       this.saUsuarios = data;
       // Obtener los ID de todos los usuarios y llamar a loadData() para cada uno
       this.saUsuarios.forEach((user) => {
@@ -48,7 +48,7 @@ export class SuperAdminSitiosComponent implements OnInit {
 
   }
 
-  
+
   /**
    * Carga los datos de un usuario y la cantidad de sitios asociados.
    * @param userId El ID del usuario.
@@ -64,9 +64,9 @@ export class SuperAdminSitiosComponent implements OnInit {
           userId: userId,
           siteCount: siteCount
         };
-  
+
         console.log(userSiteCount); // Aquí puedes ver el objeto con el ID y la cantidad de sitios
-  
+
         const boton = '<button type="button" class="btn btn-primary rounded-pill text-white"><a class="text-white text-decoration-none" href="http://localhost:4200/sausuarios/'+ userId +'">Ver Usuario</a></button>'
         this.dataTable.row.add([
           nom,
@@ -77,7 +77,7 @@ export class SuperAdminSitiosComponent implements OnInit {
         this.dataTable.draw();
         // Puedes almacenar userSiteCount en un arreglo si necesitas mantener un registro de todos los usuarios con sus respectivas cantidades de sitios
         //this.userSiteCounts.push(userSiteCount);
-        
+
 
       } catch (error) {
         console.error(error);
@@ -87,22 +87,22 @@ export class SuperAdminSitiosComponent implements OnInit {
     }
   }
 
-  
+
   /**
    * Método que se ejecuta después de que los componentes de la vista se inicializan completamente.
    */
   ngAfterViewInit() {
         this.dataTable = $('#example').DataTable({
-  
+
           "language": {
             "search": "",
             "searchPlaceholder": "Buscar",
           },
           "dom": '<"d-flex justify-content-end"f>t<"d-flex justify-content-between"ipl>',
-  
+
           "pagingType": "simple_numbers",
         });
-      
+
     }
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { passwordValidator } from './password.validator';
 import { AuthService } from 'src/app/services/auth.service';
-import { MiCuentaService } from 'src/app/services/mi-cuenta.service';
+import { MyAccountService } from 'src/app/services/my-account.service';
 import { Router } from '@angular/router';
 //! import { Account } from 'src/app/interfaces/account';
 
@@ -41,9 +41,9 @@ export class UserAccountComponent implements OnInit {
   private formBuilder!: FormBuilder;
   private authService!: AuthService;
   private router!: Router;
-  private accountService!: MiCuentaService;
+  private accountService!: MyAccountService;
 
-  constructor(formBuilderParam: FormBuilder, authServiceParam: AuthService, routerParam: Router, accountServiceParam: MiCuentaService){
+  constructor(formBuilderParam: FormBuilder, authServiceParam: AuthService, routerParam: Router, accountServiceParam: MyAccountService){
     this.formBuilder = formBuilderParam;
     this.authService = authServiceParam;
     this.router = routerParam;
@@ -65,7 +65,7 @@ export class UserAccountComponent implements OnInit {
       newPassword: [ '', [ Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH) ] ]
     }, { validator: passwordValidator });
 
-    this.authService.me().subscribe(data => {
+    this.authService.getActualUser().subscribe(data => {
       this.userData = data;
       this.idUser = data.id;
 
@@ -89,7 +89,7 @@ export class UserAccountComponent implements OnInit {
     userDataForm.url = userDataForm.name;
     userDataForm.views = 0;
     console.log('Sitio forme es: ', userDataForm);
-    this.accountService.miCuenta(userDataForm, this.idUser).subscribe(
+    this.accountService.editAccount(userDataForm, this.idUser).subscribe(
       (response) => {
         console.log(response);
         this.router.navigate([ '/misSitios' ]);
@@ -109,7 +109,7 @@ export class UserAccountComponent implements OnInit {
     passwordForm.url = passwordForm.name;
     passwordForm.views = 0;
     console.log('Sitio forme es: ' + passwordForm);
-    this.accountService.miCuenta(passwordForm, this.idUser).subscribe(
+    this.accountService.editAccount(passwordForm, this.idUser).subscribe(
       (response) => {
         console.log(response);
         this.router.navigate([ '/misSitios' ]);

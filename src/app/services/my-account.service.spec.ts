@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MiCuentaService } from './mi-cuenta.service';
+import { MyAccountService } from './my-account.service';
 
 describe('MiCuentaService', () => {
-  let service: MiCuentaService;
+  let service: MyAccountService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MiCuentaService);
+    service = TestBed.inject(MyAccountService);
   });
 
   it('should be created', () => {
