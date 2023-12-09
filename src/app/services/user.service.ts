@@ -16,7 +16,7 @@ export class UserService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     })
-  }
+  };
 
   /**
    * Constructor del servicio UserService.

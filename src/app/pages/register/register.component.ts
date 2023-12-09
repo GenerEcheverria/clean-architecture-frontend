@@ -53,7 +53,11 @@ export class RegisterComponent {
   // eslint-disable-next-line no-magic-numbers
   private readonly FIRST_ELEMENT_INDEX: number = 0;
 
-  constructor() {}
+  constructor(formBuilderParam: FormBuilder, authServiceParam: AuthService, routeParam: Router) {
+    this.formBuilder = formBuilderParam;
+    this.authService = authServiceParam;
+    this.router = routeParam;
+  }
 
   /**
    * Se ejecuta al inicializar el componente.
@@ -63,8 +67,8 @@ export class RegisterComponent {
     this.formLogin = this.formBuilder.group({
       name: [ '', [ Validators.required, Validators.minLength(this.MINIMUM_INPUT_LENGTH) ] ],
       email: [ '', [ Validators.required, this.emailValidator() ] ],
-      cel: [ '', [ Validators.required, Validators.minLength(this.MINIMUM_CELLPHONE_NUMBER_LENGTH), Validators.maxLength(this.MAXIMUM_CELLPHONE_NUMBER_LENGTH) ] ],
-      profileImage: [ '', [ Validators.required, this.imageValidator.bind(this) ] ],
+      phone: [ '', [ Validators.required, Validators.minLength(this.MINIMUM_CELLPHONE_NUMBER_LENGTH), Validators.maxLength(this.MAXIMUM_CELLPHONE_NUMBER_LENGTH) ] ],
+      photo: [ '', [ Validators.required, this.imageValidator.bind(this) ] ],
       password: [ '', [ Validators.required, Validators.minLength(this.MINIMUM_INPUT_LENGTH) ] ],
       confirmPassword: [ '', [ Validators.required ] ] }, { validator: this.passwordsMatchValidator });
   }
@@ -84,7 +88,9 @@ export class RegisterComponent {
 
   emailValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
+      console.log('owo');
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      console.log('owo2');
       const isValid = emailPattern.test(control.value);
       return isValid ? null : { emailInvalid: true };
     };

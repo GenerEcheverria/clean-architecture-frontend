@@ -13,7 +13,10 @@ export class AuthGuard implements CanActivate {
   private authService!: AuthService;
   private router!: Router;
 
-  constructor() {}
+  constructor( authServiceParam: AuthService, routerParam: Router) {
+    this.authService = authServiceParam;
+    this.router = routerParam;
+  }
 
   /**
    * Método de canActivate para determinar si el usuario está autenticado.

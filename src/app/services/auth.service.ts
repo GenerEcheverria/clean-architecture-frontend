@@ -19,9 +19,9 @@ export class AuthService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
-  }
+  };
 
-   /**
+  /**
    * Registra un nuevo usuario.
    * @param name Nombre del usuario.
    * @param email Correo electrónico del usuario.

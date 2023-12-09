@@ -14,7 +14,9 @@ export class RankingComponent {
   protected siteLibrary: any[] = [];
   private mySitesService!: MySitesService;
 
-  constructor() {}
+  constructor(mySitesServieParam: MySitesService) {
+    this.mySitesService=mySitesServieParam;
+  }
 
   ngOnInit(): void {
     this.mySitesService.getAll().subscribe(data => {

@@ -29,7 +29,10 @@ export class MySitesComponent {
   private siteService!: SiteService;
 
 
-  constructor() {}
+  constructor(mySiteServiceParam: MySitesService, siteServiceParam: SiteService) {
+    this.mySiteService = mySiteServiceParam;
+    this.siteService = siteServiceParam;
+  }
 
   /**
    * Se ejecuta al inicializar el componente.

@@ -43,7 +43,12 @@ export class UserAccountComponent implements OnInit {
   private router!: Router;
   private accountService!: MiCuentaService;
 
-  constructor(){}
+  constructor(formBuilderParam: FormBuilder, authServiceParam: AuthService, routerParam: Router, accountServiceParam: MiCuentaService){
+    this.formBuilder = formBuilderParam;
+    this.authService = authServiceParam;
+    this.router = routerParam;
+    this.accountService = accountServiceParam;
+  }
 
   /**
    * Método de ciclo de vida de Angular que se ejecuta al iniciar el componente.
@@ -78,12 +83,12 @@ export class UserAccountComponent implements OnInit {
    * Guarda los cambios realizados en la cuenta del usuario.
    */
   protected submitUserDataChange() {
-
+    console.log(this.userDataForm.value);
     const userDataForm = this.userDataForm.value;
 
     userDataForm.url = userDataForm.name;
     userDataForm.views = 0;
-    console.log('Sitio forme es: ' + userDataForm);
+    console.log('Sitio forme es: ', userDataForm);
     this.accountService.miCuenta(userDataForm, this.idUser).subscribe(
       (response) => {
         console.log(response);

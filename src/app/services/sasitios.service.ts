@@ -12,7 +12,7 @@ import { saUsuarios } from '../interfaces/saUsuarios';
 export class SasitiosService {
   url: string = 'http://localhost:8000/api';
 
-   /**
+  /**
    * Constructor del servicio SasitiosService.
    * @param http Instancia de HttpClient para realizar las peticiones HTTP.
    */
@@ -23,7 +23,7 @@ export class SasitiosService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     })
-  }
+  };
 
   /**
    * Obtiene la lista de usuarios del sistema SASitios.

@@ -27,7 +27,11 @@ export class SitesComponent {
   private siteService!: SiteService;
 
 
-  constructor() {}
+  constructor(routeParam: ActivatedRoute, routerParam: Router, siteServiceParam: SiteService) {
+    this.route = routeParam;
+    this.router = routerParam;
+    this.siteService = siteServiceParam;
+  }
 
 
   /**

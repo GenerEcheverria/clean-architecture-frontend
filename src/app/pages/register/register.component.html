@@ -14,32 +14,32 @@
                         <div class="row">
                             <div class="col-8 m-0 p-0">
                                 <div class="m-0 p-0 mt-2 p-3">
-                                    <label for="Nombre">Nombre:</label>
-                                    <input type="text" id="Nombre" pattern="^[A-Z][a-z]*$" formControlName="Nombre" class="form-control rounded-pill bg-azure-web mt-2" >
+                                    <label for="name">Nombre:</label>
+                                    <input type="text" id="name" pattern="^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\s]+$" formControlName="name" class="form-control rounded-pill bg-azure-web mt-2" >
 
                                     <div *ngIf="formLogin.get('name')?.invalid && (formLogin.get('name')?.dirty || formLogin.get('name')?.touched)">
                                         <div class="control-error" *ngIf="formLogin.get('name')?.errors?.['required']">El campo Nombre es requerido.</div>
                                         <div class="control-error" *ngIf="formLogin.get('name')?.errors?.['minlength']">No es un Nombre válido</div>
                                     </div>
-
                                 </div>
+
                                 <div class="m-0 p-0 mt-2 p-3">
                                     <label for="email">Correo electrónico:</label>
-                                    <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" formControlName="email" class="form-control rounded-pill bg-azure-web mt-2" >
+                                    <input type="email" id="email" formControlName="email" class="form-control rounded-pill bg-azure-web mt-2">
 
-                                    <div *ngIf="formLogin.get('email')?.invalid && (formLogin.get('email')?.dirty || formLogin.get('email')?.touched)">
-                                        <div class="control-error" *ngIf="formLogin.get('email')?.errors?.['required']">El campo Email es requerido.</div>
-                                        <div class="control-error" *ngIf="formLogin.get('email')?.errors?.['email']">No es un email válido</div>
+                                    <div *ngIf="formLogin.get('email')?.touched" class="control-error">
+                                        <div *ngIf="formLogin.get('email')?.hasError('required')">El campo Email es requerido.</div>
+                                        <div *ngIf="formLogin.get('email')?.value !== '' && formLogin.get('email')?.hasError('emailInvalid')">Correo no válido.</div>
                                     </div>
 
                                 </div>
                                 <div class="m-0 p-0 mt-2 p-3">
                                     <label for="telefono">Teléfono:</label>
-                                    <input type="cel" id="cel" pattern="^[0-9]+$" formControlName="cel" class="form-control rounded-pill bg-azure-web mt-2">
-                                    <div *ngIf="formLogin.get('cel')?.invalid && (formLogin.get('cel')?.dirty || formLogin.get('cel')?.touched)">
-                                        <div class="control-error" *ngIf="formLogin.get('cel')?.errors?.['required']">Se requiere un número telefónico</div>
-                                        <div class="control-error" *ngIf="formLogin.get('cel')?.errors?.['minlength']">El teléfono debe tener 10 números</div>
-                                        <div class="control-error" *ngIf="formLogin.get('cel')?.errors?.['maxlength']">El teléfono debe tener 10 números</div>
+                                    <input type="phone" id="phone" pattern="^[0-9]+$" formControlName="phone" class="form-control rounded-pill bg-azure-web mt-2">
+                                    <div *ngIf="formLogin.get('phone')?.invalid && (formLogin.get('phone')?.dirty || formLogin.get('phone')?.touched)">
+                                        <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['required']">Se requiere un número telefónico</div>
+                                        <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['minlength']">El teléfono debe tener 10 números</div>
+                                        <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['maxlength']">El teléfono debe tener 10 números</div>
                                     </div>
                                 </div>
                             </div>
@@ -52,8 +52,8 @@
                     </div>
                     <div *ngIf="imageSrc==''">
                         <div class="m-0 p-0 mt-2 p-3">
-                            <label for="Nombre">Nombre:</label>
-                            <input type="text" id="Nombre" pattern="^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\s]+$" formControlName="Nombre" class="form-control rounded-pill bg-azure-web mt-2" >
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" pattern="^[A-Za-záéíóúÁÉÍÓÚñÑüÜ\s]+$" formControlName="name" class="form-control rounded-pill bg-azure-web mt-2" >
 
                             <div *ngIf="formLogin.get('name')?.invalid && (formLogin.get('name')?.dirty || formLogin.get('name')?.touched)">
                                 <div class="control-error" *ngIf="formLogin.get('name')?.errors?.['required']">El campo Nombre es requerido.</div>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="m-0 p-0 mt-2 p-3">
                             <label for="telefono">Teléfono:</label>
-                            <input type="cel" id="cell" pattern="^[0-9]+$" formControlName="phone" class="form-control rounded-pill bg-azure-web mt-2">
+                            <input type="phone" id="phone" pattern="^[0-9]+$" formControlName="phone" class="form-control rounded-pill bg-azure-web mt-2">
                             <div *ngIf="formLogin.get('phone')?.invalid && (formLogin.get('phone')?.dirty || formLogin.get('phone')?.touched)">
                                 <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['required']">Se requiere un número telefónico</div>
                                 <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['minlength']">El teléfono debe tener 10 números</div>
@@ -81,12 +81,12 @@
                         </div>
                     </div>
                     <div class="m-0 p-0 mt-2 p-3">
-                        <label for="phone">Foto de perfil:</label>
-                        <input type="file" id="phone" name="phone" accept="image/*" formControlName="phone" (change)="onFileChange($event)" class="form-control rounded-pill bg-azure-web mt-2" />
-                        <div *ngIf="formLogin.get('phone')?.invalid && (formLogin.get('phone')?.dirty || formLogin.get('phone')?.touched)">
-                          <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['required']">Se requiere una foto de perfil</div>
-                          <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['pattern']">El archivo seleccionado no es una imagen válida</div>
-                          <div class="control-error" *ngIf="formLogin.get('phone')?.errors?.['dimensions']">La imagen debe tener el mismo ancho y alto</div>
+                        <label for="photo">Foto de perfil:</label>
+                        <input type="file" id="photo" name="photo" accept="image/*" formControlName="photo" (change)="onFileChange($event)" class="form-control rounded-pill bg-azure-web mt-2" />
+                        <div *ngIf="formLogin.get('photo')?.invalid && (formLogin.get('photo')?.dirty || formLogin.get('photo')?.touched)">
+                          <div class="control-error" *ngIf="formLogin.get('photo')?.errors?.['required']">Se requiere una foto de perfil</div>
+                          <div class="control-error" *ngIf="formLogin.get('photo')?.errors?.['pattern']">El archivo seleccionado no es una imagen válida</div>
+                          <div class="control-error" *ngIf="formLogin.get('photo')?.errors?.['dimensions']">La imagen debe tener el mismo ancho y alto</div>
                         </div>
                     </div>
                     <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">

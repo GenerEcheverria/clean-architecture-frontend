@@ -21,10 +21,10 @@
             <label for="name" class="form-label">Nombre:</label>
           </div>
           <div class="col-6">
-            <input type="text" formControlName="name" class="form-control rounded-pill bg-azure-web" id="nombre"
+            <input type="text" formControlName="name" class="form-control rounded-pill bg-azure-web" id="name"
               name="name">
 
-              <div *ngIf="userDataForm.get('name')?.invalid && (userDataForm.get('name')?.dirty || userDataForm.get('nombre')?.touched)">
+              <div *ngIf="userDataForm.get('name')?.invalid && (userDataForm.get('name')?.dirty || userDataForm.get('name')?.touched)">
                 <div class="control-error" *ngIf="userDataForm.get('name')?.errors?.['required']">El campo Nombre es requerido.</div>
                 <div class="control-error" *ngIf="userDataForm.get('name')?.errors?.['minlength']">El campo Nombre debe tener al menos 8 caracteres.</div>
                 <div class="control-error" *ngIf="userDataForm.get('name')?.errors?.['maxlength']">El campo Nombre debe tener menos de 32 caracteres.</div>

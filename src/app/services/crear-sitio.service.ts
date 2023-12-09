@@ -16,7 +16,8 @@ export class CrearSitioService {
    * Constructor del servicio CrearSitioService.
    * @param httpParam, Instancia de HttpClient para realizar las peticiones HTTP.
    */
-  constructor() {
+  constructor(httpParam: HttpClient) {
+    this.http = httpParam;
   }
 
   httpOptions = {
@@ -24,7 +25,7 @@ export class CrearSitioService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     })
-  }
+  };
 
   /**
    * Crea un nuevo sitio.

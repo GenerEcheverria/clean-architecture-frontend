@@ -15,7 +15,7 @@ import { CrearSitioService } from 'src/app/services/crear-sitio.service';
 @Component({
   selector: 'app-crear-sitio',
   templateUrl: './crear-sitio.component.html',
-  styleUrls: ['./crear-sitio.component.css'],
+  styleUrls: [ './crear-sitio.component.css' ],
 })
 export class CrearSitioComponent implements OnInit {
   /**
@@ -114,7 +114,7 @@ export class CrearSitioComponent implements OnInit {
 
   private crearSitio!: CrearSitioService;
 
-  constructor() {
+  constructor(routerParam: Router, cdrParam: ChangeDetectorRef, crearSitioParam: CrearSitioService) {
     this.isHero = false;
     this.setSocialMedia = false;
     this.setContact = false;
@@ -124,6 +124,9 @@ export class CrearSitioComponent implements OnInit {
     this.preview = false;
     this.showPreview = 'none';
     this.showForm = 'block';
+    this.router = routerParam;
+    this.cdr = cdrParam;
+    this.crearSitio = crearSitioParam;
   }
 
   /**
@@ -254,7 +257,7 @@ export class CrearSitioComponent implements OnInit {
     this.crearSitio.crearSite(sitioForm).subscribe(
       (response) => {
         console.log(response);
-        this.router.navigate(['/misSitios']);
+        this.router.navigate([ '/misSitios' ]);
       },
       (error) => {
         console.error(
@@ -270,7 +273,7 @@ export class CrearSitioComponent implements OnInit {
    * @method cancelar
    */
   cancelar(): void {
-    this.router.navigate(['/misSitios']);
+    this.router.navigate([ '/misSitios' ]);
   }
 
   /**

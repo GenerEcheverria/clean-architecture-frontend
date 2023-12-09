@@ -17,9 +17,11 @@ export class MySitesService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     })
-  }
+  };
 
-  constructor() {}
+  constructor(httpClientParam: HttpClient) {
+    this.httpClient = httpClientParam;
+  }
 
   /**
    * Obtiene todos los sitios del usuario actual.

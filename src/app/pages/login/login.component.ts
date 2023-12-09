@@ -25,7 +25,11 @@ export class LoginComponent implements OnInit {
   // eslint-disable-next-line no-magic-numbers
   private readonly MINIMUM_INPUT_VALUE: number = 8;
 
-  constructor() {}
+  constructor(routerParam: Router, formBuilderParam: FormBuilder, authServiceParam: AuthService) {
+    this.router = routerParam;
+    this.formBuilder = formBuilderParam;
+    this.authService = authServiceParam;
+  }
 
   ngOnInit(): void {
     this.formLogin = this.formBuilder.group({

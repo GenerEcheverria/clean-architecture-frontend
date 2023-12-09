@@ -15,13 +15,15 @@ export class SiteService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     })
-  }
+  };
 
   /**
    * Constructor del servicio SiteService.
    * @param httpClient Instancia de HttpClient para realizar las peticiones HTTP.
    */
-  constructor() { }
+  constructor(httpClientParam: HttpClient) {
+    this.httpClient = httpClientParam;
+  }
 
   /**
    * Obtiene la información de un sitio.

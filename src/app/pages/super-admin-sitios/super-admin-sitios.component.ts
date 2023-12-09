@@ -16,7 +16,7 @@ import DataTables from 'datatables.net';
 @Component({
   selector: 'app-super-admin-sitios',
   templateUrl: './super-admin-sitios.component.html',
-  styleUrls: ['./super-admin-sitios.component.css']
+  styleUrls: [ './super-admin-sitios.component.css' ]
 })
 export class SuperAdminSitiosComponent implements OnInit {
   public userSiteCounts: { userId: string, siteCount: number }[] = [];
