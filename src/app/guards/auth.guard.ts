@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
-/**
- * Guardia de ruta para autenticación de usuario.
- */
 @Injectable({
   providedIn: 'root'
 })
@@ -18,10 +15,6 @@ export class AuthGuard implements CanActivate {
     this.router = routerParam;
   }
 
-  /**
-   * Método de canActivate para determinar si el usuario está autenticado.
-   * @returns Una promesa que resuelve en un valor booleano que indica si el usuario está autenticado.
-   */
   public async canActivate(): Promise<boolean> {
     try {
       const response = await this.authService.isLoggedIn().toPromise();
