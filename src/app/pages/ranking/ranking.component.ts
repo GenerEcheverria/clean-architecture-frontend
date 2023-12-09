@@ -7,20 +7,24 @@ import { MisSitiosService } from 'src/app/services/mis-sitios.service';
 @Component({
   selector: 'app-ranking',
   templateUrl: './ranking.component.html',
-  styleUrls: ['./ranking.component.css']
+  styleUrls: [ './ranking.component.css' ]
 })
 export class RankingComponent {
-  public bibliotecaSitios: any[] = [];
+  public bibliotecaSitios: any[] = [];  
+  private misSitiosService!: MisSitiosService;
 
-  constructor(private misSitiosService: MisSitiosService) {}
 
-   /**
+  constructor(protected misSitiosServiceParam: MisSitiosService) {
+    this.misSitiosService = misSitiosServiceParam;
+  }
+
+  /**
    * Se ejecuta al inicializar el componente.
    */
   ngOnInit(): void {
     this.misSitiosService.getAll().subscribe(data => {
       this.bibliotecaSitios = data.sites;
-      this.bibliotecaSitios.sort((a, b) => b.views - a.views); // Ordenar por vistas de forma descendente
+      this.bibliotecaSitios.sort((a, b) => b.views - a.views);
     });
   }
 }

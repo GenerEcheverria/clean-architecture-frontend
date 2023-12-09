@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { of } from 'rxjs';
 import { CrearSitio } from '../interfaces/crear-sitio';
 
 /**
@@ -11,12 +10,14 @@ import { CrearSitio } from '../interfaces/crear-sitio';
 })
 export class CrearSitioService {
   url: string = 'http://localhost:8000/api';
+  http!: HttpClient;
 
   /**
    * Constructor del servicio CrearSitioService.
-   * @param http Instancia de HttpClient para realizar las peticiones HTTP.
+   * @param httpParam, Instancia de HttpClient para realizar las peticiones HTTP.
    */
-  constructor(private http: HttpClient) { }
+  constructor() { 
+  }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -25,7 +26,7 @@ export class CrearSitioService {
     })
   }
 
-   /**
+  /**
    * Crea un nuevo sitio.
    * @param newCrearSitio Información del nuevo sitio a crear.
    * @returns Un Observable que emite la respuesta de la petición HTTP.

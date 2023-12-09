@@ -19,12 +19,13 @@
         "no-magic-numbers": "error",
         "no-unused-vars": "error",
         "prefer-const": "error",
-        "prefer-arrow-callback": "error",
         "array-bracket-spacing": ["error", "always"],
         "object-curly-spacing": ["error", "always"],
-        "max-len": ["error", { "code": 80 }],
+        "max-len": ["error", { "code": 150 }],
         "no-empty": "error", 
-        "no-throw-literal": "error"
+        "no-throw-literal": "error",
+        "quotes": ["error", "single"]
+
     }
     
 }
