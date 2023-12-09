@@ -72,8 +72,8 @@ import { DatePipe } from '@angular/common';
     CommonModule
   ],
 
-  providers: [ DatePipe ],
-  bootstrap: [ AppComponent ]
+  providers: [DatePipe],
+  bootstrap: [AppComponent]
 })
 
 export class AppModule { }

@@ -9,9 +9,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-   /**
+  /**
    * Nombre para mostrar en el encabezado.
    */
-  @Input() name: string ="";
-  @Input() photo: string ="";
+  @Input() name: string = '';
+
+  @Input() photo: string = '';
+
 }
