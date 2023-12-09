@@ -23,14 +23,14 @@ import { TextoLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-bui
 import { ImagenLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/imagen-lienzo/imagen-lienzo.component';
 import { VideoLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/video-lienzo/video-lienzo.component';
 import { FooterLienzoComponent } from './pages/crear-sitio/lienzo-pagina/footer-lienzo/footer-lienzo.component';
-import { SuperAdminSitiosComponent } from './pages/super-admin-sitios/super-admin-sitios.component';
+import { AdminSitesComponent } from './pages/admin-sites/admin-sites.component';
 import { MySitesComponent } from './pages/my-sites/my-sites.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
 import { BodyBuilderComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/body-builder.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { SuperadministradorCuentaUsuarioComponent } from './pages/superadministrador-cuenta-usuario/superadministrador-cuenta-usuario.component';
+import { AdminAccountComponent } from './pages/admin-account/admin-account.component';
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -49,7 +49,7 @@ import { DatePipe } from '@angular/common';
     ImageComponent,
     VideoComponent,
     CrearSitioComponent,
-    SuperAdminSitiosComponent,
+    AdminSitesComponent,
     MySitesComponent,
     RankingComponent,
     LienzoPaginaComponent,
@@ -58,10 +58,10 @@ import { DatePipe } from '@angular/common';
     ImagenLienzoComponent,
     VideoLienzoComponent,
     FooterLienzoComponent,
-    SuperAdminSitiosComponent,
+    AdminSitesComponent,
     BodyBuilderComponent,
     RegisterComponent,
-    SuperadministradorCuentaUsuarioComponent
+    AdminAccountComponent
   ],
   imports: [
     BrowserModule,

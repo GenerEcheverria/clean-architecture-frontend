@@ -6,7 +6,7 @@ import { SiteService } from 'src/app/services/site.service';
  * Componente para la visualización de sitios.
  */
 @Component({
-  selector: 'app-sitios',
+  selector: 'app-sites',
   templateUrl: './sites.component.html',
   styleUrls: ['./sites.component.css']
 })
@@ -59,7 +59,7 @@ export class SitesComponent {
         this.webContent = await this.siteService.getSite(id).toPromise();
         this.isDataLoaded = true;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     } else {
       this.router.navigate(['/login']);

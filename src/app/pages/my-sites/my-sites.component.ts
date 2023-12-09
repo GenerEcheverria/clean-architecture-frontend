@@ -12,7 +12,7 @@ import { SiteService } from 'src/app/services/site.service';
  * Componente para gestionar los sitios del usuario.
  */
 @Component({
-  selector: 'app-mis-sitios',
+  selector: 'app-my-sites',
   templateUrl: './my-sites.component.html',
   styleUrls: ['./my-sites.component.css']
 })

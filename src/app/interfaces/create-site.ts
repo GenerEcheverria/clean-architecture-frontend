@@ -1,28 +1,28 @@
 /**
  * Posiciones del encabezado.
  */
-export enum HeaderPosition {
-  center = 'center',
-  left = 'left',
-  right = 'right',
+export interface HeaderPosition {
+  center: 'center',
+  left: 'left',
+  right: 'right',
 }
 
 /**
  * Tamaños del encabezado.
  */
-export enum HeaderSize {
-  big = 'big',
-  small = 'small',
-  medium = 'medium',
+export interface HeaderSize {
+  big: 'big',
+  small: 'small',
+  medium: 'medium',
 }
 
 /**
  * Tamaños del cuerpo.
  */
-export enum BodySize {
-  big = 'big',
-  small = 'small',
-  medium = 'medium',
+export interface BodySize {
+  big: 'big',
+  small: 'small',
+  medium: 'medium',
 }
 
 /**

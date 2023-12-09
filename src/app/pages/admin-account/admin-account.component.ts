@@ -12,43 +12,38 @@ import { DatePipe } from '@angular/common';
  * Componente para la administración de cuentas de usuario por parte de un superadministrador.
  */
 @Component({
-  selector: 'app-superadministrador-cuenta-usuario',
-  templateUrl: './superadministrador-cuenta-usuario.component.html',
-  styleUrls: ['./superadministrador-cuenta-usuario.component.css']
+  selector: 'app-admin-account',
+  templateUrl: './admin-account.component.html',
+  styleUrls: ['./admin-account.component.css']
 })
-export class SuperadministradorCuentaUsuarioComponent implements OnInit {
-  id!: string | null;
+export class AdminAccountComponent implements OnInit {
+
+  protected id!: string | null;
   protected name!: string;
   protected email!: string;
   protected phone!: string;
   protected sites: any;
   protected isDeleteUser!: boolean;
 
-  /**
-  * Método que se ejecuta después de que los componentes de la vista se inicializan completamente.
-  */
-  ngAfterViewInit() {
-    $(document).ready(function () {
-      $('#example').DataTable({
-
-        "language": {
-          "search": "",
-          "searchPlaceholder": "Buscar",
-        },
-        "dom": '<"d-flex justify-content-end"f>t<"d-flex justify-content-between"ipl>',
-
-        "pagingType": "simple_numbers",
-      });
-    });
-  }
+  private route!: ActivatedRoute;
+  private userService!: UserService;
+  private siteService!: SiteService;
+  private router!: Router;
+  private datePipe!: DatePipe;
 
   constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private siteService: SiteService,
-    private router: Router,
-    private datePipe: DatePipe
-  ) { }
+    routeParam: ActivatedRoute,
+    userServiceParam: UserService,
+    siteServiceParam: SiteService,
+    routerParam: Router,
+    datePipeParam: DatePipe
+  ) {
+    this.route = routeParam;
+    this.userService = userServiceParam;
+    this.siteService = siteServiceParam;
+    this.router = routerParam;
+    this.datePipe = datePipeParam;
+  }
 
   /**
   * Método que se ejecuta al inicializar el componente.
@@ -60,9 +55,27 @@ export class SuperadministradorCuentaUsuarioComponent implements OnInit {
   }
 
   /**
+  * Método que se ejecuta después de que los componentes de la vista se inicializan completamente.
+  */
+  ngAfterViewInit() {
+    $(document).ready(function initializeDataTable() {
+      $('#example').DataTable({
+
+        'language': {
+          'search': '',
+          'searchPlaceholder': 'Buscar',
+        },
+        'dom': '<"d-flex justify-content-end"f>t<"d-flex justify-content-between"ipl>',
+
+        'pagingType': 'simple_numbers',
+      });
+    });
+  }
+
+  /**
  * Carga los datos del usuario y los sitios asociados.
  */
-  async loadData(): Promise<void> {
+  private async loadData(): Promise<void> {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       try {
@@ -76,7 +89,9 @@ export class SuperadministradorCuentaUsuarioComponent implements OnInit {
       try {
         const response = await this.siteService.getSitesForUser(this.id.toString()).toPromise();
         this.sites = response.sites;
-      } catch (error) { }
+      } catch (error) {
+        console.error(error);
+      }
     } else {
       this.router.navigate(['/sasitios']);
     }
@@ -85,16 +100,18 @@ export class SuperadministradorCuentaUsuarioComponent implements OnInit {
   /**
    * Elimina el usuario actual.
    */
-  deleteUser() {
+  protected deleteUser() {
     if (this.id) {
       this.userService.deleteUser(this.id).subscribe(
         (response) => {
+          console.log(response);
           this.router.navigate(['/sasitios']);
         },
         (error) => {
-          alert("No pudo borrarse el usuario")
+          console.error(error);
+          alert('No pudo borrarse el usuario');
         }
-      )
+      );
     }
   }
 
@@ -103,7 +120,7 @@ export class SuperadministradorCuentaUsuarioComponent implements OnInit {
    * @param date La fecha a formatear.
    * @returns La fecha formateada en formato de cadena de texto.
    */
-  formatDate(date: string): string {
+  protected formatDate(date: string): string {
     const formattedDate = this.datePipe.transform(date, 'dd/MM/yyyy HH:mm:ss');
     return formattedDate || '';
   }

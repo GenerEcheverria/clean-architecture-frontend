@@ -1,36 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { SasitiosService } from 'src/app/services/sasitios.service';
 import { saUsuarios } from 'src/app/interfaces/saUsuarios';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs5';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SiteService } from 'src/app/services/site.service';
-import { UserService } from 'src/app/services/user.service';
-import DataTables from 'datatables.net';
+
 
 /**
  * Componente para la administración de sitios por parte de un superadministrador.
  */
 @Component({
-  selector: 'app-super-admin-sitios',
-  templateUrl: './super-admin-sitios.component.html',
-  styleUrls: ['./super-admin-sitios.component.css']
+  selector: 'app-admin-sites',
+  templateUrl: './admin-sites.component.html',
+  styleUrls: ['./admin-sites.component.css']
 })
-export class SuperAdminSitiosComponent implements OnInit {
-  public userSiteCounts: { userId: string, siteCount: number }[] = [];
-  public saUsuarios: saUsuarios[] = [];
-  public nombre: string[] = [];
-  public nsitios: number[] = [];
-  id!: string | null;
-  protected name!: string;
-  protected email!: string;
-  protected phone!: string;
-  public dataTable: any;
+export class AdminSitesComponent implements OnInit {
+
+  protected userSiteCounts: { userId: string, siteCount: number }[] = [];
+  protected saUsuarios: saUsuarios[] = [];
+  protected dataTable: any;
+
+  private sasitiosService!: SasitiosService;
+  private router: Router;
+  private siteService: SiteService;
 
 
-  constructor(private sasitiosService: SasitiosService, private route: ActivatedRoute, private userService: UserService, private siteService: SiteService, private router: Router) { }
+
+  constructor(sasitiosServiceParam: SasitiosService, siteServiceParam: SiteService, routerParam: Router) {
+    this.sasitiosService = sasitiosServiceParam;
+    this.router = routerParam;
+    this.siteService = siteServiceParam;
+  }
 
   /**
    * Método que se ejecuta al inicializar el componente.
@@ -41,9 +43,26 @@ export class SuperAdminSitiosComponent implements OnInit {
       // Obtener los ID de todos los usuarios y llamar a loadData() para cada uno
       this.saUsuarios.forEach((user) => {
         const userId = user.id;
-        const nom = user.name;
-        this.loadData(userId, nom);
+        const name = user.name;
+        this.loadData(userId, name);
       });
+    });
+
+  }
+
+  /**
+  * Método que se ejecuta después de que los componentes de la vista se inicializan completamente.
+  */
+  ngAfterViewInit() {
+    this.dataTable = $('#example').DataTable({
+
+      'language': {
+        'search': '',
+        'searchPlaceholder': 'Buscar',
+      },
+      'dom': '<"d-flex justify-content-end"f>t<"d-flex justify-content-between"ipl>',
+
+      'pagingType': 'simple_numbers',
     });
 
   }
@@ -52,9 +71,9 @@ export class SuperAdminSitiosComponent implements OnInit {
   /**
    * Carga los datos de un usuario y la cantidad de sitios asociados.
    * @param userId El ID del usuario.
-   * @param nom El nombre del usuario.
+   * @param name El nombre del usuario.
    */
-  async loadData(userId: string, nom: string): Promise<void> {
+  private async loadData(userId: string, name: string): Promise<void> {
     if (userId) {
       try {
         const response = await this.siteService.getSitesForUser(userId).toPromise();
@@ -67,11 +86,12 @@ export class SuperAdminSitiosComponent implements OnInit {
 
         console.log(userSiteCount); // Aquí puedes ver el objeto con el ID y la cantidad de sitios
 
-        const boton = '<button type="button" class="btn btn-primary rounded-pill text-white"><a class="text-white text-decoration-none" href="http://localhost:4200/sausuarios/' + userId + '">Ver Usuario</a></button>'
+        const button = '<button type="button" class="btn btn-primary rounded-pill text-white"><a class="text-white text-decoration-none" href="http://localhost:4200/sausuarios/' + userId + '">Ver Usuario</a></button>';
+
         this.dataTable.row.add([
-          nom,
+          name,
           siteCount.toString(),
-          boton
+          button
         ]);
 
         this.dataTable.draw();
@@ -87,23 +107,6 @@ export class SuperAdminSitiosComponent implements OnInit {
     }
   }
 
-
-  /**
-   * Método que se ejecuta después de que los componentes de la vista se inicializan completamente.
-   */
-  ngAfterViewInit() {
-    this.dataTable = $('#example').DataTable({
-
-      "language": {
-        "search": "",
-        "searchPlaceholder": "Buscar",
-      },
-      "dom": '<"d-flex justify-content-end"f>t<"d-flex justify-content-between"ipl>',
-
-      "pagingType": "simple_numbers",
-    });
-
-  }
 }
 
 
