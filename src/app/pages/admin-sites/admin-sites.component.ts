@@ -1,42 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { SasitiosService } from 'src/app/services/sasitios.service';
 import { saUsuarios } from 'src/app/interfaces/saUsuarios';
-import * as $ from 'jquery';
-import 'datatables.net';
-import 'datatables.net-bs5';
 import { Router } from '@angular/router';
 import { SiteService } from 'src/app/services/site.service';
 
-
 /**
- * Componente para la administración de sitios por parte de un superadministrador.
- */
+  * Componente para la administración de sitios por parte de un superadministrador.
+  */
 @Component({
   selector: 'app-admin-sites',
   templateUrl: './admin-sites.component.html',
-  styleUrls: ['./admin-sites.component.css']
+  styleUrls: ['./admin-sites.component.css'],
 })
 export class AdminSitesComponent implements OnInit {
-
-  protected userSiteCounts: { userId: string, siteCount: number }[] = [];
+  protected userSiteCounts: { userId: string; siteCount: number }[] = [];
   protected saUsuarios: saUsuarios[] = [];
-  protected dataTable: any;
 
   private sasitiosService!: SasitiosService;
   private router: Router;
   private siteService: SiteService;
 
-
-
-  constructor(sasitiosServiceParam: SasitiosService, siteServiceParam: SiteService, routerParam: Router) {
+  constructor(
+    sasitiosServiceParam: SasitiosService,
+    siteServiceParam: SiteService,
+    routerParam: Router
+  ) {
     this.sasitiosService = sasitiosServiceParam;
     this.router = routerParam;
     this.siteService = siteServiceParam;
   }
 
   /**
-   * Método que se ejecuta al inicializar el componente.
-   */
+    * Método que se ejecuta al inicializar el componente.
+    */
   ngOnInit() {
     this.sasitiosService.getUsers().subscribe((data: saUsuarios[]) => {
       this.saUsuarios = data;
@@ -47,58 +43,56 @@ export class AdminSitesComponent implements OnInit {
         this.loadData(userId, name);
       });
     });
-
   }
 
   /**
-  * Método que se ejecuta después de que los componentes de la vista se inicializan completamente.
-  */
-  ngAfterViewInit() {
-    this.dataTable = $('#example').DataTable({
-
-      'language': {
-        'search': '',
-        'searchPlaceholder': 'Buscar',
-      },
-      'dom': '<"d-flex justify-content-end"f>t<"d-flex justify-content-between"ipl>',
-
-      'pagingType': 'simple_numbers',
-    });
-
-  }
-
-
-  /**
-   * Carga los datos de un usuario y la cantidad de sitios asociados.
-   * @param userId El ID del usuario.
-   * @param name El nombre del usuario.
-   */
+    * Carga los datos de un usuario y la cantidad de sitios asociados.
+    * @param userId El ID del usuario.
+    * @param name El nombre del usuario.
+    */
   private async loadData(userId: string, name: string): Promise<void> {
     if (userId) {
       try {
         const response = await this.siteService.getSitesForUser(userId).toPromise();
-        const siteCount = response.sites.length; // Obtener la cantidad de sitios
-        // Guardar el ID del usuario y la cantidad de sitios en un objeto
+        const siteCount = response.sites.length;
         const userSiteCount = {
           userId: userId,
-          siteCount: siteCount
+          siteCount: siteCount,
         };
 
-        console.log(userSiteCount); // Aquí puedes ver el objeto con el ID y la cantidad de sitios
+        this.userSiteCounts.push(userSiteCount);
+        const button = document.createElement('button');
+        button.classList.add('btn', 'btn-primary', 'rounded-pill', 'text-white');
 
-        const button = '<button type="button" class="btn btn-primary rounded-pill text-white"><a class="text-white text-decoration-none" href="http://localhost:4200/sausuarios/' + userId + '">Ver Usuario</a></button>';
+        const link = document.createElement('a');
+        link.classList.add('text-white', 'text-decoration-none');
+        link.href = `/sausuarios/${userId}`;
+        link.textContent = 'Ver Usuario';
 
-        this.dataTable.row.add([
-          name,
-          siteCount.toString(),
-          button
-        ]);
+        button.appendChild(link);
 
-        this.dataTable.draw();
-        // Puedes almacenar userSiteCount en un arreglo si necesitas mantener un registro de todos los usuarios con sus respectivas cantidades de sitios
-        //this.userSiteCounts.push(userSiteCount);
+        // Agregar datos a la tabla
+        const dataTable = document.getElementById('example') as HTMLTableElement;
+        var tableBody = dataTable.querySelector('tbody');
 
+        const row = document.createElement('tr');
+        const nameCell = document.createElement('td');
+        nameCell.textContent = name;
+        const siteCountCell = document.createElement('td');
+        siteCountCell.textContent = siteCount.toString();
+        const buttonCell = document.createElement('td');
+        buttonCell.appendChild(button);
 
+        row.appendChild(nameCell);
+        row.appendChild(siteCountCell);
+        row.appendChild(buttonCell);
+
+        if (!tableBody) {
+          tableBody = document.createElement('tbody');
+          dataTable.appendChild(tableBody);
+        }
+
+        tableBody.appendChild(row);
       } catch (error) {
         console.error(error);
       }
@@ -106,7 +100,5 @@ export class AdminSitesComponent implements OnInit {
       this.router.navigate(['/sasitios']);
     }
   }
-
 }
-
 
