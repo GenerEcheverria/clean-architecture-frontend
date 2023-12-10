@@ -4,7 +4,7 @@ import { MainLayoutComponent } from './shared/main-layout/main-layout.component'
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SitesComponent } from './pages/sites/sites.component';
-import { CrearSitioComponent } from './pages/crear-sitio/crear-sitio.component';
+import { CreateSiteComponent } from './pages/create-site/create-site.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AdminSitesComponent } from './pages/admin-sites/admin-sites.component';
 import { UserAccountComponent } from './pages/user-account/user-account.component';
@@ -26,7 +26,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'misSitios', pathMatch: 'full' },
-      { path: 'crear', component: CrearSitioComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
+      { path: 'crear', component: CreateSiteComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
       { path: 'sasitios', component: AdminSitesComponent, canActivate: [RoleGuard], data: { roles: ['superadmin'] } },
       { path: 'mi-cuenta', component: UserAccountComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
       { path: 'sausuarios/:id', component: AdminAccountComponent, canActivate: [RoleGuard], data: { roles: ['superadmin'] } },

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { TimelineComponent } from './pages/crear-sitio/media-types/timeline/timeline.component';
+import { TimelineComponent } from './pages/create-site/media-types/timeline/timeline.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,26 +12,27 @@ import { SitesComponent } from './pages/sites/sites.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { MenuOptionComponent } from './shared/buttons/menu-option/menu-option.component';
-import { BodyElementComponent } from './pages/crear-sitio/body-element/body-element.component';
-import { TextComponent } from './pages/crear-sitio/media-types/text/text.component';
-import { ImageComponent } from './pages/crear-sitio/media-types/image/image.component';
-import { VideoComponent } from './pages/crear-sitio/media-types/video/video.component';
-import { CrearSitioComponent } from './pages/crear-sitio/crear-sitio.component';
-import { LienzoPaginaComponent } from './pages/crear-sitio/lienzo-pagina/lienzo-pagina.component';
-import { TituloLienzoComponent } from './pages/crear-sitio/lienzo-pagina/titulo-lienzo/titulo-lienzo.component';
-import { TextoLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/texto-lienzo/texto-lienzo.component';
-import { ImagenLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/imagen-lienzo/imagen-lienzo.component';
-import { VideoLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/video-lienzo/video-lienzo.component';
-import { FooterLienzoComponent } from './pages/crear-sitio/lienzo-pagina/footer-lienzo/footer-lienzo.component';
+import { BodyElementComponent } from './pages/create-site/body-element/body-element.component';
+import { TextComponent } from './pages/create-site/media-types/text/text.component';
+import { ImageComponent } from './pages/create-site/media-types/image/image.component';
+import { VideoComponent } from './pages/create-site/media-types/video/video.component';
+import { CreateSiteComponent } from './pages/create-site/create-site.component';
+import { PageCanvasComponent } from './pages/create-site/page-canvas/page-canvas.component';
+import { TitleCanvasComponent } from './pages/create-site/page-canvas/title-canvas/title-canvas.component';
+import { TextoLienzoComponent } from './pages/create-site/page-canvas/body-builder/text-canvas/text-canvas.component';
+import { ImageCanvasComponent } from './pages/create-site/page-canvas/body-builder/image-canvas/image-canvas.component';
+import { VideoLienzoComponent } from './pages/create-site/page-canvas/body-builder/video-canvas/video-canvas.component';
+import { FooterCanvasComponent } from './pages/create-site/page-canvas/footer-canvas/footer-canvas.component';
 import { AdminSitesComponent } from './pages/admin-sites/admin-sites.component';
 import { MySitesComponent } from './pages/my-sites/my-sites.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
-import { BodyBuilderComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/body-builder.component';
+import { BodyBuilderComponent } from './pages/create-site/page-canvas/body-builder/body-builder.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AdminAccountComponent } from './pages/admin-account/admin-account.component';
 import { DatePipe } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -48,16 +49,16 @@ import { DatePipe } from '@angular/common';
     TextComponent,
     ImageComponent,
     VideoComponent,
-    CrearSitioComponent,
+    CreateSiteComponent,
     AdminSitesComponent,
     MySitesComponent,
     RankingComponent,
-    LienzoPaginaComponent,
-    TituloLienzoComponent,
+    PageCanvasComponent,
+    TitleCanvasComponent,
     TextoLienzoComponent,
-    ImagenLienzoComponent,
+    ImageCanvasComponent,
     VideoLienzoComponent,
-    FooterLienzoComponent,
+    FooterCanvasComponent,
     AdminSitesComponent,
     BodyBuilderComponent,
     RegisterComponent,
