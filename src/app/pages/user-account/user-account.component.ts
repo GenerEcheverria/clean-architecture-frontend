@@ -61,7 +61,7 @@ export class UserAccountComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern('^((\\+52-?)|0)?[0-9]{10}$')]]
     });
     this.passwordForm = this.formBuilder.group({
-      currentPassword: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]],
+      confirmPassword: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]],
       newPassword: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]]
     }, { validator: passwordValidator });
 

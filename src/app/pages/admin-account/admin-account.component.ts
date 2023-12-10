@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
-import 'datatables.net';
-import 'datatables.net-bs5';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SiteService } from 'src/app/services/site.service';
 import { UserService } from 'src/app/services/user.service';
 import { DatePipe } from '@angular/common';
-
 
 /**
  * Componente para la administración de cuentas de usuario por parte de un superadministrador.
@@ -46,35 +42,16 @@ export class AdminAccountComponent implements OnInit {
   }
 
   /**
-  * Método que se ejecuta al inicializar el componente.
-  */
+   * Método que se ejecuta al inicializar el componente.
+   */
   ngOnInit(): void {
     this.isDeleteUser = false;
     this.loadData();
-
   }
 
   /**
-  * Método que se ejecuta después de que los componentes de la vista se inicializan completamente.
-  */
-  ngAfterViewInit() {
-    $(document).ready(function initializeDataTable() {
-      $('#example').DataTable({
-
-        'language': {
-          'search': '',
-          'searchPlaceholder': 'Buscar',
-        },
-        'dom': '<"d-flex justify-content-end"f>t<"d-flex justify-content-between"ipl>',
-
-        'pagingType': 'simple_numbers',
-      });
-    });
-  }
-
-  /**
- * Carga los datos del usuario y los sitios asociados.
- */
+   * Carga los datos del usuario y los sitios asociados.
+   */
   private async loadData(): Promise<void> {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
@@ -100,11 +77,10 @@ export class AdminAccountComponent implements OnInit {
   /**
    * Elimina el usuario actual.
    */
-  protected deleteUser() {
+  protected deleteUser(): void {
     if (this.id) {
       this.userService.deleteUser(this.id).subscribe(
-        (response) => {
-          console.log(response);
+        () => {
           this.router.navigate(['/sasitios']);
         },
         (error) => {

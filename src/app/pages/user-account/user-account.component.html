@@ -103,20 +103,20 @@
         <div class="row mb-3">
           <div class="col-2">
 
-            <label for="currentPassword" class="form-label">Confirmar Contraseña:</label>
+            <label for="confirmPassword" class="form-label">Confirmar Contraseña:</label>
           </div>
           <div class="col-6">
 
-            <input type="password" formControlName="currentPassword" class="form-control rounded-pill bg-azure-web" id="currentPassword"
-              name="currentPassword">
+            <input type="password" formControlName="confirmPassword" class="form-control rounded-pill bg-azure-web" id="confirmPassword"
+              name="confirmPassword">
 
-              <div *ngIf="passwordForm.get('currentPassword')?.invalid && (passwordForm.get('currentPassword')?.dirty || passwordForm.get('currentPassword')?.touched)">
-                <div class="control-error" *ngIf="passwordForm.get('currentPassword')?.errors?.['required']">Se requiere una contraseña</div>
-                <div class="control-error" *ngIf="passwordForm.get('currentPassword')?.errors?.['minlength']">Se requiere una contraseña de al menos 8 caracteres.</div>
-                <div class="control-error" *ngIf="passwordForm.get('currentPassword')?.errors?.['maxlength']">La contraseña no debe exceder de 32 caracteres.</div>
+              <div *ngIf="passwordForm.get('confirmPassword')?.invalid && (passwordForm.get('confirmPassword')?.dirty || passwordForm.get('confirmPassword')?.touched)">
+                <div class="control-error" *ngIf="passwordForm.get('confirmPassword')?.errors?.['required']">Se requiere una contraseña</div>
+                <div class="control-error" *ngIf="passwordForm.get('confirmPassword')?.errors?.['minlength']">Se requiere una contraseña de al menos 8 caracteres.</div>
+                <div class="control-error" *ngIf="passwordForm.get('confirmPassword')?.errors?.['maxlength']">La contraseña no debe exceder de 32 caracteres.</div>
               </div>
 
-              <div  class="control-error" *ngIf="passwordForm.hasError('passwordsDoNotMatch') && (passwordForm.get('newPassword')?.dirty || passwordForm.get('currentPassword')?.dirty)">
+              <div  class="control-error" *ngIf="passwordForm.hasError('passwordsDoNotMatch') && (passwordForm.get('newPassword')?.dirty || passwordForm.get('confirmPassword')?.dirty)">
                 Las contraseñas no coinciden
               </div>
 

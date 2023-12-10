@@ -72,11 +72,6 @@ export class BodyElementComponent {
   protected rightType = BodyElementComponent.rightType;
 
   /**
-   * Objeto para almacenar la información de la línea de tiempo.
-   */
-  protected myTimeline!: any;
-
-  /**
   * Crea un FormGroup para un medio que ocupe todo el ancho de la pantalla.
   * @param type Tipo de medio.
   * @returns FormGroup para el medio que ocupa todo el ancho.
@@ -142,13 +137,6 @@ export class BodyElementComponent {
         video: new FormGroup({
           video: new FormControl(''),
           size: new FormControl(''),
-        }),
-      });
-    case 'Timeline':
-
-      return new FormGroup({
-        timeline: new FormGroup({
-          title: new FormControl(''),
         }),
       });
     default:
