@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SidebarComponent {
 
-  @Input() role!: string;
+  @Input() role!: string | null;
 
   private authService!: AuthService;
 

@@ -3,7 +3,7 @@
   [style.background-color]="webContent.backgroundColor"
 >
 <!-- Componente para construir el header del sitio -->
-  <app-titulo-lienzo
+  <app-title-canvas
     [hero]="webContent.header.hero"
     [title]="webContent.header.title"
     [position]="webContent.header.position"
@@ -11,7 +11,7 @@
     [color]="webContent.header.color"
     [image]="webContent.header.image"
   >
-  </app-titulo-lienzo>
+  </app-title-canvas>
   <!-- Componente para construir los elementos que conforman al body del sitio -->
   <app-body-builder
     *ngFor="let item of this.webContent.body; let i = index"
@@ -21,7 +21,7 @@
   <br>
   <br>
   <!-- Componente para construir el footer del sitio -->
-  <app-footer-lienzo
+  <app-footer-canvas
     class="m-0 p-0"
     [backgroundColor]="webContent.footer.backgroundColor"
     [textColor]="webContent.footer.textColor"
@@ -31,12 +31,12 @@
     [twitterUrl]="webContent.footer.socialMedia.twitter"
     [linkedinUrl]="webContent.footer.socialMedia.linkedin"
     [tiktokUrl]="webContent.footer.socialMedia.tiktok"
-    [otroUrl]="webContent.footer.socialMedia.otro"
+    [extraUrl]="webContent.footer.socialMedia.extraUrl"
     [setExtra]="webContent.footer.extra.setExtra"
-    [imgExtraFooter]="webContent.footer.extra.image"
+    [imageExtraFooter]="webContent.footer.extra.image"
     [textExtraFooter]="webContent.footer.extra.text"
     [setContact]="webContent.footer.contact.setContact"
     [phone]="webContent.footer.contact.phone"
     [address]="webContent.footer.contact.address"
-  ></app-footer-lienzo>
+  ></app-footer-canvas>
 </div>

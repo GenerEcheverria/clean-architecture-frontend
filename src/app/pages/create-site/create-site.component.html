@@ -17,7 +17,7 @@
   [style.display]="showForm"
   id="sitioForm"
   (ngSubmit)="onSubmit()"
-  [formGroup]="sitioForm"
+  [formGroup]="siteForm"
 >
   <div class="border rounded p-4">
     <h5>Información del sitio</h5>
@@ -195,7 +195,7 @@
     <h5>Cuerpo</h5>
     <app-body-element
       *ngFor="
-        let childForm of getCtrl('body', sitioForm).controls;
+        let childForm of getCtrl('body', siteForm).controls;
         let i = index
       "
       [bodyElementForm]="childForm"
@@ -208,11 +208,9 @@
       <div class="row my-2">
         <h5 class="col-3 fs-6">Columna completa</h5>
         <select class="col-6" #full>
-          <option selected>Elemento</option>
-          <option value="Text">Texto</option>
+          <option selected value="Text">Texto</option>
           <option value="Image">Imagen</option>
           <option value="Video">Video</option>
-          <option value="Timeline">Línea del tiempo</option>
         </select>
         <button
           type="button"
@@ -225,14 +223,12 @@
       <div class="row">
         <h5 class="col-3 fs-6">Columna dividida</h5>
         <select name="" id="" class="col-3" #leftType>
-          <option selected>Elemento izquierdo</option>
-          <option value="Text">Texto</option>
+          <option selected value="Text">Texto</option>
           <option value="Image">Imagen</option>
           <option value="Video">Video</option>
         </select>
         <select name="" id="" class="col-3" #rightType>
-          <option selected>Elemento derecho</option>
-          <option value="Text">Texto</option>
+          <option selected value="Text">Texto</option>
           <option value="Image">Imagen</option>
           <option value="Video">Video</option>
         </select>
@@ -449,7 +445,7 @@
       Cancelar
     </button>
     <button
-      [disabled]="sitioForm.invalid"
+      [disabled]="siteForm.invalid"
       type="submit"
       form="sitioForm"
       class="btn btn-primary rounded-pill text-white px-5 py-2"
@@ -461,5 +457,5 @@
 <!-- Preview de la página -->
 <app-page-canvas
   *ngIf="preview"
-  [webContent]="this.sitioForm.value"
+  [webContent]="this.siteForm.value"
 ></app-page-canvas>
