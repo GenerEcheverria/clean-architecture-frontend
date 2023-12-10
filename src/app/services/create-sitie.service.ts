@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Site } from '../interfaces/create-site';
+// import { Site } from '../interfaces/create-site';
 
 /**
  * Servicio para crear un nuevo sitio.
@@ -34,7 +34,7 @@ export class CreateSiteService {
    * @param site Información del nuevo sitio a crear.
    * @returns Un Observable que emite la respuesta de la petición HTTP.
    */
-  public createSite(site: Site) {
+  public createSite(site: any) {
     return this.httpClient.post<any>(this.URL + '/media/sites', { newCrearSitio: site }, this.httpOptions);
   }
 

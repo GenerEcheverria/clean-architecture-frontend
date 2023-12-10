@@ -8,7 +8,7 @@ describe('MisSitiosComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MySitesComponent ]
+      declarations: [MySitesComponent]
     })
       .compileComponents();
 

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { passwordValidator } from './password.validator';
-import { AuthService } from 'src/app/services/auth.service';
+import { SessionService } from 'src/app/features/session/session.service';
 import { MyAccountService } from 'src/app/services/my-account.service';
 import { Router } from '@angular/router';
-//! import { Account } from 'src/app/interfaces/account';
 
 /**
  * Componente encargado de administrar la cuenta del usuario.
@@ -39,13 +38,13 @@ export class UserAccountComponent implements OnInit {
 
 
   private formBuilder!: FormBuilder;
-  private authService!: AuthService;
+  private sessionService!: SessionService;
   private router!: Router;
   private accountService!: MyAccountService;
 
-  constructor(formBuilderParam: FormBuilder, authServiceParam: AuthService, routerParam: Router, accountServiceParam: MyAccountService) {
+  constructor(formBuilderParam: FormBuilder, sessionServiceParam: SessionService, routerParam: Router, accountServiceParam: MyAccountService) {
     this.formBuilder = formBuilderParam;
-    this.authService = authServiceParam;
+    this.sessionService = sessionServiceParam;
     this.router = routerParam;
     this.accountService = accountServiceParam;
   }
@@ -65,7 +64,7 @@ export class UserAccountComponent implements OnInit {
       newPassword: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]]
     }, { validator: passwordValidator });
 
-    this.authService.getActualUser().subscribe(data => {
+    this.sessionService.getActualUser().subscribe(data => {
       this.userData = data;
       this.idUser = data.id;
 

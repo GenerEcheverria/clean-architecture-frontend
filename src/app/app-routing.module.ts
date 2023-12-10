@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
-import { LoginComponent } from './pages/login/login.component';
+import { MainLayoutComponent } from './features/shared/main-layout/main-layout.component';
+import { LoginComponent } from './features/session/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { SitesComponent } from './pages/sites/sites.component';
-import { CreateSiteComponent } from './pages/create-site/create-site.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { AdminSitesComponent } from './pages/admin-sites/admin-sites.component';
-import { UserAccountComponent } from './pages/user-account/user-account.component';
-import { AdminAccountComponent } from './pages/admin-account/admin-account.component';
+import { SitesComponent } from './features/system/sites/sites.component';
+import { CreateSiteComponent } from './features/system/create-site/create-site.component';
+import { RegisterComponent } from './features/session/register/register.component';
+import { AdminSitesComponent } from './features/admin/admin-sites-management/admin-sites-management.component';
+import { UserAccountComponent } from './features/client/user-account/user-account.component';
+import { AdminAccountComponent } from './features/admin/admin-user-management/admin-user-management.component';
 
-import { MySitesComponent } from './pages/my-sites/my-sites.component';
-import { RankingComponent } from './pages/ranking/ranking.component';
+import { MySitesComponent } from './features/client/my-sites/my-sites.component';
+import { RankingComponent } from './features/system/ranking/ranking.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 

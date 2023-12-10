@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { SessionService } from 'src/app/features/session/session.service';
 
 /**
  * Componente de la barra lateral de la aplicación.
@@ -14,12 +14,12 @@ export class SidebarComponent {
 
   @Input() role!: string | null;
 
-  private authService!: AuthService;
+  private sessionService!: SessionService;
 
   private router!: Router;
 
-  constructor(authServiceParam: AuthService, routerParam: Router) {
-    this.authService = authServiceParam;
+  constructor(sessionServiceParam: SessionService, routerParam: Router) {
+    this.sessionService = sessionServiceParam;
     this.router = routerParam;
   }
 
@@ -27,7 +27,7 @@ export class SidebarComponent {
    * Cierra la sesión del usuario y redirige al inicio de sesión.
    */
   protected logout() {
-    this.authService.logout().subscribe(
+    this.sessionService.logout().subscribe(
       (response) => {
         console.log(response);
         localStorage.removeItem('token');

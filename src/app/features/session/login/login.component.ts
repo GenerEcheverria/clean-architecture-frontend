@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { Crypto } from 'src/app/util/crypto';
+import { Crypto } from 'src/app/features/session/crypto';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { SessionService } from 'src/app/features/session/session.service';
+import { User } from 'src/app/core/domain/user.dto';
 
 /**
  * Componente para la página de inicio de sesión.
@@ -20,15 +21,15 @@ export class LoginComponent implements OnInit {
 
   private router!: Router;
   private formBuilder!: FormBuilder;
-  private authService!: AuthService;
+  private sessionService!: SessionService;
 
   // eslint-disable-next-line no-magic-numbers
   private readonly MINIMUM_INPUT_VALUE: number = 8;
 
-  constructor(routerParam: Router, formBuilderParam: FormBuilder, authServiceParam: AuthService) {
+  constructor(routerParam: Router, formBuilderParam: FormBuilder, sessionServiceParam: SessionService) {
     this.router = routerParam;
     this.formBuilder = formBuilderParam;
-    this.authService = authServiceParam;
+    this.sessionService = sessionServiceParam;
   }
 
   ngOnInit(): void {
@@ -39,21 +40,20 @@ export class LoginComponent implements OnInit {
   }
 
   protected login(): void {
-    const formUser = this.formLogin.value;
-    const user = {
-      'email': formUser.email,
-      'password': this.crypto.encrypted(formUser.password)
-    };
-    this.authService.login(user.email, user.password).subscribe(
+
+    const { email, password } = this.formLogin.value;
+
+    const user: User = new User(email, this.crypto.encrypted(password));
+
+    this.sessionService.login(user).subscribe(
       (response) => {
         localStorage.setItem('token', response.access_token);
-        this.authService.setUserRoles(response.role);
+        this.sessionService.setUserRoles(response.role);
         if (response.role === 'superadmin') {
           this.router.navigate(['/sasitios']);
         } else if (response.role === 'admin') {
           this.router.navigate(['/misSitios']);
         } else {
-          // Redirigir a otra página en caso de otro tipo de usuario
           this.router.navigate(['/login']);
         }
       },

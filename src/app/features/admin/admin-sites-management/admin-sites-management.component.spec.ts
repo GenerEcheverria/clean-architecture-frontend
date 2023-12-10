@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminSitesComponent } from './admin-sites.component';
+import { AdminSitesComponent } from './admin-sites-management.component';
 
 describe('SuperAdminSitiosComponent', () => {
   let component: AdminSitesComponent;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SasitiosService } from 'src/app/services/sasitios.service';
-import { saUsuarios } from 'src/app/interfaces/saUsuarios';
+// import { saUsuarios } from 'src/app/interfaces/saUsuarios';
 import { Router } from '@angular/router';
 import { SiteService } from 'src/app/services/site.service';
 
@@ -9,12 +9,12 @@ import { SiteService } from 'src/app/services/site.service';
   */
 @Component({
   selector: 'app-admin-sites',
-  templateUrl: './admin-sites.component.html',
-  styleUrls: ['./admin-sites.component.css'],
+  templateUrl: './admin-sites-management.component.html',
+  styleUrls: ['./admin-sites-management.component.css'],
 })
 export class AdminSitesComponent implements OnInit {
   protected userSiteCounts: { userId: string; siteCount: number }[] = [];
-  protected saUsuarios: saUsuarios[] = [];
+  protected saUsuarios: any[] = [];
 
   private sasitiosService!: SasitiosService;
   private router: Router;
@@ -34,7 +34,7 @@ export class AdminSitesComponent implements OnInit {
     * Método que se ejecuta al inicializar el componente.
     */
   ngOnInit() {
-    this.sasitiosService.getUsers().subscribe((data: saUsuarios[]) => {
+    this.sasitiosService.getUsers().subscribe((data: any[]) => {
       this.saUsuarios = data;
       // Obtener los ID de todos los usuarios y llamar a loadData() para cada uno
       this.saUsuarios.forEach((user) => {

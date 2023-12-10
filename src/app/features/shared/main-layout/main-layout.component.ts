@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { SessionService } from '../../session/session.service';
 
 /**
  * Componente para el diseño principal de la aplicación.
@@ -15,10 +15,10 @@ export class MainLayoutComponent implements OnInit {
   protected photo!: string;
   protected userRole!: string | null;
 
-  private authService: AuthService;
+  private sessionService: SessionService;
 
-  constructor(authServiceParam: AuthService) {
-    this.authService = authServiceParam;
+  constructor(sessionServiceParam: SessionService) {
+    this.sessionService = sessionServiceParam;
   }
 
   /**
@@ -33,7 +33,7 @@ export class MainLayoutComponent implements OnInit {
   * Método privado para obtener la información del usuario.
   */
   private getUserInfo() {
-    this.authService.getActualUser().subscribe(data => {
+    this.sessionService.getActualUser().subscribe(data => {
       this.name = data.name;
       this.photo = data.photo;
       const image = new Image();

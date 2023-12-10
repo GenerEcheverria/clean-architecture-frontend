@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SiteService } from 'src/app/services/site.service';
-import { UserService } from 'src/app/services/user.service';
+import { UserManagementService } from 'src/app/features/admin/user-management.service';
 import { DatePipe } from '@angular/common';
 
-/**
- * Componente para la administración de cuentas de usuario por parte de un superadministrador.
- */
 @Component({
-  selector: 'app-admin-account',
-  templateUrl: './admin-account.component.html',
-  styleUrls: ['./admin-account.component.css']
+  selector: 'app-admin-user-management',
+  templateUrl: './admin-user-management.component.html',
+  styleUrls: ['./admin-user-management.component.css']
 })
 export class AdminAccountComponent implements OnInit {
 
-  protected id!: string | null;
+  protected userId!: string | null;
   protected name!: string;
   protected email!: string;
   protected phone!: string;
@@ -22,28 +19,26 @@ export class AdminAccountComponent implements OnInit {
   protected isDeleteUser!: boolean;
 
   private route!: ActivatedRoute;
-  private userService!: UserService;
+  private userManagementService!: UserManagementService;
   private siteService!: SiteService;
   private router!: Router;
   private datePipe!: DatePipe;
 
   constructor(
     routeParam: ActivatedRoute,
-    userServiceParam: UserService,
+    userManagementServiceParam: UserManagementService,
     siteServiceParam: SiteService,
     routerParam: Router,
     datePipeParam: DatePipe
   ) {
     this.route = routeParam;
-    this.userService = userServiceParam;
+    this.userManagementService = userManagementServiceParam;
     this.siteService = siteServiceParam;
     this.router = routerParam;
     this.datePipe = datePipeParam;
   }
 
-  /**
-   * Método que se ejecuta al inicializar el componente.
-   */
+
   ngOnInit(): void {
     this.isDeleteUser = false;
     this.loadData();
@@ -53,10 +48,10 @@ export class AdminAccountComponent implements OnInit {
    * Carga los datos del usuario y los sitios asociados.
    */
   private async loadData(): Promise<void> {
-    this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id) {
+    this.userId = this.route.snapshot.paramMap.get('id');
+    if (this.userId) {
       try {
-        const response = await this.userService.getUser(this.id.toString()).toPromise();
+        const response = await this.userManagementService.getUser(this.userId.toString()).toPromise();
         this.email = response.email;
         this.name = response.name;
         this.phone = response.phone;
@@ -64,7 +59,7 @@ export class AdminAccountComponent implements OnInit {
         this.router.navigate(['/sasitios']);
       }
       try {
-        const response = await this.siteService.getSitesForUser(this.id.toString()).toPromise();
+        const response = await this.siteService.getSitesForUser(this.userId.toString()).toPromise();
         this.sites = response.sites;
       } catch (error) {
         console.error(error);
@@ -74,12 +69,10 @@ export class AdminAccountComponent implements OnInit {
     }
   }
 
-  /**
-   * Elimina el usuario actual.
-   */
+
   protected deleteUser(): void {
-    if (this.id) {
-      this.userService.deleteUser(this.id).subscribe(
+    if (this.userId) {
+      this.userManagementService.deleteUser(this.userId).subscribe(
         () => {
           this.router.navigate(['/sasitios']);
         },
@@ -91,11 +84,6 @@ export class AdminAccountComponent implements OnInit {
     }
   }
 
-  /**
-   * Formatea una fecha en el formato 'dd/MM/yyyy HH:mm:ss'.
-   * @param date La fecha a formatear.
-   * @returns La fecha formateada en formato de cadena de texto.
-   */
   protected formatDate(date: string): string {
     const formattedDate = this.datePipe.transform(date, 'dd/MM/yyyy HH:mm:ss');
     return formattedDate || '';
