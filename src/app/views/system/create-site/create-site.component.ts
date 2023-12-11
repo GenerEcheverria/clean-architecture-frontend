@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BodyElementComponent } from './body-element/body-element.component';
 // import { CreateSiteService } from 'src/app/services/create-sitie.service';
-import { SiteService } from 'src/app/infraestructure/api-v1/site.service';
+import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
 
 /**
  * Componente para la ventana de creación de sitios.

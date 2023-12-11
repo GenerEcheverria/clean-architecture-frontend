@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 // import { SasitiosService } from 'src/app/services/sasitios.service';
 // import { saUsuarios } from 'src/app/interfaces/saUsuarios';
 import { Router } from '@angular/router';
-import { AdminService } from 'src/app/infraestructure/api-v1/admin.service'; 
-import { SiteService } from 'src/app/infraestructure/api-v1/site.service';
+import { AdminService } from 'src/app/infrastructure/api-v1/admin.service';
+import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
 
 /**
   * Componente para la administración de sitios por parte de un superadministrador.

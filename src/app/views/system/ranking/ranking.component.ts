@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SiteService } from 'src/app/infraestructure/api-v1/site.service';
+import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
 
 /**
  * Componente para mostrar el ranking de sitios.

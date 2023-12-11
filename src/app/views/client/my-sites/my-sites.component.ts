@@ -3,7 +3,7 @@ import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import { SiteService } from 'src/app/infraestructure/api-v1/site.service';
+import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
 
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 

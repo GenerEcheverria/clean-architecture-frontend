@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/infraestructure/api-v1/user.service';
+import { UserService } from 'src/app/infrastructure/api-v1/user.service';
 
 /**
  * Componente de la barra lateral de la aplicación.

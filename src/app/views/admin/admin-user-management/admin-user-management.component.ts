@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { SiteService } from 'src/app/infraestructure/api-v1/site.service';
-import { AdminService } from 'src/app/infraestructure/api-v1/admin.service';
+import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
+import { AdminService } from 'src/app/infrastructure/api-v1/admin.service';
 
 @Component({
   selector: 'app-admin-user-management',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { passwordValidator } from './password.validator';
-import { ClientService } from 'src/app/infraestructure/api-v1/client.service';
+import { ClientService } from 'src/app/infrastructure/api-v1/client.service';
 import { Router } from '@angular/router';
 
 /**

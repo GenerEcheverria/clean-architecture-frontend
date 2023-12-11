@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService } from '../../../infraestructure/api-v1/client.service';
+import { ClientService } from '../../../infrastructure/api-v1/client.service';
 
 /**
  * Componente para el diseño principal de la aplicación.

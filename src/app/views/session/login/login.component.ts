@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from
 import { Crypto } from 'src/app/views/session/crypto';
 import { Router } from '@angular/router';
 import { User } from 'src/app/domain/entities/user.entity';
-import { UserService } from 'src/app/infraestructure/api-v1/user.service';
+import { UserService } from 'src/app/infrastructure/api-v1/user.service';
 
 /**
  * Componente para la página de inicio de sesión.

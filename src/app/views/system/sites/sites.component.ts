@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SiteService } from 'src/app/infraestructure/api-v1/site.service';
+import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
 
 /**
  * Componente para la visualización de sitios.
@@ -58,7 +58,7 @@ export class SitesComponent {
           }
           id = response.id;
           this.webContent = await this.siteService.getSite(id).toPromise();
-          this.isDataLoaded = true; 
+          this.isDataLoaded = true;
         }
       } catch (error) {
         console.error(error);

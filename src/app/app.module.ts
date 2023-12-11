@@ -31,6 +31,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AdminAccountComponent } from './views/admin/admin-user-management/admin-user-management.component';
 import { DatePipe } from '@angular/common';
+import { GatewayAdmin } from './domain/gateways/gateway-admin';
+import { AdminService } from './infrastructure/api-v1/admin.service';
+import { GatewayClient } from './domain/gateways/gateway-client';
+import { ClientService } from './infrastructure/api-v1/client.service';
+import { GatewaySite } from './domain/gateways/gateway-site';
+import { SiteService } from './infrastructure/api-v1/site.service';
 
 
 @NgModule({
@@ -71,7 +77,12 @@ import { DatePipe } from '@angular/common';
     CommonModule
   ],
 
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    { provide: GatewayAdmin, useClass: AdminService },
+    { provide: GatewayClient, useClass: ClientService },
+    { provide: GatewaySite, useClass: SiteService }
+  ],
   bootstrap: [AppComponent]
 })
 
