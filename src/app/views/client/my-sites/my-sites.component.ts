@@ -3,13 +3,10 @@ import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import { SiteService } from 'src/app/infraestructure/api-v1/site.service';
+import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
 
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
-/**
- * Componente para gestionar los sitios del usuario.
- */
 @Component({
   selector: 'app-my-sites',
   templateUrl: './my-sites.component.html',
@@ -31,34 +28,21 @@ export class MySitesComponent {
     this.siteService = siteServiceParam;
   }
 
-  /**
-   * Se ejecuta al inicializar el componente.
-   */
   ngOnInit(): void {
     this.updateData();
   }
 
-  /**
-   * Actualiza el estado de un sitio en la base de datos.
-   */
   protected updateSelected(id: number, state: string): void {
     this.actualModify = id;
     this.newState = state;
   }
 
-
-  /**
-   * Filtra los datos de la biblioteca de sitios según el valor del filtro.
-   */
   protected filterData() {
     this.filteredData = this.siteLibrary.filter((item) =>
       item.name.toLowerCase().includes(this.filter.toLowerCase())
     );
   }
 
-  /**
-   * Actualiza el estado de un sitio en la base de datos.
-   */
   protected updateDBState() {
     console.log(this.actualModify, this.newState);
     const site = {
@@ -76,9 +60,6 @@ export class MySitesComponent {
     );
   }
 
-  /**
-   * Genera y descarga un archivo PDF con los datos de la biblioteca de sitios.
-   */
   protected generatePDF() {
     const documentDefinition = {
       content: [
@@ -109,10 +90,6 @@ export class MySitesComponent {
     pdfMake.createPdf(documentDefinition).download('ReporteMisSitios.pdf');
   }
 
-  /**
-   * Genera y descarga un archivo Excel con los datos de la biblioteca de sitios.
-   */
-
   protected generateExcel() {
     const worksheet = XLSX.utils.json_to_sheet(this.siteLibrary);
     const workbook = XLSX.utils.book_new();
@@ -122,10 +99,6 @@ export class MySitesComponent {
     saveAs(data, 'ReporteMisSitios.xlsx');
   }
 
-  /**
-   * Genera y descarga un código QR a partir de la URL proporcionada.
-   * @param url La URL para generar el código QR.
-   */
   protected async generateQR(url: string): Promise<void> {
     try {
       const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(url)}`;
@@ -138,9 +111,6 @@ export class MySitesComponent {
     }
   }
 
-  /**
-   * Actualiza los datos de la biblioteca de sitios.
-   */
   private updateData() {
     this.siteService.getAllSitesForCurrentUser().subscribe((data : any) => {
       this.siteLibrary = data.sites;

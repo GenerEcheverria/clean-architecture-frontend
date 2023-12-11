@@ -8,9 +8,9 @@ describe('MenuOptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenuOptionComponent ]
+      declarations: [MenuOptionComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MenuOptionComponent);
     component = fixture.componentInstance;

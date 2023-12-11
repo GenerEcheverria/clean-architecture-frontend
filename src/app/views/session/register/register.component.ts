@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { User } from 'src/app/domain/entities/user.entity';
-import { Crypto } from 'src/app/views/session/crypto';
-import { ClientService } from 'src/app/infraestructure/api-v1/client.service';
+import { Crypto } from 'src/app/util/crypto';
+import { ClientService } from 'src/app/infrastructure/api-v1/client.service';
 import { Router } from '@angular/router';
 
 @Component({

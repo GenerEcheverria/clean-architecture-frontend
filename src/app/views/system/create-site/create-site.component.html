@@ -7,14 +7,14 @@
         class="form-check-input"
         type="checkbox"
         role="switch"
-        (change)="mostrarPreview()"
+        (change)="showPreview()"
       />
     </div>
   </div>
 </div>
 <!-- Formulario para las secciones de la página -->
 <form
-  [style.display]="showForm"
+  [style.display]="showFormDisplay"
   id="sitioForm"
   (ngSubmit)="onSubmit()"
   [formGroup]="siteForm"
@@ -195,7 +195,7 @@
     <h5>Cuerpo</h5>
     <app-body-element
       *ngFor="
-        let childForm of getCtrl('body', siteForm).controls;
+        let childForm of getController('body', siteForm).controls;
         let i = index
       "
       [bodyElementForm]="childForm"
@@ -439,7 +439,7 @@
   </form>
   <div class="d-flex justify-content-evenly my-4">
     <button
-      (click)="cancelar()"
+      (click)="cancel()"
       class="btn btn-secondary rounded-pill text-gray px-5 py-2"
     >
       Cancelar

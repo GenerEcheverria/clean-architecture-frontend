@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { passwordValidator } from './password.validator';
-import { ClientService } from 'src/app/infraestructure/api-v1/client.service';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { ClientService } from 'src/app/infrastructure/api-v1/client.service';
 import { Router } from '@angular/router';
 
-/**
- * Componente encargado de administrar la cuenta del usuario.
- */
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
@@ -16,10 +12,6 @@ export class UserAccountComponent implements OnInit {
 
   protected userDataForm!: FormGroup;
   protected passwordForm!: FormGroup;
-
-  /**
-   * Formulario para el cambio de contraseña del usuario.
-  */
 
   protected userData: any;
   protected idUser: string = '';
@@ -46,10 +38,6 @@ export class UserAccountComponent implements OnInit {
     this.router = routerParam;
   }
 
-  /**
-   * Método de ciclo de vida de Angular que se ejecuta al iniciar el componente.
-   * Se encarga de inicializar los formularios y definir las validaciones.
-   */
   ngOnInit(): void {
     this.userDataForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]],
@@ -59,7 +47,7 @@ export class UserAccountComponent implements OnInit {
     this.passwordForm = this.formBuilder.group({
       confirmPassword: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]],
       newPassword: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]]
-    }, { validator: passwordValidator });
+    }, { validator: this.passwordValidator });
 
     this.clientService.getActualUser().subscribe((data: any) => {
       this.userData = data;
@@ -74,10 +62,6 @@ export class UserAccountComponent implements OnInit {
 
   }
 
-  /**
-   * Método que se ejecuta al enviar el formulario de datos de cuenta.
-   * Guarda los cambios realizados en la cuenta del usuario.
-   */
   protected submitUserDataChange() {
     console.log(this.userDataForm.value);
     const userDataForm = this.userDataForm.value;
@@ -96,10 +80,6 @@ export class UserAccountComponent implements OnInit {
     );
   }
 
-  /**
-   * Método que se ejecuta al enviar el formulario de cambio de contraseñas.
-   * Guarda la nueva contraseña del usuario.
-   */
   protected submitPasswordChange() {
     const passwordForm = this.passwordForm.value;
     passwordForm.url = passwordForm.name;
@@ -115,4 +95,16 @@ export class UserAccountComponent implements OnInit {
       }
     );
   }
+
+  private passwordValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const password = control.get('password');
+    const confirmPassword = control.get('confirmPassword');
+
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+      return { 'passwordsDoNotMatch': true };
+    }
+
+    return null;
+  }
+
 }
