@@ -9,6 +9,8 @@ export class Site {
   public views: number;
   public url: string;
   public header?: Header;
+  public body?: Array<Object>;
+  public footer?: Object;
   public state?: string;
   public id?: string;
 

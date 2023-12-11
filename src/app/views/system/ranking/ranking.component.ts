@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Site } from 'src/app/domain/entities/site.entity';
 import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
 })
 export class RankingComponent {
 
-  protected siteLibrary: any[] = [];
+  protected siteLibrary: Site[] = [];
   private mySitesService!: SiteService;
 
   constructor(mySitesServiceParam: SiteService) {

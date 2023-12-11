@@ -5,7 +5,7 @@ export class User {
   public password?: string;
   public role?: string;
   public phone?: string;
-  public userId?: string;
+  public id?: string;
   public accessToken?: string;
 
   constructor(emailParam?: string, passwordParam?: string, nameParam?: string, roleParam?: string, phoneParam?: string, userIdParam?: string, accessTokenParam?: string) {
@@ -14,7 +14,7 @@ export class User {
     this.name = nameParam;
     this.role = roleParam;
     this.phone = phoneParam;
-    this.userId = userIdParam;
+    this.id = userIdParam;
     this.accessToken = accessTokenParam;
   }
 

@@ -14,7 +14,7 @@ export class VideoLienzoComponent implements OnInit {
 
   protected class: string = '';
 
-  protected safeUrl: any;
+  protected safeUrl!: Object;
 
   private sanitizer: DomSanitizer;
 

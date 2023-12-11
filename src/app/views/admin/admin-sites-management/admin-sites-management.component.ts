@@ -29,10 +29,8 @@ export class AdminSitesComponent implements OnInit {
 
 
   ngOnInit() {
-    //! ARREGLAR PARA ADMIN
     this.adminService.getUsers().subscribe((data: any) => {
       this.saUsuarios = data;
-      // Obtener los ID de todos los usuarios y llamar a loadData() para cada uno
       this.saUsuarios.forEach((user) => {
         const userId = user.id;
         const name = user.name;

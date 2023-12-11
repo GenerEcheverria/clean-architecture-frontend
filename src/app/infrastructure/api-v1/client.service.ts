@@ -32,7 +32,7 @@ export class ClientService extends GatewayClient{
     return this.httpClient.post<Client>(this.URL + '/register', { name, email, password, role, phone }, this.httpOptions);
   }
 
-  public editUser(client: Client, clientId: string) : Observable <Client>{
+  public editUser(client: Client, clientId: string | undefined) : Observable <Client>{
     return this.httpClient.put<Client>(this.URL + '/account/users/' + clientId, { client, id: clientId }, this.httpOptions);
   }
 

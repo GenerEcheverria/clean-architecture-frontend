@@ -1,13 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-/**
- * Componente para mostrar el título en el lienzo de la página.
- *
- * @component
- * @selector app-titulo-lienzo
- * @templateUrl ./titulo-lienzo.component.html
- * @styleUrls ['./titulo-lienzo.component.css']
- */
 @Component({
   selector: 'app-title-canvas',
   templateUrl: './title-canvas.component.html',

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ClientService } from 'src/app/infrastructure/api-v1/client.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/domain/entities/user.entity';
 
 @Component({
   selector: 'app-user-account',
@@ -13,8 +14,8 @@ export class UserAccountComponent implements OnInit {
   protected userDataForm!: FormGroup;
   protected passwordForm!: FormGroup;
 
-  protected userData: any;
-  protected idUser: string = '';
+  protected userData!: User;
+  protected idUser: string | undefined = '';
   protected nameUser: string = '';
   protected emailUser: string = '';
   protected phoneUser: string = '';
@@ -49,7 +50,7 @@ export class UserAccountComponent implements OnInit {
       newPassword: ['', [Validators.required, Validators.maxLength(this.MAXIMUM_INPUT_LENGTH), Validators.minLength(this.MINIMUM_INPUT_LENGTH)]]
     }, { validator: this.passwordValidator });
 
-    this.clientService.getActualUser().subscribe((data: any) => {
+    this.clientService.getActualUser().subscribe((data: User) => {
       this.userData = data;
       this.idUser = data.id;
 
@@ -63,18 +64,16 @@ export class UserAccountComponent implements OnInit {
   }
 
   protected submitUserDataChange() {
-    console.log(this.userDataForm.value);
     const userDataForm = this.userDataForm.value;
 
     userDataForm.url = userDataForm.name;
     userDataForm.views = 0;
-    console.log('Sitio forme es: ', userDataForm);
     this.clientService.editUser(userDataForm, this.idUser).subscribe(
-      (response: any) => {
+      (response: User) => {
         console.log(response);
         this.router.navigate(['/misSitios']);
       },
-      (error: any) => {
+      (error: string) => {
         console.error(JSON.stringify(JSON.parse(error), null, this.JSON_SPACING));
       }
     );
@@ -84,7 +83,6 @@ export class UserAccountComponent implements OnInit {
     const passwordForm = this.passwordForm.value;
     passwordForm.url = passwordForm.name;
     passwordForm.views = 0;
-    console.log('Sitio forme es: ' + passwordForm);
     this.clientService.editUser(passwordForm, this.idUser).subscribe(
       (response) => {
         console.log(response);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../../infrastructure/api-v1/client.service';
+import { User } from 'src/app/domain/entities/user.entity';
 
 @Component({
   selector: 'app-main-layout',
@@ -8,8 +9,8 @@ import { ClientService } from '../../../infrastructure/api-v1/client.service';
 })
 export class MainLayoutComponent implements OnInit {
 
-  protected name!: string;
-  protected photo!: string;
+  protected name: string | undefined = '';
+  protected photo: string = '';
   protected userRole!: string | null;
 
   private clientService: ClientService;
@@ -24,7 +25,7 @@ export class MainLayoutComponent implements OnInit {
   }
 
   private getUserInfo() {
-    this.clientService.getActualUser().subscribe((data:any) => {
+    this.clientService.getActualUser().subscribe((data:User) => {
       this.name = data.name;
     });
   }

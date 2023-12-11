@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthGuard implements CanActivate {
 
   private authService!: AuthService;
@@ -17,9 +18,8 @@ export class AuthGuard implements CanActivate {
 
   public async canActivate(): Promise<boolean> {
     try {
-      const response = await this.authService.isLoggedIn().toPromise();
-
-      if (response.valid) {
+      const response: AuthResponse | undefined = await this.authService.isLoggedIn().toPromise();
+      if (response && response.valid) {
         return true;
       } else {
         this.router.navigate(['/login']);
@@ -31,4 +31,8 @@ export class AuthGuard implements CanActivate {
       return false;
     }
   }
+}
+
+interface AuthResponse {
+  valid: boolean | null;
 }

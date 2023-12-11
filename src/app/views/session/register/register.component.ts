@@ -75,7 +75,7 @@ export class RegisterComponent {
   }
 
   private emailValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
+    return (control: AbstractControl): { [key: string]: Object } | null => {
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       const isValid = emailPattern.test(control.value);
       return isValid ? null : { emailInvalid: true };

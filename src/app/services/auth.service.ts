@@ -24,7 +24,7 @@ export class AuthService {
           'Authorization': `Bearer ${token}`
         })
       };
-      return this.httpClient.get<any>(this.URL + '/check', httpOptions);
+      return this.httpClient.get<AuthResponse>(this.URL + '/check', httpOptions);
     }
     return of({ valid: false });
   }
@@ -37,4 +37,8 @@ export class AuthService {
     return false;
   }
 
+}
+
+interface AuthResponse {
+  valid: boolean | null;
 }

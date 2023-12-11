@@ -8,14 +8,14 @@ import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
   styleUrls: ['./sites.component.css']
 })
 export class SitesComponent {
-  protected webContent: any;
-  protected full: any;
+  protected webContent!: any;
+  protected full!: Object;
   protected fullType!: string;
-  protected left: any;
+  protected left!: Object;
   protected leftType!: string;
-  protected right: any;
+  protected right!: Object;
   protected rightType!: string;
-  protected columns: any;
+  protected columns!: Object;
   private url!: string;
   public isDataLoaded: boolean = false;
 

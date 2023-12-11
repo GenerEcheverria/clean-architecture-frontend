@@ -44,7 +44,6 @@ export class MySitesComponent {
   }
 
   protected updateDBState() {
-    console.log(this.actualModify, this.newState);
     const site = {
       'id': this.actualModify,
       'state': this.newState
