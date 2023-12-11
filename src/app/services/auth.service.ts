@@ -20,7 +20,7 @@ export class AuthService {
    * @returns Observable que indica si el usuario ha iniciado sesión o no.
    */
   public isLoggedIn() {
-    const token = this.getToken();
+    const token = localStorage.getItem('token');
     if (token) {
       const httpOptions = {
         headers: new HttpHeaders({
