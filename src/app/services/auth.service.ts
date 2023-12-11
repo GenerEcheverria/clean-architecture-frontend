@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   private readonly URL: string = 'http://localhost:8000/api/auth';
@@ -15,10 +16,6 @@ export class AuthService {
     this.httpClient = httpClientParam;
   }
 
-  /**
-   * Comprueba si el usuario ha iniciado sesión.
-   * @returns Observable que indica si el usuario ha iniciado sesión o no.
-   */
   public isLoggedIn() {
     const token = localStorage.getItem('token');
     if (token) {
@@ -32,21 +29,12 @@ export class AuthService {
     return of({ valid: false });
   }
 
-  /**
-   * Comprueba si el usuario tiene el rol especificado.
-   * @param requiredRole Rol requerido.
-   * @returns True si el usuario tiene el rol, False en caso contrario.
-   */
   public hasRole(requiredRole: string): boolean {
     const userRole: string | null = localStorage.getItem('role');
     if (userRole) {
       return userRole === requiredRole;
     }
     return false;
-  }
-
-  private getToken(): string | null {
-    return localStorage.getItem('token');
   }
 
 }

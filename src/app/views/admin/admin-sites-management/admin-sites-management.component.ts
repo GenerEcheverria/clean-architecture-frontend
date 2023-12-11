@@ -1,19 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-// import { SasitiosService } from 'src/app/services/sasitios.service';
-// import { saUsuarios } from 'src/app/interfaces/saUsuarios';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/infrastructure/api-v1/admin.service';
 import { SiteService } from 'src/app/infrastructure/api-v1/site.service';
 
-/**
-  * Componente para la administración de sitios por parte de un superadministrador.
-  */
 @Component({
   selector: 'app-admin-sites',
   templateUrl: './admin-sites-management.component.html',
   styleUrls: ['./admin-sites-management.component.css'],
 })
 export class AdminSitesComponent implements OnInit {
+
   protected userSiteCounts: { userId: string; siteCount: number }[] = [];
   protected saUsuarios: any[] = [];
 
@@ -31,11 +27,9 @@ export class AdminSitesComponent implements OnInit {
     this.siteService = siteServiceParam;
   }
 
-  /**
-    * Método que se ejecuta al inicializar el componente.
-    */
+
   ngOnInit() {
-    // ARREGLAR PARA SUPERADMIN
+    //! ARREGLAR PARA ADMIN
     this.adminService.getUsers().subscribe((data: any) => {
       this.saUsuarios = data;
       // Obtener los ID de todos los usuarios y llamar a loadData() para cada uno
@@ -47,16 +41,10 @@ export class AdminSitesComponent implements OnInit {
     });
   }
 
-  /**
-    * Carga los datos de un usuario y la cantidad de sitios asociados.
-    * @param userId El ID del usuario.
-    * @param name El nombre del usuario.
-    */
   private async loadData(userId: string, name: string): Promise<void> {
-    console.log(userId);
     if (userId) {
       try {
-        const response : any = await this.siteService.getSitesForUser(userId).toPromise();
+        const response: any = await this.siteService.getSitesForUser(userId).toPromise();
         const siteCount = response.sites.length;
         const userSiteCount = {
           userId: userId,
@@ -74,7 +62,6 @@ export class AdminSitesComponent implements OnInit {
 
         button.appendChild(link);
 
-        // Agregar datos a la tabla
         const dataTable = document.getElementById('example') as HTMLTableElement;
         var tableBody = dataTable.querySelector('tbody');
 

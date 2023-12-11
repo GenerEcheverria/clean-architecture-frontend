@@ -4,9 +4,6 @@ import { Client } from 'src/app/domain/entities/client.entity';
 import { GatewayClient } from 'src/app/domain/gateways/gateway-client';
 import { Observable } from 'rxjs';
 
-/**
- * Servicio de autenticación y gestión de usuarios.
- */
 @Injectable({
   providedIn: 'root'
 })

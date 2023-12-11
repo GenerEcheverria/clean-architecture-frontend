@@ -12,10 +12,10 @@ import { AdminService } from 'src/app/infrastructure/api-v1/admin.service';
 export class AdminAccountComponent implements OnInit {
 
   protected userId!: string | null;
-  protected name!: string;
-  protected email!: string;
-  protected phone!: string;
-  protected sites: any;
+  protected email?: string;
+  protected name?: string;
+  protected phone?: string;
+  protected sites?: any;
   protected isDeleteUser!: boolean;
 
   private route!: ActivatedRoute;
@@ -48,16 +48,17 @@ export class AdminAccountComponent implements OnInit {
     this.userId = this.route.snapshot.paramMap.get('id');
     if (this.userId) {
       try {
+
         const response = await this.adminService.getUser(this.userId.toString()).toPromise();
-        this.email = response.email;
-        this.name = response.name;
-        this.phone = response.phone;
+        this.email = response?.email;
+        this.name = response?.name;
+        this.phone = response?.phone;
       } catch (error) {
         this.router.navigate(['/sasitios']);
       }
       try {
-        const response : any = await this.siteService.getSitesForUser(this.userId.toString()).toPromise();
-        this.sites = response.sites;
+        const response: any = await this.siteService.getSitesForUser(this.userId.toString()).toPromise();
+        this.sites = response?.sites;
       } catch (error) {
         console.error(error);
       }

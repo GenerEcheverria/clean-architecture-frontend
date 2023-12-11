@@ -2,9 +2,6 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/infrastructure/api-v1/user.service';
 
-/**
- * Componente de la barra lateral de la aplicación.
- */
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -23,9 +20,6 @@ export class SidebarComponent {
     this.router = routerParam;
   }
 
-  /**
-   * Cierra la sesión del usuario y redirige al inicio de sesión.
-   */
   protected logout() {
     this.userService.logout().subscribe(
       (response) => {

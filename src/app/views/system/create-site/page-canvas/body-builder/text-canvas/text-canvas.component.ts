@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-/**
- * Componente para mostrar texto en el lienzo de la página.
- */
 @Component({
   selector: 'app-text-canvas',
   templateUrl: './text-canvas.component.html',
@@ -10,39 +7,18 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TextoLienzoComponent implements OnInit {
 
-  /**
-  * Título del texto.
-  */
   @Input() title!: string;
 
-  /**
-   * Posición del texto.
-   */
   @Input() position!: string;
 
-  /**
- * Contenido de texto.
- */
   @Input() text: string = '';
 
-  /**
-  * Alineación del texto.
-  */
   @Input() textAlign: string = '';
 
-  /**
-  * Clase CSS correspondiente a la alineación del texto.
-  */
   protected class: string = '';
 
-  /**
-   * Clase CSS correspondiente a la posición del texto.
-   */
   protected classPosition!: string;
 
-  /**
-   * Método de inicialización del componente.
-   */
   ngOnInit(): void {
     switch (this.position) {
     case 'left':

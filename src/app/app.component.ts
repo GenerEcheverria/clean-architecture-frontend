@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 
-/**
- * Componente raíz de la aplicación.
- */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,8 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  /**
-   * Título de la aplicación.
-   */
   title = 'frontend';
 }

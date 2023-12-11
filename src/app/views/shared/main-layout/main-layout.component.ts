@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../../infrastructure/api-v1/client.service';
 
-/**
- * Componente para el diseño principal de la aplicación.
- */
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
@@ -21,17 +18,11 @@ export class MainLayoutComponent implements OnInit {
     this.clientService = clientServiceParam;
   }
 
-  /**
-   * Método de inicialización del componente.
-   */
   ngOnInit(): void {
     this.getUserInfo();
     this.userRole = localStorage.getItem('role');
   }
 
-  /**
-  * Método privado para obtener la información del usuario.
-  */
   private getUserInfo() {
     this.clientService.getActualUser().subscribe((data:any) => {
       this.name = data.name;
