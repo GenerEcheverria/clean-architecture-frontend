@@ -2,21 +2,21 @@
 
 <div
   class="border border-primary"
-  [style.background-color]="webContent.newCrearSitio.backgroundColor"
+  [style.background-color]="webContent.site.backgroundColor"
 >
 <!-- Componente para construir el header del sitio -->
   <app-title-canvas
-    [hero]="webContent.newCrearSitio.header.hero"
-    [title]="webContent.newCrearSitio.header.title"
-    [position]="webContent.newCrearSitio.header.position"
-    [size]="webContent.newCrearSitio.header.size"
-    [color]="webContent.newCrearSitio.header.color"
-    [image]="webContent.newCrearSitio.header.image"
+    [hero]="webContent.site.header.hero"
+    [title]="webContent.site.header.title"
+    [position]="webContent.site.header.position"
+    [size]="webContent.site.header.size"
+    [color]="webContent.site.header.color"
+    [image]="webContent.site.header.image"
   >
   </app-title-canvas>
   <!-- Componente para construir los elementos que conforman al body del sitio -->
   <app-body-builder
-    *ngFor="let item of this.webContent.newCrearSitio.body; let i = index"
+    *ngFor="let item of this.webContent.site.body; let i = index"
     [webContent]="item"
   >
   </app-body-builder>
@@ -25,21 +25,21 @@
   <!-- Componente para construir el footer del sitio -->
   <app-footer-canvas
     class="m-0 p-0"
-    [backgroundColor]="webContent.newCrearSitio.footer.backgroundColor"
-    [textColor]="webContent.newCrearSitio.footer.textColor"
-    [setSocialMedia]="webContent.newCrearSitio.footer.socialMedia.setSocialMedia"
-    [facebookUrl]="webContent.newCrearSitio.footer.socialMedia.facebook"
-    [instagramUrl]="webContent.newCrearSitio.footer.socialMedia.instagram"
-    [twitterUrl]="webContent.newCrearSitio.footer.socialMedia.twitter"
-    [linkedinUrl]="webContent.newCrearSitio.footer.socialMedia.linkedin"
-    [tiktokUrl]="webContent.newCrearSitio.footer.socialMedia.tiktok"
-    [extraUrl]="webContent.newCrearSitio.footer.socialMedia.extraUrl"
-    [setExtra]="webContent.newCrearSitio.footer.extra.setExtra"
-    [imageExtraFooter]="webContent.newCrearSitio.footer.extra.imageExtraFooter"
-    [textExtraFooter]="webContent.newCrearSitio.footer.extra.text"
-    [setContact]="webContent.newCrearSitio.footer.contact.setContact"
-    [phone]="webContent.newCrearSitio.footer.contact.phone"
-    [address]="webContent.newCrearSitio.footer.contact.address"
+    [backgroundColor]="webContent.site.footer.backgroundColor"
+    [textColor]="webContent.site.footer.textColor"
+    [setSocialMedia]="webContent.site.footer.socialMedia.setSocialMedia"
+    [facebookUrl]="webContent.site.footer.socialMedia.facebook"
+    [instagramUrl]="webContent.site.footer.socialMedia.instagram"
+    [twitterUrl]="webContent.site.footer.socialMedia.twitter"
+    [linkedinUrl]="webContent.site.footer.socialMedia.linkedin"
+    [tiktokUrl]="webContent.site.footer.socialMedia.tiktok"
+    [extraUrl]="webContent.site.footer.socialMedia.extraUrl"
+    [setExtra]="webContent.site.footer.extra.setExtra"
+    [imageExtraFooter]="webContent.site.footer.extra.imageExtraFooter"
+    [textExtraFooter]="webContent.site.footer.extra.text"
+    [setContact]="webContent.site.footer.contact.setContact"
+    [phone]="webContent.site.footer.contact.phone"
+    [address]="webContent.site.footer.contact.address"
   ></app-footer-canvas>
 </div>
 </ng-container>
