@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 export class ClientService extends GatewayClient{
 
-  private readonly URL: string = 'http://localhost:8000/api/auth';
+  private readonly URL: string = 'http://localhost:8000/api/account/';
 
   private httpClient!: HttpClient;
 
@@ -29,7 +29,7 @@ export class ClientService extends GatewayClient{
 
     const { name, email, password, role, phone } = client;
 
-    return this.httpClient.post<Client>('http://localhost:8000/api/account/register', { name, email, password, role, phone }, this.httpOptions);
+    return this.httpClient.post<Client>(this.URL+'register', { name, email, password, role, phone }, this.httpOptions);
   }
 
   public editUser(client: Client, clientId: string) : Observable <Client>{
@@ -40,7 +40,7 @@ export class ClientService extends GatewayClient{
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.httpClient.put<Client>('http://localhost:8000/api/account/users/' + clientId, { client, id: clientId }, httpOptions);
+    return this.httpClient.put<Client>(this.URL+'users/' + clientId, { client, id: clientId }, httpOptions);
   }
 
   public getActualUser() : Observable<Client>{
@@ -50,7 +50,7 @@ export class ClientService extends GatewayClient{
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.httpClient.post<Client>(this.URL + '/getUserData', {}, httpOptions);
+    return this.httpClient.post<Client>(this.URL + 'users/getUserData', {}, httpOptions);
   }
 
 }
