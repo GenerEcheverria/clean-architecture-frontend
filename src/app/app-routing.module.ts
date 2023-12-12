@@ -26,12 +26,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'misSitios', pathMatch: 'full' },
-      { path: 'crear', component: CreateSiteComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
-      { path: 'sasitios', component: AdminSitesComponent, canActivate: [RoleGuard], data: { roles: ['superadmin'] } },
-      { path: 'mi-cuenta', component: UserAccountComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
-      { path: 'sausuarios/:id', component: AdminAccountComponent, canActivate: [RoleGuard], data: { roles: ['superadmin'] } },
-      { path: 'misSitios', component: MySitesComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
-      { path: 'ranking', component: RankingComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
+      { path: 'crear', component: CreateSiteComponent, canActivate: [RoleGuard], data: { roles: ['Client'] } },
+      { path: 'sasitios', component: AdminSitesComponent, canActivate: [RoleGuard], data: { roles: ['Admin'] } },
+      { path: 'mi-cuenta', component: UserAccountComponent, canActivate: [RoleGuard], data: { roles: ['Client'] } },
+      { path: 'sausuarios/:id', component: AdminAccountComponent, canActivate: [RoleGuard], data: { roles: ['Admin'] } },
+      { path: 'misSitios', component: MySitesComponent, canActivate: [RoleGuard], data: { roles: ['Client'] } },
+      { path: 'ranking', component: RankingComponent, canActivate: [RoleGuard], data: { roles: ['Client'] } },
       { path: '**', redirectTo: 'misSitios', pathMatch: 'full' },
     ]
   }

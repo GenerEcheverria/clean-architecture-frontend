@@ -46,9 +46,9 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         localStorage.setItem('token', response.access_token);
         this.setUserRoles(response.role);
-        if (response.role === 'superadmin') {
+        if (response.role === 'Admin') {
           this.router.navigate(['/sasitios']);
-        } else if (response.role === 'admin') {
+        } else if (response.role === 'Client') {
           this.router.navigate(['/misSitios']);
         } else {
           this.router.navigate(['/login']);

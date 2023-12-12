@@ -47,7 +47,7 @@ export class RegisterComponent {
 
   protected registerUser() {
 
-    const { name, email, password, role='admin', phone } = this.formLogin.value;
+    const { name, email, password, role='Client', phone } = this.formLogin.value;
 
     const user: User = new User(email, this.crypto.encrypted(password), name, role, phone);
 
