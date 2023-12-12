@@ -26,7 +26,7 @@ export class AdminService extends GatewayAdmin {
   }
 
   public getUser(userId: string) {
-    return this.httpClient.get<Admin>(this.URL + '/users/' + userId, this.httpOptions);
+    return this.httpClient.get<Admin>(this.URL + '/account/users/' + userId, this.httpOptions);
   }
 
   public getUsers() : Observable <Admin>{
@@ -34,7 +34,7 @@ export class AdminService extends GatewayAdmin {
   }
 
   public deleteUser(userId: string) : Observable <Admin>{
-    return this.httpClient.delete<Admin>(this.URL + '/users/' + userId, this.httpOptions);
+    return this.httpClient.delete<Admin>(this.URL + '/account/users/' + userId, this.httpOptions);
   }
 
 }
