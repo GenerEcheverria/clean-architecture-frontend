@@ -50,7 +50,7 @@ export class ClientService extends GatewayClient{
         'Authorization': `Bearer ${token}`
       })
     };
-    return this.httpClient.post<Client>(this.URL + '/me', {}, httpOptions);
+    return this.httpClient.post<Client>(this.URL + '/getUserData', {}, httpOptions);
   }
 
 }
