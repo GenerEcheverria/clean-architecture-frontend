@@ -1,42 +1,47 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { TimelineComponent } from './pages/crear-sitio/media-types/timeline/timeline.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login/login.component';
-import { UserAccountComponent } from './pages/user-account/user-account.component';
-import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
-import { SitesComponent } from './pages/sites/sites.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { MenuOptionComponent } from './shared/buttons/menu-option/menu-option.component';
-import { BodyElementComponent } from './pages/crear-sitio/body-element/body-element.component';
-import { TextComponent } from './pages/crear-sitio/media-types/text/text.component';
-import { ImageComponent } from './pages/crear-sitio/media-types/image/image.component';
-import { VideoComponent } from './pages/crear-sitio/media-types/video/video.component';
-import { CrearSitioComponent } from './pages/crear-sitio/crear-sitio.component';
-import { LienzoPaginaComponent } from './pages/crear-sitio/lienzo-pagina/lienzo-pagina.component';
-import { TituloLienzoComponent } from './pages/crear-sitio/lienzo-pagina/titulo-lienzo/titulo-lienzo.component';
-import { TextoLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/texto-lienzo/texto-lienzo.component';
-import { ImagenLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/imagen-lienzo/imagen-lienzo.component';
-import { VideoLienzoComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/video-lienzo/video-lienzo.component';
-import { FooterLienzoComponent } from './pages/crear-sitio/lienzo-pagina/footer-lienzo/footer-lienzo.component';
-import { SuperAdminSitiosComponent } from './pages/super-admin-sitios/super-admin-sitios.component';
-import { MySitesComponent } from './pages/my-sites/my-sites.component';
-import { RankingComponent } from './pages/ranking/ranking.component';
-import { BodyBuilderComponent } from './pages/crear-sitio/lienzo-pagina/body-builder/body-builder.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './views/session/login/login.component';
+import { UserAccountComponent } from './views/client/user-account/user-account.component';
+import { MainLayoutComponent } from './views/shared/main-layout/main-layout.component';
+import { SitesComponent } from './views/system/sites/sites.component';
+import { HeaderComponent } from './views/shared/header/header.component';
+import { SidebarComponent } from './views/shared/sidebar/sidebar.component';
+import { MenuOptionComponent } from './views/shared/buttons/menu-option/menu-option.component';
+import { BodyElementComponent } from './views/system/create-site/body-element/body-element.component';
+import { TextComponent } from './views/system/create-site/media-types/text/text.component';
+import { ImageComponent } from './views/system/create-site/media-types/image/image.component';
+import { VideoComponent } from './views/system/create-site/media-types/video/video.component';
+import { CreateSiteComponent } from './views/system/create-site/create-site.component';
+import { PageCanvasComponent } from './views/system/create-site/page-canvas/page-canvas.component';
+import { TitleCanvasComponent } from './views/system/create-site/page-canvas/title-canvas/title-canvas.component';
+import { TextoLienzoComponent } from './views/system/create-site/page-canvas/body-builder/text-canvas/text-canvas.component';
+import { ImageCanvasComponent } from './views/system/create-site/page-canvas/body-builder/image-canvas/image-canvas.component';
+import { VideoLienzoComponent } from './views/system/create-site/page-canvas/body-builder/video-canvas/video-canvas.component';
+import { FooterCanvasComponent } from './views/system/create-site/page-canvas/footer-canvas/footer-canvas.component';
+import { BodyBuilderComponent } from './views/system/create-site/page-canvas/body-builder/body-builder.component';
+import { AdminSitesComponent } from './views/admin/admin-sites-management/admin-sites-management.component';
+import { MySitesComponent } from './views/client/my-sites/my-sites.component';
+import { RankingComponent } from './views/system/ranking/ranking.component';
+import { RegisterComponent } from './views/session/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { SuperadministradorCuentaUsuarioComponent } from './pages/superadministrador-cuenta-usuario/superadministrador-cuenta-usuario.component';
+import { AdminAccountComponent } from './views/admin/admin-user-management/admin-user-management.component';
 import { DatePipe } from '@angular/common';
+import { GatewayAdmin } from './domain/gateways/gateway-admin';
+import { AdminService } from './infrastructure/api-v1/admin.service';
+import { GatewayClient } from './domain/gateways/gateway-client';
+import { ClientService } from './infrastructure/api-v1/client.service';
+import { GatewaySite } from './domain/gateways/gateway-site';
+import { SiteService } from './infrastructure/api-v1/site.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    TimelineComponent,
     LoginComponent,
     UserAccountComponent,
     MainLayoutComponent,
@@ -48,20 +53,20 @@ import { DatePipe } from '@angular/common';
     TextComponent,
     ImageComponent,
     VideoComponent,
-    CrearSitioComponent,
-    SuperAdminSitiosComponent,
+    CreateSiteComponent,
+    AdminSitesComponent,
     MySitesComponent,
     RankingComponent,
-    LienzoPaginaComponent,
-    TituloLienzoComponent,
+    PageCanvasComponent,
+    TitleCanvasComponent,
     TextoLienzoComponent,
-    ImagenLienzoComponent,
+    ImageCanvasComponent,
     VideoLienzoComponent,
-    FooterLienzoComponent,
-    SuperAdminSitiosComponent,
+    FooterCanvasComponent,
+    AdminSitesComponent,
     BodyBuilderComponent,
     RegisterComponent,
-    SuperadministradorCuentaUsuarioComponent
+    AdminAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -72,8 +77,13 @@ import { DatePipe } from '@angular/common';
     CommonModule
   ],
 
-  providers: [ DatePipe ],
-  bootstrap: [ AppComponent ]
+  providers: [
+    DatePipe,
+    { provide: GatewayAdmin, useClass: AdminService },
+    { provide: GatewayClient, useClass: ClientService },
+    { provide: GatewaySite, useClass: SiteService }
+  ],
+  bootstrap: [AppComponent]
 })
 
 export class AppModule { }

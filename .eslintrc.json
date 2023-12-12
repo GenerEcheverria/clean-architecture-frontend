@@ -19,14 +19,12 @@
         "no-magic-numbers": "error",
         "no-unused-vars": "error",
         "prefer-const": "error",
-        "array-bracket-spacing": ["error", "always"],
+        "array-bracket-spacing": ["error", "never"],
         "object-curly-spacing": ["error", "always"],
-        "max-len": ["error", { "code": 200 }],
         "no-empty": "error",
         "no-throw-literal": "error",
         "quotes": ["error", "single"],
         "semi": ["error", "always"]
-
     }
 
 }

@@ -1,0 +1,71 @@
+<div>
+  <div *ngIf="!columns" [ngSwitch]="fullType" class="row m-0 p-0">
+    <!--alineacionTexto puede ser Justificado || Izquierda || Derecha || Centro. -->
+    <app-text-canvas
+      *ngSwitchCase="'text'"
+      [title]="this.full.text.title"
+      [position]="this.full.text.position"
+      [text]="this.full.text.text"
+      [textAlign]="this.full.text.alignment"
+    >
+    </app-text-canvas>
+    <!--tamañoImg puede ser Grande || Mediano|| Pequeño. -->
+    <app-image-canvas
+      *ngSwitchCase="'image'"
+      [fuenteImg]="this.full.image.image"
+      [captionImg]="this.full.image.caption"
+      [imageSize]="this.full.image.size"
+    ></app-image-canvas>
+    <app-video-canvas
+      *ngSwitchCase="'video'"
+      [videoSource]="this.full.video.video"
+      [videoScale]="this.full.video.size"
+    ></app-video-canvas>
+  </div>
+  <div *ngIf="columns" class="d-flex justify-content-between">
+    <div [ngSwitch]="leftType">
+      <app-text-canvas
+        *ngSwitchCase="'text'"
+        [title]="this.left.text.title"
+        [position]="this.left.text.position"
+        [text]="this.left.text.text"
+        [textAlign]="this.left.text.alignment"
+      >
+      </app-text-canvas>
+      <!--tamañoImg puede ser Grande || Mediano|| Pequeño. -->
+      <app-image-canvas
+        *ngSwitchCase="'image'"
+        [fuenteImg]="this.left.image.image"
+        [captionImg]="this.left.image.caption"
+        [imageSize]="this.left.image.size"
+      ></app-image-canvas>
+      <app-video-canvas
+        *ngSwitchCase="'video'"
+        [videoSource]="this.left.video.video"
+        [videoScale]="this.left.video.size"
+      ></app-video-canvas>
+    </div>
+    <div [ngSwitch]="rightType">
+      <app-text-canvas
+        *ngSwitchCase="'text'"
+        [title]="this.right.text.title"
+        [position]="this.right.text.position"
+        [text]="this.right.text.text"
+        [textAlign]="this.right.text.alignment"
+      >
+      </app-text-canvas>
+      <!--tamañoImg puede ser Grande || Mediano|| Pequeño. -->
+      <app-image-canvas
+        *ngSwitchCase="'image'"
+        [fuenteImg]="this.right.image.image"
+        [captionImg]="this.right.image.caption"
+        [imageSize]="this.right.image.size"
+      ></app-image-canvas>
+      <app-video-canvas
+        *ngSwitchCase="'video'"
+        [videoSource]="this.right.video.video"
+        [videoScale]="this.right.video.size"
+      ></app-video-canvas>
+    </div>
+  </div>
+</div>

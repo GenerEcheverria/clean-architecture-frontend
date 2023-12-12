@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
-/**
- * Componente raíz de la aplicación.
- */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,8 +7,5 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
 
-  /**
-   * Título de la aplicación.
-   */
   title = 'frontend';
 }
