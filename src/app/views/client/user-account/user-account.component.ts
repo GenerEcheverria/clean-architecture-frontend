@@ -15,7 +15,7 @@ export class UserAccountComponent implements OnInit {
   protected passwordForm!: FormGroup;
 
   protected userData!: User;
-  protected idUser: string | undefined = '';
+  protected idUser: string = '';
   protected nameUser: string = '';
   protected emailUser: string = '';
   protected phoneUser: string = '';
@@ -52,8 +52,8 @@ export class UserAccountComponent implements OnInit {
 
     this.clientService.getActualUser().subscribe((data: User) => {
       this.userData = data;
-      this.idUser = data.id;
-
+      this.idUser = data.id !== undefined ? data.id : '';
+      
       this.userDataForm.patchValue({
         name: data.name,
         phone: data.phone,

@@ -29,11 +29,18 @@ export class ClientService extends GatewayClient{
 
     const { name, email, password, role, phone } = client;
 
-    return this.httpClient.post<Client>(this.URL + '/register', { name, email, password, role, phone }, this.httpOptions);
+    return this.httpClient.post<Client>('http://localhost:8000/api/account/register', { name, email, password, role, phone }, this.httpOptions);
   }
 
-  public editUser(client: Client, clientId: string | undefined) : Observable <Client>{
-    return this.httpClient.put<Client>(this.URL + '/account/users/' + clientId, { client, id: clientId }, this.httpOptions);
+  public editUser(client: Client, clientId: string) : Observable <Client>{
+    const token = localStorage.getItem('token');
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+    return this.httpClient.put<Client>('http://localhost:8000/api/account/users/' + clientId, { client, id: clientId }, httpOptions);
   }
 
   public getActualUser() : Observable<Client>{
